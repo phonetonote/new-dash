@@ -6,6 +6,7 @@ import config from "./config";
 import styles from "./style";
 import typography from "./foundations/typography";
 import borders from "./foundations/borders";
+import shadows from "./foundations/shadows";
 
 /* List of theme key
  * https://github.com/chakra-ui/chakra-ui/blob/5c6397a318fba95b35b6cfcd9c15fb22820fe579/packages/theme/src/utils.ts#L4-L23
@@ -32,11 +33,12 @@ import borders from "./foundations/borders";
  */
 const override: ChakraTheme = {
   ...baseTheme,
+  ...typography,
   colors,
   components,
   config,
-  ...typography,
-  ...borders,
+  shadows,
+  borders,
   styles,
 };
 

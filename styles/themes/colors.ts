@@ -1,17 +1,26 @@
-import { Colors } from "@chakra-ui/react";
+import { ColorHues, Colors, RecursiveObject } from "@chakra-ui/react";
 
 /* Reference for type
  * https://github.com/chakra-ui/chakra-ui/blob/be28abf78957787e0efdabe567443f44985dc1e0/packages/theme/src/theme.types.ts#L36-L38
  */
 
+type PtnColorObject = Record<number | string, string>;
 type PtnColors = {
-  ptnAqua: {
-    300: string;
-    700: string;
-  };
+  transparent: string;
+  current: string;
+  black: string;
+  white: string;
+  ptnAqua: PtnColorObject;
+  ptnTeal: PtnColorObject;
+  ptnGreen: PtnColorObject;
+  ptnOrange: PtnColorObject;
+  ptnYellow: PtnColorObject;
+  whiteAlpha: PtnColorObject;
+  blackAlpha: PtnColorObject;
+  gray: PtnColorObject;
 };
 
-const colors: Colors & PtnColors = {
+const colors: PtnColors = {
   transparent: "transparent",
   current: "currentColor",
   black: "#171F1D",
@@ -59,7 +68,32 @@ const colors: Colors & PtnColors = {
     300: "#97E7F1",
     700: "#1E7E9B",
   },
-  // todo brand colors
+  ptnTeal: {
+    400: "#8BABA2",
+    600: "#417668",
+    800: "#174E46",
+  },
+  ptnGreen: {
+    100: "#EAFEE9",
+    200: "#C0F6BD",
+    300: "#97EB91",
+    400: "#6FDC69",
+    500: "#4CC746",
+    700: "#157C10",
+    900: "#175605",
+  },
+  ptnYellow: {
+    100: "#F7F2DE",
+    200: "#F0DDA8",
+    300: "#F2BA71",
+  },
+  ptnOrange: {
+    300: "#F5A377",
+    400: "#E67247",
+    500: "#AF5F41",
+    700: "#784C3B",
+    800: "#55322B",
+  },
 };
 
 export default colors;
