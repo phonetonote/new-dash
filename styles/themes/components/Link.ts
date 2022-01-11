@@ -12,7 +12,7 @@ const Link: ComponentStyleConfig = {
     _focus: {
       boxShadow: "none",
     },
-    color: mode(colors.light.contrast.color, colors.dark.contrast.color)(props),
+    color: mode(colors.ptnAqua["700"], colors.ptnAqua["300"])(props),
   }),
 };
 

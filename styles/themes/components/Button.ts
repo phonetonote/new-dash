@@ -1,15 +1,18 @@
-import { mode, transparentize } from "@chakra-ui/theme-tools";
+import {
+  mode,
+  SystemStyleInterpolation,
+  transparentize,
+} from "@chakra-ui/theme-tools";
 import type {
   SystemStyleObject,
   SystemStyleFunction,
 } from "@chakra-ui/theme-tools";
-import colors from "../colors";
-import typography from "../foundations/typography";
+import { ComponentSingleStyleConfig } from "@chakra-ui/theme";
 
 const baseStyle: SystemStyleObject = {
   lineHeight: "1.2",
   borderRadius: "md",
-  fontWeight: typography.fontWeights.normal,
+  fontWeight: "semibold",
   transitionProperty: "common",
   transitionDuration: "normal",
   _focus: {
@@ -32,7 +35,7 @@ const variantGhost: SystemStyleFunction = (props) => {
 
   if (c === "gray") {
     return {
-      color: mode(`inherit`, `whiteAlpha.900`)(props),
+      color: mode(`blackAlpha.900`, `whiteAlpha.900`)(props),
       _hover: {
         bg: mode(`gray.100`, `whiteAlpha.200`)(props),
       },
@@ -57,7 +60,7 @@ const variantGhost: SystemStyleFunction = (props) => {
 
 const variantOutline: SystemStyleFunction = (props) => {
   const { colorScheme: c } = props;
-  const borderColor = mode(`gray.200`, `whiteAlpha.300`)(props);
+  const borderColor = mode(`gray.400`, `whiteAlpha.300`)(props);
   return {
     border: "1px solid",
     borderColor: c === "gray" ? borderColor : "currentColor",
@@ -92,17 +95,17 @@ const variantSolid: SystemStyleFunction = (props) => {
   const { colorScheme: c } = props;
 
   if (c === "gray") {
-    const bg = mode(`gray.100`, `whiteAlpha.900`)(props);
+    const bg = mode(`gray.100`, `whiteAlpha.200`)(props);
 
     return {
       bg,
       _hover: {
-        bg: mode(`gray.200`, `whiteAlpha.800`)(props),
+        bg: mode(`gray.200`, `whiteAlpha.300`)(props),
         _disabled: {
           bg,
         },
       },
-      _active: { bg: mode(`gray.300`, `whiteAlpha.700`)(props) },
+      _active: { bg: mode(`gray.300`, `whiteAlpha.400`)(props) },
     };
   }
 
@@ -148,56 +151,13 @@ const variantLink: SystemStyleFunction = (props) => {
   };
 };
 
-const ptnButton = {
-  borderRadius: "12px",
-  border: "3px solid",
-};
-
-const ptnPrimary: SystemStyleFunction = (props) => {
-  return {
-    ...ptnButton,
-    backgroundColor: mode(colors.ptnTeal["600"], colors.ptnGreen["300"])(props),
-    color: mode(colors.ptnGreen["100"], colors.ptnGreen["900"])(props),
-    borderColor: mode(colors.ptnTeal["400"], colors.ptnGreen["500"])(props),
-
-    _hover: {
-      boxShadow: mode(
-        `-3px 3px 0 0 ${colors.ptnTeal["800"]}`,
-        `-3px 3px 0 0 ${colors.ptnGreen["100"]}`
-      )(props),
-    },
-    _active: {
-      backgroundColor: mode(
-        colors.ptnTeal["800"],
-        colors.ptnGreen["100"]
-      )(props),
-    },
-  };
-};
-
-const ptnSecondary: SystemStyleFunction = (props) => {
-  return {
-    ...ptnButton,
-    backgroundColor: mode(
-      colors.ptnOrange["500"],
-      colors.ptnOrange["300"]
-    )(props),
-    color: mode(colors.ptnYellow["100"], colors.ptnOrange["800"])(props),
-    borderColor: mode(colors.ptnOrange["300"], colors.ptnOrange["500"])(props),
-
-    _hover: {
-      boxShadow: mode(
-        `-3px 3px 0 0 ${colors.ptnOrange["700"]}`,
-        `-3px 3px 0 0 ${colors.ptnYellow["100"]}`
-      )(props),
-    },
-    _active: {
-      backgroundColor: mode(
-        colors.ptnOrange["700"],
-        colors.ptnYellow["100"]
-      )(props),
-    },
-  };
+const variantUnstyled = {
+  bg: "none",
+  color: "inherit",
+  display: "inline",
+  lineHeight: "inherit",
+  m: 0,
+  p: 0,
 };
 
 const variants = {
@@ -205,8 +165,7 @@ const variants = {
   outline: variantOutline,
   solid: variantSolid,
   link: variantLink,
-  ptnPrimary: ptnPrimary,
-  ptnSecondary: ptnSecondary,
+  unstyled: variantUnstyled,
 };
 
 const defaultProps = {
@@ -215,8 +174,10 @@ const defaultProps = {
   colorScheme: "gray",
 };
 
-export default {
+const toExport: ComponentSingleStyleConfig = {
   baseStyle,
   variants,
-  defaultProps,
+  ...defaultProps,
 };
+
+export default { ...toExport };

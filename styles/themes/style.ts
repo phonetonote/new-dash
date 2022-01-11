@@ -12,8 +12,8 @@ const styles: Styles = {
     ":root": {
       "--shadowColor": mode("190deg 50% 25%", "150deg 40% 50%")(props),
       "--outlineColor": mode(
-        colors.ptnGreen["400"],
-        colors.ptnGreen["400"]
+        colors.ptnAqua["700"],
+        colors.ptnAqua["300"]
       )(props),
     },
     ".stand-out": {
