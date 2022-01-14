@@ -4,7 +4,6 @@ import {
   chakra,
   VisuallyHidden,
   useColorModeValue,
-  useColorMode,
 } from "@chakra-ui/react";
 import React from "react";
 

@@ -10,6 +10,7 @@ import { SidebarLink } from "./SidebarLink";
 import { UserInfo } from "./UserInfo";
 import { ThemeSwitcher } from "../footer/ThemeSwitcher";
 import { ScrollArea } from "../ScrollArea";
+import { FiBarChart2, FiCheckCircle, FiSettings } from "react-icons/fi";
 
 export const Sidebar = () => {
   return (
@@ -26,18 +27,7 @@ export const Sidebar = () => {
       aria-label="dashboard-links"
     >
       <Box fontSize="sm" lineHeight="tall">
-        <Box
-          as="a"
-          href="#"
-          p="3"
-          display="block"
-          transition="background 0.1s"
-          rounded="xl"
-          _hover={{ bg: "whiteAlpha.200" }}
-          whiteSpace="nowrap"
-        >
-          <UserInfo name="Esther Collins" email="esther-colls@chakra.com" />
-        </Box>
+        {/* <UserInfo name="Esther Collins" email="esther-colls@chakra.com" /> */}
         <ScrollArea pt="5" pb="6">
           <Flex
             height={"100%"}
@@ -45,25 +35,12 @@ export const Sidebar = () => {
             justifyContent={"space-between"}
           >
             <Box>
-              <SidebarLink
-                display={{ base: "block", md: "none" }}
-                mb="2"
-                icon={<HiSearchCircle />}
-              >
-                Search
-              </SidebarLink>
               <Stack pb="6">
-                <SidebarNavSectionTitle>Links</SidebarNavSectionTitle>
+                <SidebarNavSectionTitle>dashboard</SidebarNavSectionTitle>
 
-                <SidebarLink icon={<HiOutlineInbox />}>Inbox</SidebarLink>
-                <SidebarLink icon={<HiBookmark />}>Bookmarks</SidebarLink>
-                <SidebarLink icon={<HiPencil />}>Drafts</SidebarLink>
-              </Stack>
-              <Stack pb="6">
-                <SidebarNavSectionTitle>Chats</SidebarNavSectionTitle>
-                <SidebarLink>Inbox</SidebarLink>
-                <SidebarLink>Personal</SidebarLink>
-                <SidebarLink>Work</SidebarLink>
+                <SidebarLink icon={<FiBarChart2 />}>usage</SidebarLink>
+                <SidebarLink icon={<FiCheckCircle />}>installation</SidebarLink>
+                <SidebarLink icon={<FiSettings />}>settings</SidebarLink>
               </Stack>
             </Box>
 

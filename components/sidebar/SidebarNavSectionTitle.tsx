@@ -4,12 +4,10 @@ import typography from "../../styles/themes/foundations/typography";
 
 export const SidebarNavSectionTitle = (props: TextProps) => (
   <Text
-    casing="uppercase"
-    fontSize="s"
-    fontWeight="semibold"
-    letterSpacing="wide"
+    fontSize="lg"
+    fontWeight={typography.fontWeights.headerBold}
     paddingStart="3"
-    color={mode("gray.600", "gray.400")}
+    color={mode("gray.600", "whiteAlpha.600")}
     fontFamily={typography.fonts.heading}
     {...props}
   />

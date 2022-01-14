@@ -19,7 +19,7 @@ const Layout: React.FunctionComponent<LayoutProps> = ({ children }) => {
         height="90vh"
         bg={useColorModeValue("gray.200", "black")}
         overflow="hidden"
-        sx={{ "--sidebar-width": "16rem" }}
+        sx={{ "--sidebar-width": "12rem" }}
       >
         <Sidebar />
         <Box
@@ -32,7 +32,7 @@ const Layout: React.FunctionComponent<LayoutProps> = ({ children }) => {
         >
           <Box
             maxW="2560px"
-            bg={useColorModeValue("white", "gray.900")}
+            bg={useColorModeValue("gray.100", "gray.900")}
             height="100%"
             pb="6"
             rounded={{ md: "lg" }}
@@ -49,10 +49,7 @@ const Layout: React.FunctionComponent<LayoutProps> = ({ children }) => {
                   <MobileMenuButton onClick={toggle} isOpen={isOpen} />
                 </Flex>
               </Flex>
-              <Flex direction="column" flex="1" overflow="auto" px="10" pt="8">
-                <Heading size="md" fontWeight="extrabold" mb="6">
-                  Product Vision
-                </Heading>
+              <Flex direction="column" flex="1" overflow="auto" px="4">
                 <Box
                   flex="1"
                   borderWidth="3px"
