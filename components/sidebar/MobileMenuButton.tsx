@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Box, useColorModeValue } from "@chakra-ui/react";
 import * as React from "react";
 import { FiMenu, FiX } from "react-icons/fi";
 
@@ -19,8 +19,8 @@ export const MobileMenuButton = (props: MobileMenuButtonProps) => {
       rounded="md"
       p="1"
       fontSize="xl"
-      color="gray.500"
-      _hover={{ bg: "gray.100" }}
+      color="gray.300"
+      _hover={{ bg: useColorModeValue("blackAlpha.50", "blackAlpha.300") }}
       onClick={onClick}
     >
       <Box srOnly>{isOpen ? "Close Menu" : "Open Menu"}</Box>

@@ -2,7 +2,8 @@ import { Styles, mode, darken, lighten } from "@chakra-ui/theme-tools";
 import colors from "./colors";
 import typography from "./foundations/typography";
 
-export const bgColor = (props: any) => mode(colors.white, colors.black)(props);
+export const bgColor = (props: any) =>
+  mode(colors.gray["200"], colors.black)(props);
 
 /* Reference for types
  * https://github.com/chakra-ui/chakra-ui/blob/db51ff6063996a834f1880813673953a3ff5c524/packages/theme/src/styles.ts#L1-L23
