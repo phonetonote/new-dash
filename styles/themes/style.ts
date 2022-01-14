@@ -15,12 +15,21 @@ const styles: Styles = {
         colors.ptnAqua["700"],
         colors.ptnAqua["300"]
       )(props),
+      ".cl-auth-form-body, .cl-auth-form-body button": {
+        textTransform: "lowercase",
+      },
+      ".cl-modal-container > div": {
+        width: "95%",
+      },
+      ".cl-modal-container .cl-sign-in, .cl-modal-container .cl-sign-up": {
+        margin: "0 auto",
+      },
     },
     ".stand-out": {
       backgroundColor: mode(colors.gray["100"], colors.gray["800"])(props),
     },
     strong: {
-      fontWeight: typography.fontWeights.bold,
+      fontWeight: typography.fontWeights.textBold,
     },
     a: {
       color: mode(colors.ptnAqua[700], colors.ptnAqua[300])(props),

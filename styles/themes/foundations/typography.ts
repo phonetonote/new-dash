@@ -1,7 +1,8 @@
 const typography = {
   fontWeights: {
     normal: 400,
-    bold: 700,
+    headerBold: 700,
+    textBold: 800,
   },
 
   fonts: {

@@ -1,8 +1,8 @@
 import { Text, TextProps, useColorModeValue as mode } from "@chakra-ui/react";
 import * as React from "react";
-import typography from "../styles/themes/foundations/typography";
+import typography from "../../styles/themes/foundations/typography";
 
-export const NavSectionTitle = (props: TextProps) => (
+export const SidebarNavSectionTitle = (props: TextProps) => (
   <Text
     casing="uppercase"
     fontSize="s"
