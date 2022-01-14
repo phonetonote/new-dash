@@ -8,11 +8,15 @@ import type {
   SystemStyleFunction,
 } from "@chakra-ui/theme-tools";
 import { ComponentSingleStyleConfig } from "@chakra-ui/theme";
+import typography from "../foundations/typography";
+import { space } from "@chakra-ui/react";
+import colors from "../colors";
 
 const baseStyle: SystemStyleObject = {
   lineHeight: "1.2",
   borderRadius: "md",
-  fontWeight: "semibold",
+  cursor: "pointer",
+  fontWeight: typography.fontWeights.normal,
   transitionProperty: "common",
   transitionDuration: "normal",
   _focus: {
@@ -38,8 +42,12 @@ const variantGhost: SystemStyleFunction = (props) => {
       color: mode(`blackAlpha.900`, `whiteAlpha.900`)(props),
       _hover: {
         bg: mode(`gray.100`, `whiteAlpha.200`)(props),
+        color: mode(`black`, `ptnGreen.200`)(props),
       },
-      _active: { bg: mode(`gray.200`, `whiteAlpha.300`)(props) },
+      _active: {
+        bg: mode(`gray.200`, `whiteAlpha.300`)(props),
+        color: mode(`blackAlpha.800`, `ptnGreen.300`)(props),
+      },
     };
   }
 
@@ -65,6 +73,36 @@ const variantOutline: SystemStyleFunction = (props) => {
     border: "1px solid",
     borderColor: c === "gray" ? borderColor : "currentColor",
     ...variantGhost(props),
+  };
+};
+
+const varaintPtn: SystemStyleFunction = (props) => {
+  const { colorScheme: c } = props;
+  const borderColor = mode(`ptnTeal.400`, `ptnGreen.500`)(props);
+  const backgroundColor = mode(`ptnTeal.600`, `ptnGreen.300`)(props);
+  const activeBackgroundColor = mode(`ptnTeal.800`, `ptnGreen.100`)(props);
+  const color = mode(`white`, `ptnGreen.900`)(props);
+  const boxShadowColor = mode(
+    colors.ptnTeal["800"],
+    colors.ptnGreen["100"]
+  )(props);
+
+  return {
+    border: "3px solid",
+    padding: "18px",
+    borderRadius: "12px",
+    borderColor: c === "gray" ? borderColor : "currentColor",
+    backgroundColor: c === "gray" ? backgroundColor : "gray.400",
+    color: c === "gray" ? color : "currentColor",
+    _hover: {
+      color: c === "gray" ? color : "currentColor",
+      boxShadow: `-3px 3px 0px ${boxShadowColor}`,
+    },
+    _active: {
+      color: c === "gray" ? color : "currentColor",
+      boxShadow: "none",
+      backgroundColor: activeBackgroundColor,
+    },
   };
 };
 
@@ -98,14 +136,19 @@ const variantSolid: SystemStyleFunction = (props) => {
     const bg = mode(`gray.100`, `whiteAlpha.200`)(props);
 
     return {
+      color: mode("gray.600", "ptnGreen.200")(props),
       bg,
       _hover: {
+        color: mode(`gray.700`, `ptnGreen.300`)(props),
         bg: mode(`gray.200`, `whiteAlpha.300`)(props),
         _disabled: {
           bg,
         },
       },
-      _active: { bg: mode(`gray.300`, `whiteAlpha.400`)(props) },
+      _active: {
+        bg: mode(`gray.300`, `whiteAlpha.400`)(props),
+        color: mode(`gray.800`, `ptnGreen.400`)(props),
+      },
     };
   }
 
@@ -165,6 +208,7 @@ const variants = {
   outline: variantOutline,
   solid: variantSolid,
   link: variantLink,
+  ptn: varaintPtn,
   unstyled: variantUnstyled,
 };
 

@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import * as React from "react";
-import { HiMenu, HiX } from "react-icons/hi";
+import { FiMenu, FiX } from "react-icons/fi";
 
 interface MobileMenuButtonProps {
   onClick: () => void;
@@ -24,7 +24,7 @@ export const MobileMenuButton = (props: MobileMenuButtonProps) => {
       onClick={onClick}
     >
       <Box srOnly>{isOpen ? "Close Menu" : "Open Menu"}</Box>
-      {isOpen ? <HiX /> : <HiMenu />}
+      {isOpen ? <FiX /> : <FiMenu />}
     </Box>
   );
 };

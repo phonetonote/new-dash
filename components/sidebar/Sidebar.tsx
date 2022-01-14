@@ -5,11 +5,11 @@ import {
   HiBookmark,
   HiPencil,
 } from "react-icons/hi";
-import { NavSectionTitle } from "./NavSectionTitle";
-import { ScrollArea } from "./ScrollArea";
+import { SidebarNavSectionTitle } from "./SidebarNavSectionTitle";
 import { SidebarLink } from "./SidebarLink";
-import { ThemeSwitcher } from "./ThemeSwitcher";
 import { UserInfo } from "./UserInfo";
+import { ThemeSwitcher } from "../footer/ThemeSwitcher";
+import { ScrollArea } from "../ScrollArea";
 
 export const Sidebar = () => {
   return (
@@ -53,14 +53,14 @@ export const Sidebar = () => {
                 Search
               </SidebarLink>
               <Stack pb="6">
-                <NavSectionTitle>Links</NavSectionTitle>
+                <SidebarNavSectionTitle>Links</SidebarNavSectionTitle>
 
                 <SidebarLink icon={<HiOutlineInbox />}>Inbox</SidebarLink>
                 <SidebarLink icon={<HiBookmark />}>Bookmarks</SidebarLink>
                 <SidebarLink icon={<HiPencil />}>Drafts</SidebarLink>
               </Stack>
               <Stack pb="6">
-                <NavSectionTitle>Chats</NavSectionTitle>
+                <SidebarNavSectionTitle>Chats</SidebarNavSectionTitle>
                 <SidebarLink>Inbox</SidebarLink>
                 <SidebarLink>Personal</SidebarLink>
                 <SidebarLink>Work</SidebarLink>
