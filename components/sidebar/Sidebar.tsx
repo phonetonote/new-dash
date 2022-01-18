@@ -10,7 +10,14 @@ import { SidebarLink } from "./SidebarLink";
 import { UserInfo } from "./UserInfo";
 import { ThemeSwitcher } from "../footer/ThemeSwitcher";
 import { ScrollArea } from "../ScrollArea";
-import { FiBarChart2, FiCheckCircle, FiSettings } from "react-icons/fi";
+import {
+  FiBarChart2,
+  FiCheckCircle,
+  FiDollarSign,
+  FiSettings,
+  FiSliders,
+  FiUser,
+} from "react-icons/fi";
 
 export const Sidebar = () => {
   return (
@@ -27,6 +34,7 @@ export const Sidebar = () => {
       aria-label="dashboard-links"
     >
       <Box fontSize="sm" lineHeight="tall">
+        {/* #TODO logo */}
         {/* <UserInfo name="Esther Collins" email="esther-colls@chakra.com" /> */}
         <ScrollArea pt="5" pb="6">
           <Flex
@@ -40,7 +48,11 @@ export const Sidebar = () => {
 
                 <SidebarLink icon={<FiBarChart2 />}>usage</SidebarLink>
                 <SidebarLink icon={<FiCheckCircle />}>installation</SidebarLink>
-                <SidebarLink icon={<FiSettings />}>settings</SidebarLink>
+                <SidebarLink icon={<FiSettings />}>preferences</SidebarLink>
+                <SidebarLink icon={<FiUser />}>connected accounts</SidebarLink>
+                <SidebarLink icon={<FiSliders />}>
+                  your subscription
+                </SidebarLink>
               </Stack>
             </Box>
 

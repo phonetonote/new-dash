@@ -2,7 +2,7 @@ import type { AppProps } from "next/app";
 import { ChakraProvider } from "@chakra-ui/react";
 
 import customTheme from "../styles/themes";
-import { ClerkProvider } from "@clerk/nextjs";
+import { ClerkLoaded, ClerkProvider } from "@clerk/nextjs";
 import { NextPage } from "next";
 import { ReactElement, ReactNode } from "react";
 import { PageWithLayout } from "../types/PageWithLayout";
@@ -19,9 +19,11 @@ function MyApp({ Component, pageProps }: AppLayoutProps) {
   return (
     <ChakraProvider theme={customTheme}>
       <ClerkProvider>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+        <ClerkLoaded>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </ClerkLoaded>
       </ClerkProvider>
     </ChakraProvider>
   );

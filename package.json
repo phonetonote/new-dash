@@ -5,9 +5,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "generate-gql-client": "zeus https://solid-narwhal-13.hasura.app/v1/graphql ./utils/generated --ts -H 'X-Hasura-Admin-Secret: 5adde4da04b639f6de55e6388af4b6ac9ba56a554cc0f81b239456abda1ccff5"
   },
   "dependencies": {
+    "@apollo/client": "^3.5.7",
     "@chakra-ui/icons": "^1.1.1",
     "@chakra-ui/react": "^1.7.4",
     "@chakra-ui/theme": "^1.12.3",
@@ -17,6 +19,7 @@
     "@emotion/styled": "^11.6.0",
     "csstype": "^3.0.10",
     "framer-motion": "^5.5.6",
+    "graphql-zeus": "^4.0.4",
     "mixpanel-browser": "^2.43.0",
     "next": "12.0.7",
     "react": "17.0.2",
@@ -29,6 +32,7 @@
     "@types/react": "17.0.38",
     "eslint": "8.6.0",
     "eslint-config-next": "12.0.7",
+    "graphql": "^16.2.0",
     "typescript": "4.5.4"
   }
 }

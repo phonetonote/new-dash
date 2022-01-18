@@ -14,6 +14,7 @@ type PtnColors = {
   ptnTeal: PtnColorObject;
   ptnGreen: PtnColorObject;
   ptnOrange: PtnColorObject;
+  ptnRed: PtnColorObject;
   ptnYellow: PtnColorObject;
   whiteAlpha: PtnColorObject;
   blackAlpha: PtnColorObject;
@@ -93,6 +94,13 @@ const colors: PtnColors = {
     500: "#AF5F41",
     700: "#784C3B",
     800: "#55322B",
+  },
+  ptnRed: {
+    100: "#FEF1F0",
+    200: "#FCE3E3",
+    300: "#F39C9B",
+    500: "#d76563",
+    600: "#BF3D3B",
   },
 };
 
