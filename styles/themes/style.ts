@@ -11,11 +11,12 @@ export const bgColor = (props: any) =>
 const styles: Styles = {
   global: (props) => ({
     ":root": {
-      "--shadowColor": mode("190deg 50% 25%", "150deg 40% 50%")(props),
+      "--shadowColor": mode("160deg 21% 81%", "150deg 50% 12%")(props),
       "--outlineColor": mode(
         colors.ptnAqua["700"],
         colors.ptnAqua["300"]
       )(props),
+      "--thinOutlineColor": mode(colors.gray["200"], colors.gray["800"])(props),
       ".cl-auth-form-body, .cl-auth-form-body button": {
         textTransform: "lowercase",
       },

@@ -16,10 +16,10 @@ const Layout: React.FunctionComponent<LayoutProps> = ({ children }) => {
   return (
     <>
       <Flex
-        height="90vh"
+        height="100vh"
         bg={useColorModeValue("gray.200", "black")}
         overflow="hidden"
-        sx={{ "--sidebar-width": "12rem" }}
+        sx={{ "--sidebar-width": "14rem" }}
       >
         <Sidebar />
         <Box
@@ -35,7 +35,7 @@ const Layout: React.FunctionComponent<LayoutProps> = ({ children }) => {
             bg={useColorModeValue("gray.100", "gray.900")}
             height="100%"
             pb="6"
-            rounded={{ md: "lg" }}
+            rounded={{ md: "md" }}
           >
             <Flex direction="column" height="full">
               <Flex
@@ -50,12 +50,7 @@ const Layout: React.FunctionComponent<LayoutProps> = ({ children }) => {
                 </Flex>
               </Flex>
               <Flex direction="column" flex="1" overflow="auto" px="4">
-                <Box
-                  flex="1"
-                  borderWidth="3px"
-                  borderStyle="dashed"
-                  rounded="xl"
-                >
+                <Box flex="1" rounded="xl">
                   {children}
                 </Box>
               </Flex>
