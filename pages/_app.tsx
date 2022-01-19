@@ -7,6 +7,7 @@ import { NextPage } from "next";
 import { ReactElement, ReactNode } from "react";
 import { PageWithLayout } from "../types/PageWithLayout";
 import React from "react";
+import "focus-visible/dist/focus-visible";
 
 type AppLayoutProps = {
   Component: PageWithLayout;

@@ -52,6 +52,10 @@ const styles: Styles = {
       bg: bgColor(props),
       color: mode(colors.black, colors.white)(props),
     },
+    ".js-focus-visible :focus:not([data-focus-visible-added])": {
+      outline: "none",
+      boxShadow: "none",
+    },
   }),
 };
 

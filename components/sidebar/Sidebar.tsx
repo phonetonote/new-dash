@@ -46,10 +46,10 @@ export const Sidebar = () => {
               <Stack pb="6">
                 <SidebarNavSectionTitle>dashboard</SidebarNavSectionTitle>
 
-                <SidebarLink icon={<FiBarChart2 />}>usage</SidebarLink>
+                <SidebarLink icon={<FiBarChart2 />}>channels</SidebarLink>
                 <SidebarLink icon={<FiCheckCircle />}>installation</SidebarLink>
+                <SidebarLink icon={<FiUser />}>user settings</SidebarLink>
                 <SidebarLink icon={<FiSettings />}>preferences</SidebarLink>
-                <SidebarLink icon={<FiUser />}>connected accounts</SidebarLink>
                 <SidebarLink icon={<FiSliders />}>
                   your subscription
                 </SidebarLink>

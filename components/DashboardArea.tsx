@@ -1,31 +1,23 @@
-import { useUser } from "@clerk/nextjs";
-import { useEffect } from "react";
-import Analytics from "../helpers/analytics";
-import { gql, useQuery } from "@apollo/client";
-import { subscriptionQuery } from "../helpers/queries/subscription-query";
-import { ApolloProviderWrapper } from "../helpers/apollo-client";
-import { DashboardHeading } from "./headings/DashboardHeading";
-import { SubscriptionBadge } from "./widgets/SubscriptionBadge";
+import { useQuery } from "@apollo/client";
 import {
   Box,
-  Flex,
-  HStack,
   SimpleGrid,
-  StatHelpText,
-  VStack,
-  useColorModeValue,
   Spinner,
-  useColorMode,
-  Heading,
-  Skeleton,
-  Stack,
+  useColorModeValue,
+  visuallyHiddenStyle,
+  VStack,
 } from "@chakra-ui/react";
+import { UserProfile, useUser } from "@clerk/nextjs";
+import { useEffect } from "react";
+import Analytics from "../helpers/analytics";
 import { dashboardQuery } from "../helpers/queries/dashboard-query";
-import { MESSAGE_ENUM } from "../helpers/message-enum";
-import { mutedText, PtnKey } from "./widgets/PtnKey";
+import { subscriptionQuery } from "../helpers/queries/subscription-query";
+import typography from "../styles/themes/foundations/typography";
 import { DashboardSection } from "./DashboardSection";
-import { FiCircle } from "react-icons/fi";
-import colors from "../styles/themes/colors";
+import { ChannelStatus } from "./widgets/ChannelStatus";
+import { ClientStatus } from "./widgets/ClientStatus";
+import { PtnKey } from "./widgets/PtnKey";
+import { SubscriptionBadge } from "./widgets/SubscriptionBadge";
 
 export const DashboardArea = () => {
   const user = useUser();
@@ -100,20 +92,15 @@ export const DashboardArea = () => {
     "email",
   ];
 
-  const channelColors = {
-    notReady: useColorModeValue(colors.ptnRed["500"], colors.ptnRed["500"]),
-    ready: useColorModeValue(colors.ptnAqua["700"], colors.ptnAqua["300"]),
-    received: useColorModeValue(colors.ptnGreen["700"], colors.ptnGreen["500"]),
-  };
-
   return (
-    <VStack align={"stretch"} spacing={"12"}>
-      <DashboardSection title="usage">
+    <VStack align="stretch" spacing="12" pt="4" pb="8">
+      <DashboardSection title="channels">
         <>
-          <SubscriptionBadge
+          {/* #TODO put in subscription area */}
+          {/* <SubscriptionBadge
             loading={subscriptionLoading}
             data={subscriptionData}
-          />
+          /> */}
 
           {/* <OverageAlert> */}
           <SimpleGrid columns={{ base: 1, md: 3 }} spacing="6">
@@ -138,47 +125,59 @@ export const DashboardArea = () => {
                 )?.aggregate?.count?.toString() ?? fallback;
 
               return (
-                <Box key={inputMethod} shadow="thinOutline" rounded="md" p="5">
-                  <VStack align="stretch" spacing={"2"}>
-                    <Flex justify="space-between" align="baseline">
-                      <Heading color={mutedText()} size="md">
-                        {inputMethod}
-                      </Heading>
-                      {/* #TODO once a message has been received, additional not ready channels should not be red */}
-                      <Box
-                        border="4px solid"
-                        borderColor={channelColors.received}
-                        rounded="full"
-                        height="16px"
-                        width="16px"
-                      ></Box>
-                    </Flex>
-                    <HStack align={"baseline"}>
-                      <Skeleton height="20px" />
-                      <Skeleton height="20px" />
-                      {/* <Heading>{numberString}</Heading>
-                      <Box fontSize={"sm"}>
-                        message{numberString === "1" ? "" : "s"} this month
-                        <br />
-                        {MESSAGE_ENUM[inputMethod]?.desc}
-                      </Box> */}
-                    </HStack>
-                    <Stack>
-                      <Skeleton height="20px" />
-                      <Skeleton height="20px" />
-                      <Skeleton height="20px" />
-                    </Stack>
-                  </VStack>
-                </Box>
+                <ChannelStatus
+                  count={numberString}
+                  inputMethod={inputMethod}
+                  key={inputMethod}
+                />
               );
             })}
           </SimpleGrid>
         </>
       </DashboardSection>
       <DashboardSection title="installation">
-        <PtnKey
-          ptnKey={liveData?.["roam_keys"]?.[0]?.key ?? "loading..."}
-        ></PtnKey>
+        <SimpleGrid columns={{ base: 1, md: 2 }} spacing="6">
+          <PtnKey ptnKey={liveData?.["roam_keys"]?.[0]?.key ?? "loading..."} />
+          <ClientStatus />
+        </SimpleGrid>
+      </DashboardSection>
+      <DashboardSection title="user settings">
+        <Box
+          sx={{
+            ".cl-component": {
+              "--clerk-accounts-background-color": useColorModeValue(
+                "colors.gray.100",
+                "colors.gray.900"
+              ),
+              "--clerk-background-color": useColorModeValue(
+                "colors.gray.100",
+                "colors.gray.900"
+              ),
+              "--clerk-font-color": useColorModeValue(
+                "colors.blackAlpha.700",
+                "colors.whiteAlpha.700"
+              ),
+              "--clerk-font-color-l1": useColorModeValue(
+                "colors.blackAlpha.700",
+                "colors.whiteAlpha.700"
+              ),
+
+              // #TODO text sizing here is a mess
+              ".cl-subtitle": {
+                fontSize: "1em",
+              },
+              ".cl-page-heading": {
+                // ...visuallyHiddenStyle,
+              },
+
+              "h1, h2, h3, h4, h5, h6": {
+                fontFamily: typography.fonts.heading,
+              },
+            },
+          }}
+        >
+          <UserProfile path="/dashboard" />
+        </Box>
       </DashboardSection>
     </VStack>
   );

@@ -1,7 +1,6 @@
-import { VStack, Flex } from "@chakra-ui/react";
+import { VStack } from "@chakra-ui/react";
 import { ReactChild } from "react";
 import { DashboardHeading } from "./headings/DashboardHeading";
-import { SubscriptionBadge } from "./widgets/SubscriptionBadge";
 
 type DashboardSectionProps = {
   title: string;
