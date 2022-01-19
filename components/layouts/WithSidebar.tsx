@@ -34,7 +34,7 @@ const Layout: React.FunctionComponent<LayoutProps> = ({ children }) => {
             maxW="2560px"
             bg={useColorModeValue("gray.100", "gray.900")}
             height="100%"
-            pb="6"
+            pb="0"
             rounded={{ md: "md" }}
           >
             <Flex direction="column" height="full">
@@ -44,6 +44,8 @@ const Layout: React.FunctionComponent<LayoutProps> = ({ children }) => {
                 align="center"
                 px="10"
                 py="2"
+                border="2px solid red"
+                display={{ base: "flex", md: "none" }}
               >
                 <Flex align="center">
                   <MobileMenuButton onClick={toggle} isOpen={isOpen} />

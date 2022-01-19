@@ -46,17 +46,17 @@ export const SubscriptionBadge = (props: SubscriptionBadgeProps) => {
 
   return (
     <>
-      <SkeletonText noOfLines={1} isLoaded={!loading}>
+      <Skeleton noOfLines={1} isLoaded={!loading}>
         {/* #TODO lowercase and style */}
         <HStack>
           {/* #TODO link to account management section */}
           <Badge variant="outline">{status}</Badge>
-          <Badge>{nickname}</Badge>
+          <Badge variant="subtle">{nickname}</Badge>
         </HStack>
 
         {/* #TODO link to change plan */}
         {/* #TODO button to remove plan */}
-      </SkeletonText>
+      </Skeleton>
     </>
   );
 };
