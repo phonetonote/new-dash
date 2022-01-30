@@ -26,12 +26,9 @@ export const PtnKey = (props: PtnKeyProps) => {
   const { hasCopied, onCopy } = useClipboard(ptnKey);
 
   return (
-    <Box p="5" shadow={"thinOutline"} rounded="md">
+    <Box>
       <VStack align="stretch" spacing="6">
         <VStack align="stretch">
-          <Heading fontSize={"lg"} color={mutedColor}>
-            ptn key
-          </Heading>
           <Box color={mutedColor} fontSize={"sm"}>
             your ptn key, previously named roam key, is used by channels and
             clients to verify you. keep this secure.

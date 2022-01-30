@@ -4,6 +4,7 @@ const borders = {
   "2px": "2px solid",
   "4px": "4px solid",
   "8px": "8px solid",
+  thinborder: "1px solid var(--thinOutlineColor)",
 };
 
 export default borders;

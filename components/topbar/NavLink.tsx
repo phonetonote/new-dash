@@ -24,6 +24,7 @@ export const navColors = {
   },
 };
 
+// TODO generally make the nav work...
 // #TODO active page styling
 const DesktopNavLink = React.forwardRef<HTMLAnchorElement, NavLinkProps>(
   (props, ref) => {

@@ -9,7 +9,6 @@ const shadows = {
     8px 16px 16px hsl(var(--shadowColor) / 0.2),
     16px 32px 32px hsl(var(--shadowColor) / 0.2)`,
   outline: "0 0 0 3px var(--outlineColor)",
-  thinOutline: "0 0 0 1px var(--thinOutlineColor)",
 };
 
 export default shadows;
