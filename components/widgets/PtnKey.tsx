@@ -26,6 +26,7 @@ export const PtnKey = (props: PtnKeyProps) => {
   const { hasCopied, onCopy } = useClipboard(ptnKey);
 
   return (
+    // #TODO handle reloading scroll issue
     <Box>
       <VStack align="stretch" spacing="6">
         <VStack align="stretch">

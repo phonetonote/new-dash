@@ -9,8 +9,9 @@ import {
 import Link from "next/link";
 import { useRouter } from "next/router";
 import * as React from "react";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { HiChevronRight, HiOutlineChevronRight } from "react-icons/hi";
+import { ActiveTitleContext } from "../areas/DashboardArea";
 
 interface SidebarLinkProps extends BoxProps {
   icon?: React.ReactElement;
@@ -19,6 +20,8 @@ interface SidebarLinkProps extends BoxProps {
 }
 
 export const printTitle = (title: string): string => title.replace("-", " ");
+export const condenseTitle = (title: string): string =>
+  title.trim().replace(" ", "-");
 
 export const SidebarLink = (props: SidebarLinkProps) => {
   const {
