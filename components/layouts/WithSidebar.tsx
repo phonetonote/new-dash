@@ -14,17 +14,17 @@ const Layout: React.FunctionComponent<LayoutProps> = ({ children }) => {
   const { isOpen, toggle } = useMobileMenuState();
 
   return (
+    // #TODO striaghten out right content area and sidebar
     <>
       <Flex
         height="100vh"
         bg={useColorModeValue("gray.200", "black")}
-        overflow="hidden"
-        sx={{ "--sidebar-width": "14rem" }}
+        sx={{ "--sidebar-width": "10rem" }}
       >
         <Sidebar />
         <Box
           flex="1"
-          p={{ base: "0", md: "6" }}
+          p={{ base: "0", md: "0" }}
           marginStart={{ md: "var(--sidebar-width)" }}
           position="relative"
           left={isOpen ? "var(--sidebar-width)" : "0"}
@@ -33,9 +33,8 @@ const Layout: React.FunctionComponent<LayoutProps> = ({ children }) => {
           <Box
             maxW="2560px"
             bg={useColorModeValue("gray.100", "gray.900")}
-            height="100%"
-            pb="0"
-            rounded={{ md: "md" }}
+            px="4"
+            ml="1"
           >
             <Flex direction="column" height="full">
               <Flex
@@ -51,7 +50,7 @@ const Layout: React.FunctionComponent<LayoutProps> = ({ children }) => {
                   <MobileMenuButton onClick={toggle} isOpen={isOpen} />
                 </Flex>
               </Flex>
-              <Flex direction="column" flex="1" overflow="auto" px="4">
+              <Flex direction="column" flex="1">
                 <Box flex="1" rounded="xl">
                   {children}
                 </Box>

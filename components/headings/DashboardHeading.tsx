@@ -1,18 +1,18 @@
 import { Heading, useColorModeValue } from "@chakra-ui/react";
-import { ReactChild } from "react";
+import { printTitle } from "../sidebar/SidebarLink";
 
 type DashboardHeadingProps = {
-  children: ReactChild;
+  title: string;
 };
 
 export const DashboardHeading = (props: DashboardHeadingProps) => {
-  const { children } = props;
+  const { title } = props;
   return (
     <Heading
-      fontSize={"x-large"}
+      fontSize={"2xl"}
       color={useColorModeValue("blackAlpha.700", "whiteAlpha.700")}
     >
-      {children}
+      {printTitle(title)}
     </Heading>
   );
 };

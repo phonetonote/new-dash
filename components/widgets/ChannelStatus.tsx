@@ -9,6 +9,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import colors from "../../styles/themes/colors";
+import { CircleStatus } from "../indicators/circle-status";
 import { mutedText } from "./PtnKey";
 
 type ChannelStatusProps = {
@@ -28,20 +29,14 @@ export const ChannelStatus = (props: ChannelStatusProps) => {
   const channelColors = getChannelColors();
 
   return (
-    <Box key={inputMethod} shadow="thinOutline" rounded="md" p="5">
+    <Box key={inputMethod} border="thinborder" rounded="md" p="5">
       <VStack align="stretch" spacing={"2"}>
         <Flex justify="space-between" align="baseline">
           <Heading color={mutedText()} size="md">
             {inputMethod}
           </Heading>
           {/* #TODO once a message has been received, additional not ready channels should not be red */}
-          <Box
-            border="4px solid"
-            borderColor={channelColors.received}
-            rounded="full"
-            height="16px"
-            width="16px"
-          ></Box>
+          <CircleStatus type="green"></CircleStatus>
         </Flex>
         <HStack align={"baseline"}>
           <Skeleton height="20px" />
