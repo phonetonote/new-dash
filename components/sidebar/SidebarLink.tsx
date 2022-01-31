@@ -11,7 +11,6 @@ import { useRouter } from "next/router";
 import * as React from "react";
 import { useContext, useEffect } from "react";
 import { HiChevronRight, HiOutlineChevronRight } from "react-icons/hi";
-import { ActiveTitleContext } from "../areas/DashboardArea";
 
 interface SidebarLinkProps extends BoxProps {
   icon?: React.ReactElement;
@@ -21,7 +20,7 @@ interface SidebarLinkProps extends BoxProps {
 
 export const printTitle = (title: string): string => title.replace("-", " ");
 export const condenseTitle = (title: string): string =>
-  title.trim().replace(" ", "-");
+  title.toLocaleLowerCase().trim().replace(" ", "-");
 
 export const SidebarLink = (props: SidebarLinkProps) => {
   const {
@@ -32,18 +31,6 @@ export const SidebarLink = (props: SidebarLinkProps) => {
     ...rest
   } = props;
   const router = useRouter();
-
-  useEffect(() => {
-    const onHashChangeStart = (url: string) => {
-      console.log(`Path changing to ${url}`);
-    };
-
-    router.events.on("hashChangeStart", onHashChangeStart);
-
-    return () => {
-      router.events.off("hashChangeStart", onHashChangeStart);
-    };
-  }, [router.events]);
 
   const isActiveTitle = router.asPath.includes(title);
 
@@ -60,7 +47,6 @@ export const SidebarLink = (props: SidebarLinkProps) => {
   const applicableStyles = isActiveTitle ? activeLink : inactiveLink;
 
   return (
-    // #TODO use next.js links
     <Link href={href} passHref scroll={false}>
       <Box
         as="a"

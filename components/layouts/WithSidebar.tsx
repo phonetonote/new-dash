@@ -32,7 +32,7 @@ const Layout: React.FunctionComponent<LayoutProps> = ({ children }) => {
         >
           <Box
             maxW="2560px"
-            bg={useColorModeValue("gray.100", "gray.900")}
+            bg={useColorModeValue("gray.50", "gray.900")}
             px="4"
             ml="1"
           >

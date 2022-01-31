@@ -7,7 +7,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { useUser } from "@clerk/nextjs";
-import { createContext, useEffect, useState } from "react";
+import { useEffect } from "react";
 import { FiKey, FiPackage, FiSend } from "react-icons/fi";
 import Analytics from "../../helpers/analytics";
 import { dashboardQuery } from "../../helpers/queries/dashboard-query";
@@ -15,17 +15,13 @@ import { DashboardSection } from "../DashboardSection";
 import { ChannelStatus } from "../widgets/ChannelStatus";
 import { ClientStatus } from "../widgets/ClientStatus";
 import { PtnKey } from "../widgets/PtnKey";
-import { AreaStack } from "./AreaStack";
-import useScrollPosition from "@react-hook/window-scroll";
-import { HEADING_CLASS } from "../headings/DashboardHeading";
-import { condenseTitle } from "../sidebar/SidebarLink";
-import { useRouter } from "next/router";
-
-export const ActiveTitleContext = createContext("foo");
+import useScrollableArea, {
+  ActiveTitleContext,
+} from "../../hooks/useScrollableArea";
 
 export const DashboardArea = () => {
+  const [activeTitle, setActiveTitle] = useScrollableArea();
   const user = useUser();
-  const router = useRouter();
 
   useEffect(() => {
     Analytics.identify(user.id);
@@ -50,8 +46,7 @@ export const DashboardArea = () => {
     };
   };
 
-  // #TODO rename
-  type DataType = {
+  type AggregateData = {
     smsCount: AggregateCount;
     facebookCountL: AggregateCount;
     alfredCount: AggregateCount;
@@ -64,10 +59,10 @@ export const DashboardArea = () => {
   };
   const {
     data: liveData,
-    refetch: refetchRoamKey,
+    refetch,
     loading,
   }: {
-    data?: DataType;
+    data?: AggregateData;
     refetch: Function;
     loading: boolean;
   } = useQuery(dashboardQuery, {
@@ -86,46 +81,9 @@ export const DashboardArea = () => {
     "email",
   ];
 
-  const scrollY = useScrollPosition(30);
-
-  const [activeTitle, setActiveTitle] = useState<string>("");
-
-  useEffect(() => {
-    const params = new URLSearchParams(`${window.location.search}`);
-    console.log("params", params);
-    const possibleTitle = params.get("title");
-    router.push(`/dashboard#${possibleTitle}`);
-  }, []);
-
-  useEffect(() => {
-    const headings = document.getElementsByClassName(HEADING_CLASS);
-    const sortedHeadings = Array.from(headings).sort(
-      (heading) => heading.getBoundingClientRect().top
-    );
-    const visibleHeadings = Array.from(sortedHeadings)?.filter(
-      (heading) => heading.getBoundingClientRect().top > 0
-    );
-
-    const topHeading =
-      visibleHeadings.length > 0 ? visibleHeadings[0] : sortedHeadings[0];
-
-    if (topHeading) {
-      setActiveTitle(condenseTitle(topHeading.innerHTML));
-
-      const newRoute = `/dashboard?title=${condenseTitle(
-        topHeading.innerHTML
-      )}`;
-
-      console.log("newRoute", newRoute, router.asPath);
-      if (newRoute !== router.asPath) {
-        router.replace(`${newRoute}`, "", { scroll: false });
-      }
-    }
-  }, [scrollY]);
-
   return (
     <VStack align="stretch" spacing="20">
-      <ActiveTitleContext.Provider value={activeTitle}>
+      <ActiveTitleContext.Provider value={activeTitle.toString()}>
         <DashboardSection title="channels" icon={<FiSend />}>
           <>
             {/* #TODO <OverageAlert> */}
@@ -144,12 +102,10 @@ export const DashboardArea = () => {
                   "-"
                 );
 
-                const aggData = liveData;
-
                 const numberString =
                   (
                     liveData?.[
-                      `${inputMethod}Count` as keyof DataType
+                      `${inputMethod}Count` as keyof AggregateData
                     ] as AggregateCount
                   )?.aggregate?.count?.toString() ?? fallback;
 

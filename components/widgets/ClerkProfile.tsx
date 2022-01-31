@@ -5,9 +5,15 @@ import typography from "../../styles/themes/foundations/typography";
 
 type ClerkProfileProps = {
   only: "account" | "security";
+  activeTitle: string;
 };
 export const ClerkProfile = (props: ClerkProfileProps) => {
-  const { only } = props;
+  const { only, activeTitle } = props;
+
+  const headerColors =
+    only === activeTitle
+      ? useColorModeValue("ptnGreen.600", "ptnGreen.300")
+      : useColorModeValue("blackAlpha.700", "whiteAlpha.700");
 
   return (
     <Box
@@ -19,11 +25,11 @@ export const ClerkProfile = (props: ClerkProfileProps) => {
           },
 
           "--clerk-accounts-background-color": useColorModeValue(
-            "colors.gray.100",
+            "colors.gray.50",
             "colors.gray.900"
           ),
           "--clerk-background-color": useColorModeValue(
-            "colors.gray.100",
+            "colors.gray.50",
             "colors.gray.900"
           ),
           "--clerk-font-color": useColorModeValue(
@@ -69,6 +75,7 @@ export const ClerkProfile = (props: ClerkProfileProps) => {
             fontSize: "2xl",
             lineHeight: "100%",
             paddingTop: "16px",
+            color: headerColors,
           },
 
           h1: {

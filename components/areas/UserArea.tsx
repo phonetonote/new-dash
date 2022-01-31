@@ -11,8 +11,13 @@ import { useQuery } from "@apollo/client";
 import { subscriptionQuery } from "../../helpers/queries/subscription-query";
 import { useUser } from "@clerk/nextjs";
 import { SubscriptionLink } from "../widgets/SubscriptionLink";
+import useScrollableArea, {
+  ActiveTitleContext,
+} from "../../hooks/useScrollableArea";
 
 export const UserArea = () => {
+  const [activeTitle, setActiveTitle] = useScrollableArea();
+
   const user = useUser();
 
   const {
@@ -31,34 +36,51 @@ export const UserArea = () => {
 
   return (
     <VStack align="stretch" spacing="20" p="0">
-      <Box id="account">
-        <ClerkProfile only="account"></ClerkProfile>
-      </Box>
-      <Box id="security">
-        <ClerkProfile only="security"></ClerkProfile>
-      </Box>
-      <DashboardSection id="billing" title="billing" icon={<FiCreditCard />}>
-        <>
-          <SubscriptionBadge
-            loading={subscriptionLoading}
-            status={stripeData?.status ?? "starter"}
-            nickname={stripeData?.plan?.nickname ?? "free"}
-          />
-          <Skeleton isLoaded={!subscriptionLoading}>
-            {stripeData ? (
-              <SubscriptionLink clerkId={user.id} />
-            ) : (
-              <Button
-                as="a"
-                href={`${process.env.NEXT_PUBLIC_OLD_MARKETING_SITE}/pages/pricing`}
-              >
-                view pricing
-              </Button>
-            )}
-          </Skeleton>
-        </>
-      </DashboardSection>
-      <Box height={"800px"}></Box>
+      <ActiveTitleContext.Provider value={activeTitle.toString()}>
+        <Box id="account">
+          <ActiveTitleContext.Consumer>
+            {(value) => {
+              return (
+                <ClerkProfile only="account" activeTitle={value}></ClerkProfile>
+              );
+            }}
+          </ActiveTitleContext.Consumer>
+        </Box>
+        <Box id="security">
+          <ActiveTitleContext.Consumer>
+            {(value) => {
+              return (
+                <ClerkProfile
+                  only="security"
+                  activeTitle={value}
+                ></ClerkProfile>
+              );
+            }}
+          </ActiveTitleContext.Consumer>
+        </Box>
+        <DashboardSection id="billing" title="billing" icon={<FiCreditCard />}>
+          <>
+            <SubscriptionBadge
+              loading={subscriptionLoading}
+              status={stripeData?.status ?? "starter"}
+              nickname={stripeData?.plan?.nickname ?? "free"}
+            />
+            <Skeleton isLoaded={!subscriptionLoading}>
+              {stripeData ? (
+                <SubscriptionLink clerkId={user.id} />
+              ) : (
+                <Button
+                  as="a"
+                  href={`${process.env.NEXT_PUBLIC_OLD_MARKETING_SITE}/pages/pricing`}
+                >
+                  view pricing
+                </Button>
+              )}
+            </Skeleton>
+          </>
+        </DashboardSection>
+        <Box height={"800px"}></Box>
+      </ActiveTitleContext.Provider>
     </VStack>
   );
 };

@@ -4,7 +4,7 @@ import * as React from "react";
 export const ScrollArea = (props: BoxProps) => (
   <Box
     overflowY="auto"
-    height="80vh"
+    height="90vh"
     minH="px"
     maxH="full"
     {...props}
