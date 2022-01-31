@@ -45,7 +45,7 @@ export const PtnKey = (props: PtnKeyProps) => {
                   onClick={onCopy}
                   style={{ borderTopLeftRadius: 0, borderBottomLeftRadius: 0 }}
                 >
-                  {hasCopied ? "Copied" : "Copy"}
+                  {hasCopied ? "copied" : "copy"}
                 </Button>
               }
             />

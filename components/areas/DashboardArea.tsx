@@ -13,7 +13,7 @@ import Analytics from "../../helpers/analytics";
 import { dashboardQuery } from "../../helpers/queries/dashboard-query";
 import { DashboardSection } from "../DashboardSection";
 import { ChannelStatus } from "../widgets/ChannelStatus";
-import { ClientStatus } from "../widgets/ClientStatus";
+import { ClientInfo } from "../widgets/ClientInfo";
 import { PtnKey } from "../widgets/PtnKey";
 import useScrollableArea, {
   ActiveTitleContext,
@@ -47,6 +47,7 @@ export const DashboardArea = () => {
   };
 
   type AggregateData = {
+    messages_aggregate: AggregateCount;
     smsCount: AggregateCount;
     facebookCountL: AggregateCount;
     alfredCount: AggregateCount;
@@ -80,6 +81,8 @@ export const DashboardArea = () => {
     "zapier",
     "email",
   ];
+
+  const totalSentMessages = liveData?.messages_aggregate?.aggregate?.count;
 
   return (
     <VStack align="stretch" spacing="20">
@@ -124,7 +127,7 @@ export const DashboardArea = () => {
           <PtnKey ptnKey={liveData?.["roam_keys"]?.[0]?.key ?? "loading..."} />
         </DashboardSection>
         <DashboardSection title="clients" icon={<FiPackage />}>
-          <ClientStatus />
+          <ClientInfo totalSentMessages={totalSentMessages} loading={loading} />
         </DashboardSection>
         <Box height={"650px"}></Box>
       </ActiveTitleContext.Provider>

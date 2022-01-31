@@ -19,8 +19,8 @@ type ChannelStatusProps = {
 
 export const getChannelColors = () => ({
   notReady: useColorModeValue(colors.ptnRed["500"], colors.ptnRed["500"]),
-  ready: useColorModeValue(colors.ptnAqua["700"], colors.ptnAqua["300"]),
-  received: useColorModeValue(colors.ptnGreen["700"], colors.ptnGreen["500"]),
+  ready: useColorModeValue(colors.ptnYellow["400"], colors.ptnYellow["300"]),
+  received: useColorModeValue(colors.ptnGreen["500"], colors.ptnGreen["600"]),
 });
 
 export const ChannelStatus = (props: ChannelStatusProps) => {

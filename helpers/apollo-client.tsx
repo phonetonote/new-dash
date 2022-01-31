@@ -24,7 +24,7 @@ export const ApolloProviderWrapper = ({
         ...headers,
         authorization: `Bearer ${token}`,
         "x-hasura-admin-secret":
-          "5adde4da04b639f6de55e6388af4b6ac9ba56a554cc0f81b239456abda1ccff5", //#TODO REMOVE THIS
+          "5adde4da04b639f6de55e6377af4b6ac9ba56a554cc0f81b239456abda1ccff5", //#TODO REMOVE THIS
       },
     };
   });

@@ -28,14 +28,10 @@ export const SubscriptionBadge = (props: SubscriptionBadgeProps) => {
   return (
     <>
       <Skeleton noOfLines={1} isLoaded={!loading}>
-        {/* #TODO style */}
         <HStack>
-          {/* #TODO link to account management section */}
           <Badge variant="outline">{status}</Badge>
-          <Badge variant="subtle">{nickname}</Badge>
+          <Badge variant="outline">{nickname}</Badge>
         </HStack>
-
-        {/* #TODO (post deploy) change stripe portal link */}
       </Skeleton>
     </>
   );

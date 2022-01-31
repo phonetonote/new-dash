@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client'
+import { gql } from "@apollo/client";
 
 export const dashboardQuery = gql`
   query DashboardData($clerkId: String = "") {
@@ -13,6 +13,14 @@ export const dashboardQuery = gql`
     }
     roam_keys(where: { clerk_id: { _eq: $clerkId } }, order_by: { id: desc }) {
       key
+    }
+
+    messages_aggregate(
+      where: { clerk_id: { _eq: $clerkId }, status: { _eq: 2 } }
+    ) {
+      aggregate {
+        count
+      }
     }
 
     totalCount: filter_to_current_month_aggregate(
@@ -66,4 +74,4 @@ export const dashboardQuery = gql`
       }
     }
   }
-`
+`;

@@ -55,7 +55,7 @@ const colors: PtnColors = {
 
   gray: {
     50: "#F7FAFC",
-    100: "#D8ECE6",
+    100: "#dfe5e3",
     200: "#C0D3CD",
     300: "#A8B9B4",
     400: "#90A09B",
@@ -88,6 +88,7 @@ const colors: PtnColors = {
     100: "#F7F2DE",
     200: "#F0DDA8",
     300: "#F2BA71",
+    400: "#F3A744",
   },
   ptnOrange: {
     300: "#F5A377",

@@ -14,8 +14,8 @@ export const DashboardHeading = (props: DashboardHeadingProps) => {
 
   const colors =
     title === activeTitle
-      ? useColorModeValue("ptnGreen.600", "ptnGreen.300")
-      : useColorModeValue("blackAlpha.700", "whiteAlpha.700");
+      ? useColorModeValue("blackAlpha.900", "ptnGreen.300")
+      : useColorModeValue("blackAlpha.500", "whiteAlpha.700");
   return (
     <>
       <Heading fontSize={"2xl"} color={colors} className={HEADING_CLASS}>

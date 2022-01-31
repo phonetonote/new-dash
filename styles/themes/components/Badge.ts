@@ -32,14 +32,13 @@ const variantSubtle: SystemStyleFunction = (props) => {
 };
 
 const variantOutline: SystemStyleFunction = (props) => {
-  const { colorScheme: c, theme } = props;
-  const darkColor = transparentize(`${c}.200`, 0.8)(theme);
-  const lightColor = getColor(theme, `${c}.500`);
-  const color = mode(lightColor, darkColor)(props);
+  const color = mode("gray.700", "gray.300")(props);
 
   return {
     color,
-    boxShadow: `inset 0 0 0px 1px ${color}`,
+    border: `1px solid`,
+    borderColor: color,
+    boxShadow: "none",
   };
 };
 
