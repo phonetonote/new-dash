@@ -13,6 +13,10 @@ const Link: ComponentStyleConfig = {
       boxShadow: "none",
     },
     color: mode(colors.ptnAqua["700"], colors.ptnAqua["300"])(props),
+    textDecoration: "underline",
+    _hover: {
+      textDecoration: "none",
+    },
   }),
 };
 

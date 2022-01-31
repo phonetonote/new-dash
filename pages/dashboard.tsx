@@ -6,6 +6,7 @@ import WithSidebar from "../components/layouts/WithSidebar";
 import { ApolloProviderWrapper } from "../helpers/apollo-client";
 import { PageWithLayout } from "../types/PageWithLayout";
 import { AreaStack } from "../components/areas/AreaStack";
+import { SignedOutArea } from "../components/areas/SignedOutArea";
 
 const Dashboard: NextPage = (props) => {
   return (
@@ -15,9 +16,9 @@ const Dashboard: NextPage = (props) => {
           <DashboardArea></DashboardArea>
         </ApolloProviderWrapper>
       </SignedIn>
-      {/* #TODO signedout */}
-
-      <SignedOut>sign in to get started</SignedOut>
+      <SignedOut>
+        <SignedOutArea />
+      </SignedOut>
     </Box>
   );
 };

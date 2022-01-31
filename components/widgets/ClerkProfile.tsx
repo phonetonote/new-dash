@@ -1,5 +1,7 @@
-import { Box, useColorModeValue } from "@chakra-ui/react";
-import { UserProfile } from "@clerk/nextjs";
+import { Box, Button, Flex, useColorModeValue } from "@chakra-ui/react";
+import { SignOutButton, UserProfile } from "@clerk/nextjs";
+import { useRouter } from "next/router";
+import { FiLogOut } from "react-icons/fi";
 import colors from "../../styles/themes/colors";
 import typography from "../../styles/themes/foundations/typography";
 
@@ -10,6 +12,8 @@ type ClerkProfileProps = {
 export const ClerkProfile = (props: ClerkProfileProps) => {
   const { only, activeTitle } = props;
 
+  const router = useRouter();
+
   const headerColors =
     only === activeTitle
       ? useColorModeValue("ptnGreen.600", "ptnGreen.300")
@@ -19,6 +23,9 @@ export const ClerkProfile = (props: ClerkProfileProps) => {
     <Box
       sx={{
         ".cl-component": {
+          ".cl-page-heading": {
+            alignItems: "center",
+          },
           ".cl-main": {
             margin: "0",
             padding: "0",

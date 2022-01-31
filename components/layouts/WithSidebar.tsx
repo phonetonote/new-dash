@@ -14,7 +14,6 @@ const Layout: React.FunctionComponent<LayoutProps> = ({ children }) => {
   const { isOpen, toggle } = useMobileMenuState();
 
   return (
-    // #TODO striaghten out right content area and sidebar
     <>
       <Flex
         height="100vh"

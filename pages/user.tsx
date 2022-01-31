@@ -2,6 +2,7 @@ import { Box } from "@chakra-ui/react";
 import { SignedIn, SignedOut } from "@clerk/nextjs";
 import type { NextPage } from "next";
 import { DashboardArea } from "../components/areas/DashboardArea";
+import { SignedOutArea } from "../components/areas/SignedOutArea";
 import { UserArea } from "../components/areas/UserArea";
 import WithSidebar from "../components/layouts/WithSidebar";
 import { ApolloProviderWrapper } from "../helpers/apollo-client";
@@ -15,8 +16,9 @@ const User: NextPage = (props) => {
           <UserArea></UserArea>
         </ApolloProviderWrapper>
       </SignedIn>
-      {/* #TODO signedout */}
-      <SignedOut>sign in to get started</SignedOut>
+      <SignedOut>
+        <SignedOutArea />
+      </SignedOut>
     </Box>
   );
 };

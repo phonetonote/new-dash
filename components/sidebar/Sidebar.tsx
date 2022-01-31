@@ -1,4 +1,4 @@
-import { Box, Flex, Stack } from "@chakra-ui/react";
+import { Box, chakra, Flex, HStack, IconButton, Stack } from "@chakra-ui/react";
 import {
   HiSearchCircle,
   HiOutlineInbox,
@@ -11,10 +11,14 @@ import { UserInfo } from "./UserInfo";
 import { ThemeSwitcher } from "../footer/ThemeSwitcher";
 import { ScrollArea } from "../ScrollArea";
 import {
+  FiArrowLeftCircle,
   FiBarChart2,
   FiCheckCircle,
+  FiCornerDownLeft,
   FiCreditCard,
   FiDollarSign,
+  FiGlobe,
+  FiHome,
   FiKey,
   FiPackage,
   FiSend,
@@ -23,6 +27,7 @@ import {
   FiSliders,
   FiUser,
 } from "react-icons/fi";
+import Link from "next/link";
 
 export const Sidebar = () => {
   const pages = [
@@ -60,16 +65,28 @@ export const Sidebar = () => {
       aria-label="dashboard-links"
     >
       <Box fontSize="sm" lineHeight="tall">
-        {/* #TODO in sidebar bar - sign out, link to marketing site */}
-
-        <ScrollArea pt="5" pb="6">
+        <ScrollArea>
           <Flex
             height={"100%"}
             direction={"column"}
             justifyContent={"space-between"}
           >
-            {/* #TODO logo */}
             <Box>
+              <Link href="/dashboard#channels" passHref={true}>
+                <a>
+                  <chakra.img
+                    src="images/logo.svg"
+                    alt="logo"
+                    width="20"
+                    mx="3"
+                    p="3"
+                    ml="0"
+                    mt="-3"
+                    mb="6"
+                  />
+                </a>
+              </Link>
+
               {pages.map((page) => (
                 <Stack pb="6" key={page.path}>
                   <SidebarNavSectionTitle>{page.path}</SidebarNavSectionTitle>
@@ -88,7 +105,19 @@ export const Sidebar = () => {
             </Box>
 
             <Box paddingLeft={2}>
-              <ThemeSwitcher></ThemeSwitcher>
+              <HStack spacing="4">
+                <Link href="https://phonetonote.com" passHref>
+                  <IconButton
+                    title="back to home page"
+                    aria-label="back to home page"
+                    variant="outline"
+                    isRound={true}
+                    icon={<FiCornerDownLeft></FiCornerDownLeft>}
+                  />
+                </Link>
+                <ThemeSwitcher></ThemeSwitcher>
+                {/* #TODO help email button that corresponds to plan type */}
+              </HStack>
             </Box>
           </Flex>
         </ScrollArea>

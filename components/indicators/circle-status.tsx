@@ -14,6 +14,8 @@ export const CircleStatus = (props: CircleStatus) => {
   let color = channelColors.ready;
   if (type === "green") {
     color = channelColors.received;
+  } else if (type === "red") {
+    color = channelColors.notReady;
   }
 
   return (
