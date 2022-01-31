@@ -24,12 +24,6 @@ import {
   FiUser,
 } from "react-icons/fi";
 
-// #TODO make a pages type that includes this hash one
-// type Hash = {
-//   name: string,
-//   icon: React.ReactElement
-// }
-
 export const Sidebar = () => {
   const pages = [
     {
@@ -74,7 +68,6 @@ export const Sidebar = () => {
             direction={"column"}
             justifyContent={"space-between"}
           >
-            {/* #TODO add scrolling classes - https://www.npmjs.com/package/react-intersection-observer */}
             {/* #TODO logo */}
             <Box>
               {pages.map((page) => (

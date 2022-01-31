@@ -1,6 +1,6 @@
 import { Box, HStack, useColorModeValue, VStack } from "@chakra-ui/react";
 import { ReactChild } from "react";
-import { ActiveTitleContext } from "./areas/DashboardArea";
+import { ActiveTitleContext } from "../hooks/useScrollableArea";
 import { DashboardHeading } from "./headings/DashboardHeading";
 
 type DashboardSectionProps = {

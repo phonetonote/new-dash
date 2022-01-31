@@ -14,7 +14,7 @@ export const DashboardHeading = (props: DashboardHeadingProps) => {
 
   const colors =
     title === activeTitle
-      ? useColorModeValue("ptnGreen.700", "ptnGreen.300")
+      ? useColorModeValue("ptnGreen.600", "ptnGreen.300")
       : useColorModeValue("blackAlpha.700", "whiteAlpha.700");
   return (
     <>
