@@ -29,8 +29,8 @@ export const SubscriptionBadge = (props: SubscriptionBadgeProps) => {
     <>
       <Skeleton noOfLines={1} isLoaded={!loading}>
         <HStack>
-          <Badge variant="outline">{status}</Badge>
-          <Badge variant="outline">{nickname}</Badge>
+          <Badge variant="outline">{status?.replaceAll("_", " ")}</Badge>
+          <Badge variant="outline">{nickname?.replaceAll("_", " ")}</Badge>
         </HStack>
       </Skeleton>
     </>
