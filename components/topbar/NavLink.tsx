@@ -68,9 +68,10 @@ export const MobileNavLink = (props: NavLinkProps) => {
         color: mode("gray.700", "white"),
       }}
       _active={{ color: mode(navColors.light.color, navColors.dark.color) }}
-      children={children}
       {...rest}
-    />
+    >
+      children
+    </chakra.a>
   );
 };
 

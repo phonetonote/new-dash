@@ -1,7 +1,6 @@
 import { Box, VStack, Flex, Heading, HStack, Skeleton } from "@chakra-ui/react";
 import colors from "../../styles/themes/colors";
 import { CircleStatus } from "../indicators/circle-status";
-import { mutedText } from "./PtnKey";
 import { UserResource } from "@clerk/types";
 import { AggregateCount } from "../areas/DashboardArea";
 import {
@@ -10,6 +9,7 @@ import {
 } from "../../helpers/determineChannelStatus";
 import { channelMessages, InputMethod } from "../../helpers/channelMessages";
 import { AllData } from "../../hooks/useFetchData";
+import { useMutedColor } from "../../hooks/useChannelColors";
 
 type ChannelStatusProps = {
   inputMethod: string;
@@ -22,6 +22,7 @@ export type ChannelStatusTypes = "notReady" | "ready" | "received";
 
 export const ChannelStatus = (props: ChannelStatusProps) => {
   const { inputMethod, data, loading, user } = props;
+  const mutedColor = useMutedColor();
 
   const statusByInputMethod = {
     sms: determineStatusWithTwoCounts(
@@ -56,7 +57,7 @@ export const ChannelStatus = (props: ChannelStatusProps) => {
     <Box key={inputMethod} border="thinborder" rounded="md" p="5">
       <VStack align="stretch" spacing={"2"}>
         <Flex justify="space-between" align="baseline" pb="4">
-          <Heading color={mutedText()} size="md">
+          <Heading color={mutedColor} size="md">
             {inputMethod}
           </Heading>
           {!loading && <CircleStatus type={channelStatus}></CircleStatus>}

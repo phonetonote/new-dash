@@ -12,18 +12,16 @@ import {
   useColorModeValue,
   VStack,
 } from "@chakra-ui/react";
+import { useMutedColor } from "../../hooks/useChannelColors";
 import { CopyText } from "./CopyText";
 
 type PtnKeyProps = {
   ptnKey: string;
 };
 
-export const mutedText = () =>
-  useColorModeValue("blackAlpha.700", "whiteAlpha.700");
-
 export const PtnKey = (props: PtnKeyProps) => {
   const { ptnKey } = props;
-  const mutedColor = mutedText();
+  const mutedColor = useMutedColor();
 
   return (
     <Box>

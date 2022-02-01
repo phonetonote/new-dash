@@ -1,4 +1,5 @@
 import { Box, useColorModeValue } from "@chakra-ui/react";
+import { useChannelColors } from "../../hooks/useChannelColors";
 import colors from "../../styles/themes/colors";
 import { ChannelStatusTypes } from "../widgets/ChannelStatus";
 
@@ -8,16 +9,10 @@ type CircleStatus = {
   type: ChannelStatusTypes;
 };
 
-const getChannelColors = (): { [key in ChannelStatusTypes]: string } => ({
-  notReady: useColorModeValue(colors.ptnRed["500"], colors.ptnRed["500"]),
-  ready: useColorModeValue(colors.ptnYellow["400"], colors.ptnYellow["300"]),
-  received: useColorModeValue(colors.ptnGreen["500"], colors.ptnGreen["600"]),
-});
-
 export const CircleStatus = (props: CircleStatus) => {
   const { type } = props;
 
-  const channelColors = getChannelColors();
+  const channelColors = useChannelColors();
   let color = channelColors.ready;
   if (type === "received") {
     color = channelColors.received;
