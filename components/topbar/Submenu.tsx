@@ -22,6 +22,8 @@ interface SubmenuProps {
 const DesktopSubmenu = (props: SubmenuProps) => {
   const { link } = props;
   const { isOpen, getMenuProps, getTriggerProps } = useNavMenu();
+  const borderColor = useColorModeValue(colors.gray["200"], colors.gray["800"]);
+
   return (
     <>
       <NavLink.Desktop
@@ -39,10 +41,8 @@ const DesktopSubmenu = (props: SubmenuProps) => {
       <NavMenu
         {...getMenuProps()}
         animate={isOpen ? "open" : "closed"}
-        borderY={`1px solid ${useColorModeValue(
-          colors.gray["200"],
-          colors.gray["800"]
-        )}`}
+        borderY="1px solid"
+        borderColor={borderColor}
         py={10}
       >
         <Box maxW="7xl" mx="auto" px="8">
@@ -67,6 +67,7 @@ const DesktopSubmenu = (props: SubmenuProps) => {
 const MobileSubMenu = (props: SubmenuProps) => {
   const { link } = props;
   const { isOpen, onToggle } = useDisclosure();
+  const linkColor = useColorModeValue("black", "ptnGreen.100");
 
   return (
     <Box>
@@ -91,7 +92,7 @@ const MobileSubMenu = (props: SubmenuProps) => {
               key={idx}
               href={item.href}
               borderBottomWidth={0}
-              color={useColorModeValue("black", "ptnGreen.100")}
+              color={linkColor}
             >
               {item.label}
             </NavLink.Mobile>

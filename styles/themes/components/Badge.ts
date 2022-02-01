@@ -50,13 +50,13 @@ const variants = {
 };
 
 const defaultProps = {
-  variant: "subtle",
+  variant: undefined,
   colorScheme: "gray",
 };
 
 export default {
   baseStyle,
-  parts: {},
+  parts: undefined,
   variants,
   defaultProps,
 };

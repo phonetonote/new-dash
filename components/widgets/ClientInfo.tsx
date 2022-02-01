@@ -17,10 +17,10 @@ import {
   Badge,
 } from "@chakra-ui/react";
 import Link from "next/link";
+import { useMutedColor } from "../../hooks/useChannelColors";
 import typography from "../../styles/themes/foundations/typography";
 import { CircleStatus } from "../indicators/circle-status";
 import { MyLink } from "../MyLink";
-import { mutedText } from "./PtnKey";
 
 type ClientInfoProps = {
   loading: boolean;
@@ -29,6 +29,8 @@ type ClientInfoProps = {
 
 export const ClientInfo = (props: ClientInfoProps) => {
   const { loading, totalSentMessages } = props;
+  const mutedColor = useMutedColor();
+
   const noMessagesReceived =
     !loading &&
     typeof totalSentMessages === "number" &&
@@ -56,12 +58,15 @@ document.getElementsByTagName("head")[0].appendChild(s);
     ? "ready"
     : "notReady";
 
+  const bgColor = useColorModeValue("ptnRed.200", "ptnRed.600");
+  const textColor = useColorModeValue("blackAlpha.800", "whiteAlpha.900");
+
   return (
     <SimpleGrid columns={{ base: 1, md: 2 }} spacing="6">
       <Box border="thinborder" rounded="md" p="5">
         <VStack align="stretch" spacing={"2"}>
           <Flex justify="space-between" align="baseline">
-            <Heading color={mutedText()} size="md">
+            <Heading color={mutedColor} size="md">
               status
             </Heading>
             {!loading && <CircleStatus type={circleColor}></CircleStatus>}
@@ -86,8 +91,8 @@ document.getElementsByTagName("head")[0].appendChild(s);
 
             {errorReceived && (
               <Text
-                bg={useColorModeValue("ptnRed.200", "ptnRed.600")}
-                color={useColorModeValue("blackAlpha.800", "whiteAlpha.900")}
+                bg={bgColor}
+                color={textColor}
                 as="div"
                 p="2"
                 my="2"
@@ -101,7 +106,7 @@ document.getElementsByTagName("head")[0].appendChild(s);
       </Box>
       <Box border="thinborder" rounded="md" p="5">
         <VStack align="stretch" spacing={"2"}>
-          <Heading color={mutedText()} size="md">
+          <Heading color={mutedColor} size="md">
             logseq
           </Heading>
           <Text>
@@ -116,7 +121,7 @@ document.getElementsByTagName("head")[0].appendChild(s);
       </Box>
       <Box border="thinborder" rounded="md" p="5">
         <VStack align="stretch" spacing={"2"}>
-          <Heading color={mutedText()} size="md">
+          <Heading color={mutedColor} size="md">
             roam
           </Heading>
           <OrderedList stylePosition="inside" spacing="4">
@@ -179,7 +184,7 @@ document.getElementsByTagName("head")[0].appendChild(s);
 
       <Box border="thinborder" rounded="md" p="5">
         <VStack align="stretch" spacing={"2"}>
-          <Heading color={mutedText()} size="md">
+          <Heading color={mutedColor} size="md">
             craft
           </Heading>
           <VStack spacing="4">

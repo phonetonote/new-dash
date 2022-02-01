@@ -13,11 +13,10 @@ export const ClerkProfile = (props: ClerkProfileProps) => {
   const { only, activeTitle } = props;
 
   const router = useRouter();
+  const titleColor = useColorModeValue("blackAlpha.700", "whiteAlpha.700");
+  const activeTitleColor = useColorModeValue("ptnGreen.600", "ptnGreen.300");
 
-  const headerColors =
-    only === activeTitle
-      ? useColorModeValue("ptnGreen.600", "ptnGreen.300")
-      : useColorModeValue("blackAlpha.700", "whiteAlpha.700");
+  const headerColors = only === activeTitle ? activeTitleColor : titleColor;
 
   return (
     <Box

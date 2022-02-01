@@ -84,7 +84,7 @@ export const DashboardArea = () => {
     if (params.get("signedUp") && user && user.id) {
       Analytics.track("loadedDashboardAfterSignup");
     }
-  }, [Analytics, user]);
+  }, [user]);
 
   useEffect(() => {
     if (paymentIntentClientSecret) {
@@ -108,7 +108,7 @@ export const DashboardArea = () => {
         }
       });
     }
-  }, [paymentIntentClientSecret]);
+  }, [paymentIntentClientSecret, stripePromise]);
 
   const overageAlert = (
     <Alert status="warning" rounded="md">

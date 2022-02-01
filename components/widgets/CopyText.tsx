@@ -24,18 +24,15 @@ export const CopyText = (props: CopyTextProps) => {
           placeholder="loading..."
           fontSize={{ base: "12px", md: "16px" }}
         />{" "}
-        <InputRightElement
-          width="4.5rem"
-          children={
-            <Button
-              variant={"outline"}
-              onClick={onCopy}
-              style={{ borderTopLeftRadius: 0, borderBottomLeftRadius: 0 }}
-            >
-              {hasCopied ? "copied" : "copy"}
-            </Button>
-          }
-        />
+        <InputRightElement width="4.5rem">
+          <Button
+            variant={"outline"}
+            onClick={onCopy}
+            style={{ borderTopLeftRadius: 0, borderBottomLeftRadius: 0 }}
+          >
+            {hasCopied ? "copied" : "copy"}
+          </Button>
+        </InputRightElement>
       </InputGroup>
     </Flex>
   );
