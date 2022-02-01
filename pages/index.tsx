@@ -1,16 +1,28 @@
-import { Box, useColorModeValue } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
+import { SignedIn, SignedOut } from "@clerk/nextjs";
 import type { NextPage } from "next";
+import { DashboardArea } from "../components/areas/DashboardArea";
+import WithSidebar from "../components/layouts/WithSidebar";
+import { ApolloProviderWrapper } from "../helpers/apollo-client";
 import { PageWithLayout } from "../types/PageWithLayout";
-import WithTopbar from "../components/layouts/WithTopbar";
+import { AreaStack } from "../components/areas/AreaStack";
+import { SignedOutArea } from "../components/areas/SignedOutArea";
 
 const Home: NextPage = (props) => {
   return (
-    <Box pb={4} pt={16}>
-      a very new home page experience
+    <Box>
+      <SignedIn>
+        <ApolloProviderWrapper>
+          <DashboardArea></DashboardArea>
+        </ApolloProviderWrapper>
+      </SignedIn>
+      <SignedOut>
+        <SignedOutArea />
+      </SignedOut>
     </Box>
   );
 };
 
-(Home as PageWithLayout).layout = WithTopbar;
+(Home as PageWithLayout).layout = WithSidebar;
 
 export default Home;

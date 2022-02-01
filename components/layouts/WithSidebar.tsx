@@ -42,7 +42,8 @@ const Layout: React.FunctionComponent<LayoutProps> = ({ children }) => {
                 align="center"
                 px="10"
                 py="2"
-                border="2px solid red"
+                borderBottom="1px solid"
+                borderColor={useColorModeValue("gray.200", "whiteAlpha.300")}
                 display={{ base: "flex", md: "none" }}
               >
                 <Flex align="center">

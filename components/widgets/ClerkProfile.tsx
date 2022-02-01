@@ -126,7 +126,7 @@ export const ClerkProfile = (props: ClerkProfileProps) => {
         },
       }}
     >
-      <UserProfile path="/dashboard" only={only} hideNavigation={true} />
+      <UserProfile path="/" only={only} hideNavigation={true} />
     </Box>
   );
 };

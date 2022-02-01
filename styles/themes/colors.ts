@@ -68,6 +68,7 @@ const colors: PtnColors = {
   ptnAqua: {
     300: "#97E7F1",
     700: "#1E7E9B",
+    800: "#0C6581",
   },
   ptnTeal: {
     400: "#8BABA2",

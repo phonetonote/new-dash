@@ -1,5 +1,5 @@
 import { Box, Button, Flex, Skeleton, Text, VStack } from "@chakra-ui/react";
-import { FiCreditCard, FiSend, FiSettings } from "react-icons/fi";
+import { FiCreditCard, FiHelpCircle, FiSend, FiSettings } from "react-icons/fi";
 import { DashboardSection } from "../DashboardSection";
 import {
   Plan,
@@ -8,7 +8,6 @@ import {
 } from "../widgets/SubscriptionBadge";
 import { ClerkProfile } from "../widgets/ClerkProfile";
 import { useQuery } from "@apollo/client";
-import { subscriptionQuery } from "../../helpers/queries/subscription-query";
 import { SignOutButton, useUser } from "@clerk/nextjs";
 import { SubscriptionLink } from "../widgets/SubscriptionLink";
 import useScrollableArea, {
@@ -16,25 +15,26 @@ import useScrollableArea, {
 } from "../../hooks/useScrollableArea";
 import router from "next/router";
 import { BillingWdiget } from "../widgets/BillingWidget";
+import { useFetchData } from "../../hooks/useFetchData";
+import { IoHelpBuoy } from "react-icons/io5";
 
 export const UserArea = () => {
   const [activeTitle, setActiveTitle] = useScrollableArea();
 
   const user = useUser();
 
-  const {
-    data: subscriptionData,
-    refetch: refetchSubscriptionData,
-    loading: subscriptionLoading,
-  } = useQuery(subscriptionQuery, {
-    variables: {
-      clerkId: user.id,
-    },
-    pollInterval: 2000,
-  });
+  const { data: liveData, loading, refetch } = useFetchData();
 
-  const liveSubscription: Subscription = subscriptionData?.subscriptions?.[0];
+  const liveSubscription: Subscription | undefined =
+    liveData?.subscriptions?.[0];
   const stripeData = liveSubscription?.stripe_data;
+  const currentPlan: Plan = liveSubscription
+    ? (liveSubscription.stripe_data.plan.product.name as Plan)
+    : "free";
+  const supportEmail =
+    currentPlan === "pro"
+      ? "prosupport@phonetonote.com"
+      : "support@phonetonote.com";
 
   return (
     <VStack align="stretch" spacing="20" p="0">
@@ -54,7 +54,7 @@ export const UserArea = () => {
               </ActiveTitleContext.Consumer>
             </Box>
 
-            <Flex width="840px" mt="4" justifyContent="right">
+            <Flex maxWidth="840px" mt="4" justifyContent="right">
               <SignOutButton
                 signOutCallback={() =>
                   router.push(`${process.env.NEXT_PUBLIC_OLD_MARKETING_SITE}`)
@@ -79,9 +79,9 @@ export const UserArea = () => {
         </Box>
         <DashboardSection id="billing" title="billing" icon={<FiCreditCard />}>
           <BillingWdiget
-            subscriptionLoading={subscriptionLoading}
+            subscriptionLoading={loading}
             user={user}
-            stripeData={stripeData}
+            stripeData={stripeData as Subscription["stripe_data"]}
           />
         </DashboardSection>
         <DashboardSection
@@ -90,6 +90,12 @@ export const UserArea = () => {
           icon={<FiSettings />}
         >
           <Text>check back soon for monthly backup preferences and more.</Text>
+        </DashboardSection>
+        <DashboardSection id="help" title="help" icon={<IoHelpBuoy />}>
+          <Text>
+            plase email <a href={`mailto:${supportEmail}`}>{supportEmail}</a>{" "}
+            for support
+          </Text>
         </DashboardSection>
         <Box height={"800px"}></Box>
       </ActiveTitleContext.Provider>
