@@ -22,7 +22,7 @@ export const CopyText = (props: CopyTextProps) => {
           value={text}
           isReadOnly
           placeholder="loading..."
-          fontSize={{ base: "12px", md: "16px" }}
+          fontSize={{ base: "12px", md: "14px" }}
         />{" "}
         <InputRightElement width="4.5rem">
           <Button
