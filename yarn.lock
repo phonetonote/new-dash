@@ -1166,6 +1166,11 @@
   "resolved" "https://registry.npmjs.org/@sindresorhus/is/-/is-4.2.1.tgz"
   "version" "4.2.1"
 
+"@stripe/stripe-js@^1.22.0":
+  "integrity" "sha512-fm8TR8r4LwbXgBIYdPmeMjJJkxxFC66tvoliNnmXOpUgZSgQKoNPW3ON0ZphZIiif1oqWNhAaSrr7tOvGu+AFg=="
+  "resolved" "https://registry.npmjs.org/@stripe/stripe-js/-/stripe-js-1.22.0.tgz"
+  "version" "1.22.0"
+
 "@szmarczak/http-timer@^4.0.5":
   "integrity" "sha512-4BAffykYOgO+5nzBWYwE3W90sBgLJoUPRWWcL8wlyiM8IB8ipJz3UMJ9KXQd1RKQXpKp8Tutn80HZtWsu2u76w=="
   "resolved" "https://registry.npmjs.org/@szmarczak/http-timer/-/http-timer-4.0.6.tgz"

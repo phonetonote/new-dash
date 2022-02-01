@@ -14,10 +14,12 @@ import {
   Code,
   useClipboard,
   Button,
+  Badge,
 } from "@chakra-ui/react";
 import Link from "next/link";
 import typography from "../../styles/themes/foundations/typography";
 import { CircleStatus } from "../indicators/circle-status";
+import { MyLink } from "../MyLink";
 import { mutedText } from "./PtnKey";
 
 type ClientInfoProps = {
@@ -49,10 +51,10 @@ document.getElementsByTagName("head")[0].appendChild(s);
   const { hasCopied, onCopy } = useClipboard(roamSnippet);
 
   const circleColor = messagesReceived
-    ? "green"
+    ? "received"
     : noMessagesReceived
-    ? "yellow"
-    : "red";
+    ? "ready"
+    : "notReady";
 
   return (
     <SimpleGrid columns={{ base: 1, md: 2 }} spacing="6">
@@ -68,14 +70,8 @@ document.getElementsByTagName("head")[0].appendChild(s);
             {loading && <Skeleton height="18px" width="100px" />}
             {messagesReceived && (
               <>
-                <Text
-                  as="span"
-                  mr="1"
-                  fontWeight={typography.fontWeights.textBold}
-                >
-                  {totalSentMessages}
-                </Text>
-                <span>{`message${
+                <Badge variant="outline">{totalSentMessages}</Badge>
+                <span>{` message${
                   totalSentMessages > 1 ? "s" : ""
                 } published`}</span>
               </>
@@ -83,16 +79,8 @@ document.getElementsByTagName("head")[0].appendChild(s);
 
             {noMessagesReceived && (
               <>
-                <Text
-                  as="span"
-                  mr="1"
-                  fontWeight={typography.fontWeights.textBold}
-                >
-                  0
-                </Text>
-                <span>
-                  messages published, please install one of the clients
-                </span>
+                <Badge variant="outline">0</Badge> messages published, please
+                install one of the clients
               </>
             )}
 
@@ -119,12 +107,9 @@ document.getElementsByTagName("head")[0].appendChild(s);
           <Text>
             our <strong>logseq-phonetonote</strong> plugin is available in the
             logseq plugin marketplace. issues and feature requests are{" "}
-            <Link
-              href="https://github.com/phonetonote/phonetonote-logseq/issues"
-              passHref={true}
-            >
-              <ChakraLink>being tracked on github</ChakraLink>
-            </Link>
+            <MyLink href="https://github.com/phonetonote/phonetonote-logseq/issues">
+              being tracked on github
+            </MyLink>
             .
           </Text>
         </VStack>
@@ -200,31 +185,22 @@ document.getElementsByTagName("head")[0].appendChild(s);
           <VStack spacing="4">
             <Text>
               the{" "}
-              <Link
-                href="https://github.com/phonetonote/phonetocraft-builds"
-                passHref={true}
-              >
-                <ChakraLink>phonetocraft-builds repo</ChakraLink>
-              </Link>{" "}
+              <MyLink href="https://github.com/phonetonote/phonetocraft-builds">
+                phonetocraft-builds repo
+              </MyLink>{" "}
               contains <strong>.craftx</strong> files ready to download and
               install on your computer. full source code is{" "}
-              <Link
-                href="https://github.com/phonetonote/phonetocraft"
-                passHref={true}
-              >
-                <ChakraLink>available here</ChakraLink>
-              </Link>
+              <MyLink href="https://github.com/phonetonote/phonetocraft">
+                available here
+              </MyLink>
               .
             </Text>
             <Text>
               please note this is an alpha release and does not contain all of
               the features of the roam client. see and participate in our{" "}
-              <Link
-                href="https://github.com/phonetonote/phonetocraft/discussions/2"
-                passHref={true}
-              >
-                <ChakraLink>craft roadmap</ChakraLink>
-              </Link>{" "}
+              <MyLink href="https://github.com/phonetonote/phonetocraft/discussions/2">
+                craft roadmap
+              </MyLink>{" "}
               for more details.
             </Text>
           </VStack>

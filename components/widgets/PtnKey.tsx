@@ -12,6 +12,7 @@ import {
   useColorModeValue,
   VStack,
 } from "@chakra-ui/react";
+import { CopyText } from "./CopyText";
 
 type PtnKeyProps = {
   ptnKey: string;
@@ -23,7 +24,6 @@ export const mutedText = () =>
 export const PtnKey = (props: PtnKeyProps) => {
   const { ptnKey } = props;
   const mutedColor = mutedText();
-  const { hasCopied, onCopy } = useClipboard(ptnKey);
 
   return (
     <Box>
@@ -34,23 +34,7 @@ export const PtnKey = (props: PtnKeyProps) => {
             clients to verify you. keep this secure.
           </Box>
         </VStack>
-        <Flex>
-          <InputGroup style={{ maxWidth: "420px" }}>
-            <Input value={ptnKey} isReadOnly placeholder="loading..." />{" "}
-            <InputRightElement
-              width="4.5rem"
-              children={
-                <Button
-                  variant={"outline"}
-                  onClick={onCopy}
-                  style={{ borderTopLeftRadius: 0, borderBottomLeftRadius: 0 }}
-                >
-                  {hasCopied ? "copied" : "copy"}
-                </Button>
-              }
-            />
-          </InputGroup>
-        </Flex>
+        <CopyText text={ptnKey} />
       </VStack>
     </Box>
   );

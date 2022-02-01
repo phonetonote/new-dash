@@ -1,58 +1,69 @@
-import {
-  Box,
-  VStack,
-  Flex,
-  Heading,
-  HStack,
-  Skeleton,
-  Stack,
-  useColorModeValue,
-} from "@chakra-ui/react";
+import { Box, VStack, Flex, Heading, HStack, Skeleton } from "@chakra-ui/react";
 import colors from "../../styles/themes/colors";
 import { CircleStatus } from "../indicators/circle-status";
 import { mutedText } from "./PtnKey";
+import { UserResource } from "@clerk/types";
+import { AggregateCount } from "../areas/DashboardArea";
+import {
+  determineStatusWithOneCount,
+  determineStatusWithTwoCounts,
+} from "../../helpers/determineChannelStatus";
+import { channelMessages, InputMethod } from "../../helpers/channelMessages";
+import { AllData } from "../../hooks/useFetchData";
 
 type ChannelStatusProps = {
   inputMethod: string;
-  count: string;
+  data: AllData | undefined;
+  loading: boolean;
+  user: UserResource;
 };
 
-export const getChannelColors = () => ({
-  notReady: useColorModeValue(colors.ptnRed["500"], colors.ptnRed["500"]),
-  ready: useColorModeValue(colors.ptnYellow["400"], colors.ptnYellow["300"]),
-  received: useColorModeValue(colors.ptnGreen["500"], colors.ptnGreen["600"]),
-});
+export type ChannelStatusTypes = "notReady" | "ready" | "received";
 
 export const ChannelStatus = (props: ChannelStatusProps) => {
-  const { inputMethod, count } = props;
+  const { inputMethod, data, loading, user } = props;
 
-  const channelColors = getChannelColors();
+  const statusByInputMethod = {
+    sms: determineStatusWithTwoCounts(
+      user.phoneNumbers.length,
+      data?.smsCount.aggregate.count ?? 0
+    ),
+    facebook: determineStatusWithTwoCounts(
+      data?.facebookChannels.aggregate.count ?? 0,
+      data?.facebookCount.aggregate.count ?? 0
+    ),
+    alfred: determineStatusWithOneCount(data?.alfredCount.aggregate.count ?? 0),
+    telegram: determineStatusWithTwoCounts(
+      data?.telegramChannels.aggregate.count ?? 0,
+      data?.telegramCount.aggregate.count ?? 0
+    ),
+    zapier: determineStatusWithOneCount(data?.zapierCount.aggregate.count ?? 0),
+    email: determineStatusWithTwoCounts(
+      user.emailAddresses.length,
+      data?.emailCount.aggregate.count ?? 0
+    ),
+  };
+  const channelStatus: ChannelStatusTypes = statusByInputMethod[
+    inputMethod as InputMethod
+  ] as ChannelStatusTypes;
+
+  const messages = channelMessages(
+    (data?.[`${inputMethod}Count` as keyof AllData] as AggregateCount)
+      ?.aggregate.count
+  )[inputMethod as InputMethod];
 
   return (
     <Box key={inputMethod} border="thinborder" rounded="md" p="5">
       <VStack align="stretch" spacing={"2"}>
-        <Flex justify="space-between" align="baseline">
+        <Flex justify="space-between" align="baseline" pb="4">
           <Heading color={mutedText()} size="md">
             {inputMethod}
           </Heading>
-          {/* #TODO once a message has been received, additional not ready channels should not be red */}
-          <CircleStatus type="green"></CircleStatus>
+          {!loading && <CircleStatus type={channelStatus}></CircleStatus>}
         </Flex>
-        <HStack align={"baseline"}>
-          <Skeleton height="20px" />
-          <Skeleton height="20px" />
-          {/* <Heading>{count}</Heading>
-                      <Box fontSize={"sm"}>
-                        message{count === "1" ? "" : "s"} this month
-                        <br />
-                        {MESSAGE_ENUM[inputMethod]?.desc}
-                      </Box> */}
-        </HStack>
-        <Stack>
-          <Skeleton height="20px" />
-          <Skeleton height="20px" />
-          <Skeleton height="20px" />
-        </Stack>
+        <Skeleton isLoaded={!loading}>
+          <Box>{messages[channelStatus]}</Box>
+        </Skeleton>
       </VStack>
     </Box>
   );

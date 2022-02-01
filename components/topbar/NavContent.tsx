@@ -40,7 +40,7 @@ const MobileNavContext = (props: FlexProps) => {
           display={{ base: "none", sm: "flex" }}
         >
           <SignedIn>
-            <NextLink href={"/dashboard"} passHref>
+            <NextLink href="/" passHref>
               <Button as="a" variant="solid">
                 dashboard
               </Button>
@@ -118,7 +118,7 @@ const DesktopNavContent = (props: FlexProps) => {
       </HStack>
       <HStack spacing="8" minW="240px" justify="flex-end">
         <SignedIn>
-          <NextLink href="/dashboard" passHref>
+          <NextLink href="/" passHref>
             <Button as="a" variant="ptn">
               dashboard
             </Button>

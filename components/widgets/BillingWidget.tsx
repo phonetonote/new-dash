@@ -25,7 +25,6 @@ export const BillingWdiget = (props: BillingWidgetProps) => {
 
   return (
     <>
-      {/* #TODO <OverageAlert> */}
       <SubscriptionBadge
         loading={subscriptionLoading}
         status={stripeData?.status ?? "starter"}

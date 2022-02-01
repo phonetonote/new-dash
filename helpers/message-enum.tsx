@@ -1,5 +1,6 @@
 import Link from "next/link";
 import React, { ReactChild } from "react";
+import { MyLink } from "../components/MyLink";
 
 export const MESSAGE_ENUM: {
   [k: string]: {
@@ -46,8 +47,8 @@ export const MESSAGE_ENUM: {
     desc: (
       <div>
         get started{" "}
-        <Link href="/pages/integrations">with our zapier integration</Link> to
-        pipe other data to your notes. you will need your ptn_key to get
+        <MyLink href="/pages/integrations">with our zapier integration</MyLink>{" "}
+        to pipe other data to your notes. you will need your ptn_key to get
         started. it might still be referred to as phonetoroam and your roam_key
         over there.
       </div>

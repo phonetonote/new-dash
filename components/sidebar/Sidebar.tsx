@@ -1,38 +1,26 @@
 import { Box, chakra, Flex, HStack, IconButton, Stack } from "@chakra-ui/react";
-import {
-  HiSearchCircle,
-  HiOutlineInbox,
-  HiBookmark,
-  HiPencil,
-} from "react-icons/hi";
 import { SidebarNavSectionTitle } from "./SidebarNavSectionTitle";
 import { SidebarLink } from "./SidebarLink";
-import { UserInfo } from "./UserInfo";
 import { ThemeSwitcher } from "../footer/ThemeSwitcher";
 import { ScrollArea } from "../ScrollArea";
 import {
-  FiArrowLeftCircle,
-  FiBarChart2,
-  FiCheckCircle,
   FiCornerDownLeft,
   FiCreditCard,
-  FiDollarSign,
-  FiGlobe,
-  FiHome,
   FiKey,
   FiPackage,
   FiSend,
   FiSettings,
   FiShield,
-  FiSliders,
   FiUser,
 } from "react-icons/fi";
 import Link from "next/link";
+import { IoHelpBuoy } from "react-icons/io5";
 
 export const Sidebar = () => {
   const pages = [
     {
-      path: "dashboard",
+      path: "",
+      title: "dashboard",
       hashes: [
         { name: "channels", icon: <FiSend /> },
         { name: "ptn-key", icon: <FiKey /> },
@@ -42,11 +30,13 @@ export const Sidebar = () => {
 
     {
       path: "user",
+      title: "user",
       hashes: [
         { name: "account", icon: <FiUser /> },
         { name: "security", icon: <FiShield /> },
         { name: "billing", icon: <FiCreditCard /> },
         { name: "preferences", icon: <FiSettings /> },
+        { name: "help", icon: <IoHelpBuoy /> },
       ],
     },
   ];
@@ -72,7 +62,7 @@ export const Sidebar = () => {
             justifyContent={"space-between"}
           >
             <Box>
-              <Link href="/dashboard#channels" passHref={true}>
+              <Link href="/#channels" passHref={true}>
                 <a>
                   <chakra.img
                     src="images/logo.svg"
@@ -88,8 +78,8 @@ export const Sidebar = () => {
               </Link>
 
               {pages.map((page) => (
-                <Stack pb="6" key={page.path}>
-                  <SidebarNavSectionTitle>{page.path}</SidebarNavSectionTitle>
+                <Stack pb="6" key={page.title}>
+                  <SidebarNavSectionTitle>{page.title}</SidebarNavSectionTitle>
                   {page.hashes.map((hash) => {
                     return (
                       <SidebarLink
@@ -116,7 +106,6 @@ export const Sidebar = () => {
                   />
                 </Link>
                 <ThemeSwitcher></ThemeSwitcher>
-                {/* #TODO help email button that corresponds to plan type */}
               </HStack>
             </Box>
           </Flex>

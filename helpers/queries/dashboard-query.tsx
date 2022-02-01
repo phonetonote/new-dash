@@ -10,64 +10,101 @@ export const dashboardQuery = gql`
       id
       nickname
       status
-    }
-    roam_keys(where: { clerk_id: { _eq: $clerkId } }, order_by: { id: desc }) {
-      key
-    }
-
-    messages_aggregate(
-      where: { clerk_id: { _eq: $clerkId }, status: { _eq: 2 } }
-    ) {
-      aggregate {
-        count
+      stripe_data {
+        id
+        cancelAt
+        currentPeriodEnd
+        currentPeriodStart
+        startDate
+        status
+        items {
+          data {
+            id
+          }
+        }
+        plan {
+          interval
+          product {
+            ... on StripeProduct {
+              name
+            }
+          }
+          nickname
+        }
       }
     }
 
-    totalCount: filter_to_current_month_aggregate(
+    totalMonthylMessages: filter_to_current_month_aggregate(
       where: { clerk_id: { _eq: $clerkId } }
     ) {
       aggregate {
         count
       }
     }
-    smsCount: filter_to_current_month_aggregate(
+
+    roam_keys(where: { clerk_id: { _eq: $clerkId } }, order_by: { id: desc }) {
+      key
+    }
+
+    totalCount: messages_aggregate(
+      where: { clerk_id: { _eq: $clerkId }, status: { _eq: 2 } }
+    ) {
+      aggregate {
+        count
+      }
+    }
+    smsCount: messages_aggregate(
       where: { clerk_id: { _eq: $clerkId }, sender_type: { _eq: 0 } }
     ) {
       aggregate {
         count
       }
     }
-    facebookCount: filter_to_current_month_aggregate(
+    facebookCount: messages_aggregate(
       where: { clerk_id: { _eq: $clerkId }, sender_type: { _eq: 1 } }
     ) {
       aggregate {
         count
       }
     }
-
-    alfredCount: filter_to_current_month_aggregate(
+    alfredCount: messages_aggregate(
       where: { clerk_id: { _eq: $clerkId }, sender_type: { _eq: 3 } }
     ) {
       aggregate {
         count
       }
     }
-    telegramCount: filter_to_current_month_aggregate(
+    telegramCount: messages_aggregate(
       where: { clerk_id: { _eq: $clerkId }, sender_type: { _eq: 5 } }
     ) {
       aggregate {
         count
       }
     }
-    zapierCount: filter_to_current_month_aggregate(
+    zapierCount: messages_aggregate(
       where: { clerk_id: { _eq: $clerkId }, sender_type: { _eq: 6 } }
     ) {
       aggregate {
         count
       }
     }
-    emailCount: filter_to_current_month_aggregate(
+    emailCount: messages_aggregate(
       where: { clerk_id: { _eq: $clerkId }, sender_type: { _eq: 7 } }
+    ) {
+      aggregate {
+        count
+      }
+    }
+    facebookChannels: facebooks_aggregate(
+      where: { clerk_id: { _eq: $clerkId } }
+    ) {
+      aggregate {
+        count
+      }
+    }
+
+    telegramChannels: local_telegrams_aggregate(
+      where: { clerk_id: { _eq: $clerkId } }
     ) {
       aggregate {
         count

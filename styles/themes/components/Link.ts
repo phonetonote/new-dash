@@ -1,5 +1,5 @@
 import { ComponentStyleConfig } from "@chakra-ui/react";
-import { mode } from "@chakra-ui/theme-tools";
+import { darken, mode } from "@chakra-ui/theme-tools";
 
 import colors from "../colors";
 
@@ -12,7 +12,7 @@ const Link: ComponentStyleConfig = {
     _focus: {
       boxShadow: "none",
     },
-    color: mode(colors.ptnAqua["700"], colors.ptnAqua["300"])(props),
+    color: mode(colors.ptnAqua["800"], colors.ptnAqua["300"])(props),
     textDecoration: "underline",
     _hover: {
       textDecoration: "none",
