@@ -1,4 +1,5 @@
 import { getColor, mode, transparentize } from "@chakra-ui/theme-tools";
+
 import type {
   SystemStyleFunction,
   SystemStyleObject,
@@ -55,6 +56,7 @@ const defaultProps = {
 
 export default {
   baseStyle,
+  parts: {},
   variants,
   defaultProps,
 };
