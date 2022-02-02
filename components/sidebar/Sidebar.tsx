@@ -64,16 +64,9 @@ export const Sidebar = () => {
             <Box>
               <Link href="/#channels" passHref={true}>
                 <a>
-                  <chakra.img
-                    src="images/logo.svg"
-                    alt="logo"
-                    width="20"
-                    mx="3"
-                    p="3"
-                    ml="0"
-                    mt="-3"
-                    mb="6"
-                  />
+                  <Box mx="3" p="3" ml="0" mt="-3" mb="6">
+                    <img src="images/logo.svg" alt="logo" width="60px" />
+                  </Box>
                 </a>
               </Link>
 
