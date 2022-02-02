@@ -125,7 +125,10 @@ const DesktopNavContent = (props: FlexProps) => {
           </NextLink>
         </SignedIn>
         <SignedOut>
-          <SignInButton mode="modal">
+          <SignInButton
+            mode="modal"
+            redirectUrl={`${process.env.NEXT_PUBLIC_NEW_DASHBOARD_SITE}`}
+          >
             <Button variant={"ghost"}>sign in</Button>
           </SignInButton>
           <SignUpButton mode="modal">
