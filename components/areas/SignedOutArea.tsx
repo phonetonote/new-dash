@@ -5,7 +5,9 @@ export const SignedOutArea = () => {
   return (
     <Box minH="100vh" p="4">
       <HStack>
-        <SignInButton>
+        <SignInButton
+          redirectUrl={`${process.env.NEXT_PUBLIC_NEW_DASHBOARD_SITE}`}
+        >
           <Button variant="ptn">sign in</Button>
         </SignInButton>
         <Box ml="2"> to view this page</Box>
