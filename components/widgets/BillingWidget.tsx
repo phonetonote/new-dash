@@ -36,7 +36,7 @@ export const BillingWdiget = (props: BillingWidgetProps) => {
             <SubscriptionLink clerkId={user.id} />
           </Box>
 
-          {(!stripeData || !stripeData?.status?.includes("expired")) && (
+          {(!stripeData || stripeData?.status?.includes("expired")) && (
             <Box>
               <Button
                 as="a"
