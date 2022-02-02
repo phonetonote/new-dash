@@ -173,7 +173,7 @@ document.getElementsByTagName("head")[0].appendChild(s);
                 background="ptnRed.600"
                 px="1"
                 m="1"
-                color="whiteAlpha.900"
+                color="white"
               >
                 red
               </Text>
