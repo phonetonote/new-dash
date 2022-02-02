@@ -1,4 +1,12 @@
-import { Box, Button, Flex, Skeleton, Text, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  HStack,
+  Skeleton,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import { FiCreditCard, FiHelpCircle, FiSend, FiSettings } from "react-icons/fi";
 import { DashboardSection } from "../DashboardSection";
 import {
@@ -17,6 +25,7 @@ import router from "next/router";
 import { BillingWdiget } from "../widgets/BillingWidget";
 import { useFetchData } from "../../hooks/useFetchData";
 import { IoHelpBuoy } from "react-icons/io5";
+import { TwitterButton } from "../TwitterButton";
 
 export const UserArea = () => {
   const [activeTitle, setActiveTitle] = useScrollableArea();
@@ -55,13 +64,16 @@ export const UserArea = () => {
             </Box>
 
             <Flex maxWidth="840px" mt="4" justifyContent="right">
-              <SignOutButton
-                signOutCallback={() =>
-                  router.push(`${process.env.NEXT_PUBLIC_OLD_MARKETING_SITE}`)
-                }
-              >
-                <Button my="4">sign out</Button>
-              </SignOutButton>
+              <HStack spacing="4" align="stretch">
+                {/* <TwitterButton /> */}
+                <SignOutButton
+                  signOutCallback={() =>
+                    router.push(`${process.env.NEXT_PUBLIC_OLD_MARKETING_SITE}`)
+                  }
+                >
+                  <Button>sign out</Button>
+                </SignOutButton>
+              </HStack>
             </Flex>
           </VStack>
         </Box>
