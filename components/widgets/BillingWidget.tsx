@@ -31,16 +31,22 @@ export const BillingWdiget = (props: BillingWidgetProps) => {
         nickname={stripeData?.plan?.nickname ?? "free"}
       />
       <Skeleton isLoaded={!subscriptionLoading}>
-        {stripeData ? (
-          <SubscriptionLink clerkId={user.id} />
-        ) : (
-          <Button
-            as="a"
-            href={`${process.env.NEXT_PUBLIC_OLD_MARKETING_SITE}/pages/pricing`}
-          >
-            view pricing
-          </Button>
-        )}
+        <VStack spacing="4" align="stretch">
+          <Box>
+            <SubscriptionLink clerkId={user.id} />
+          </Box>
+
+          {(!stripeData || !stripeData?.status?.includes("expired")) && (
+            <Box>
+              <Button
+                as="a"
+                href={`${process.env.NEXT_PUBLIC_OLD_MARKETING_SITE}/pages/pricing`}
+              >
+                view pricing
+              </Button>
+            </Box>
+          )}
+        </VStack>
       </Skeleton>
     </>
   );
