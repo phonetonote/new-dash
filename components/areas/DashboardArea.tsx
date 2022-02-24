@@ -125,6 +125,8 @@ export const DashboardArea = () => {
     </Alert>
   );
 
+  const ptnKey = liveData?.["roam_keys"]?.[0]?.key ?? "loading...";
+
   return (
     <VStack align="stretch" spacing="20">
       <ActiveTitleContext.Provider value={activeTitle.toString()}>
@@ -162,13 +164,14 @@ export const DashboardArea = () => {
           </>
         </DashboardSection>
         <DashboardSection title="ptn-key" icon={<FiKey />}>
-          <PtnKey ptnKey={liveData?.["roam_keys"]?.[0]?.key ?? "loading..."} />
+          <PtnKey ptnKey={ptnKey} />
         </DashboardSection>
         <DashboardSection title="clients" icon={<FiPackage />}>
           <>
             <ClientInfo
               totalSentMessages={totalSentMessages}
               loading={loading}
+              ptnKey={ptnKey}
             />
             <Skeleton isLoaded={!loading}>
               {shouldRenderOverage && overageAlert}
