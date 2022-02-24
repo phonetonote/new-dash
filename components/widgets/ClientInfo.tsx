@@ -25,10 +25,11 @@ import { MyLink } from "../MyLink";
 type ClientInfoProps = {
   loading: boolean;
   totalSentMessages: number | undefined;
+  ptnKey: string;
 };
 
 export const ClientInfo = (props: ClientInfoProps) => {
-  const { loading, totalSentMessages } = props;
+  const { loading, totalSentMessages, ptnKey } = props;
   const mutedColor = useMutedColor();
 
   const noMessagesReceived =
@@ -46,7 +47,7 @@ s.src = "https://client.phonetoroam.com/phone-to-roam.js";
 s.id = "phone-to-roam-script";
 s.async = false;
 s.type = "text/javascript";
-s.dataset.roam_key = "e62c37f55e498db033cbc217ca52f554"
+s.dataset.roam_key = "${ptnKey}"
 document.getElementsByTagName("head")[0].appendChild(s);
 `;
 
