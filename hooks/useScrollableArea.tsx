@@ -7,17 +7,17 @@ import useScrollPosition from "@react-hook/window-scroll";
 export const ActiveTitleContext = createContext("");
 
 const useScrollableArea = () => {
+  const urlParamsWithNewTitle = (newTitle: string) => {
+    const existingParams = new URLSearchParams(`${window.location.search}`);
+    const newParams = Object.fromEntries(existingParams);
+    newParams["title"] = newTitle;
+
+    return new URLSearchParams(newParams).toString();
+  };
+
   const scrollY = useScrollPosition(30);
 
   const [activeTitle, setActiveTitle] = useState<string>("");
-
-  useEffect(() => {
-    const params = new URLSearchParams(`${window.location.search}`);
-    const possibleTitle = params.get("title");
-    router.push(`${window.location.pathname}#${possibleTitle}`, "", {
-      shallow: true,
-    });
-  }, []);
 
   useEffect(() => {
     const headings = [
@@ -37,11 +37,12 @@ const useScrollableArea = () => {
       visibleHeadings.length > 0 ? visibleHeadings[0] : sortedHeadings[0];
 
     if (topHeading) {
+      const newParams = urlParamsWithNewTitle(
+        condenseTitle(topHeading.innerHTML)
+      );
       setActiveTitle(condenseTitle(topHeading.innerHTML));
 
-      const newRoute = `${window.location.pathname}?title=${condenseTitle(
-        topHeading.innerHTML
-      )}`;
+      const newRoute = `${window.location.pathname}?${newParams}`;
 
       if (newRoute !== router.asPath) {
         router.push(`${newRoute}`, undefined, { shallow: true });
