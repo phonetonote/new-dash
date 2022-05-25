@@ -24,7 +24,7 @@ export const BillingWdiget = (props: BillingWidgetProps) => {
   const { user, subscriptionLoading, stripeData } = props;
 
   const has_subscription =
-    stripeData && stripeData?.status?.includes("expired");
+    stripeData && !stripeData?.status?.includes("expired");
 
   return (
     <>
