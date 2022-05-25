@@ -23,6 +23,9 @@ type BillingWidgetProps = {
 export const BillingWdiget = (props: BillingWidgetProps) => {
   const { user, subscriptionLoading, stripeData } = props;
 
+  const has_subscription =
+    stripeData && stripeData?.status?.includes("expired");
+
   return (
     <>
       <SubscriptionBadge
@@ -32,11 +35,13 @@ export const BillingWdiget = (props: BillingWidgetProps) => {
       />
       <Skeleton isLoaded={!subscriptionLoading}>
         <VStack spacing="4" align="stretch">
-          <Box>
-            <SubscriptionLink clerkId={user.id} />
-          </Box>
+          {has_subscription && (
+            <Box>
+              <SubscriptionLink clerkId={user.id} />
+            </Box>
+          )}
 
-          {(!stripeData || stripeData?.status?.includes("expired")) && (
+          {!has_subscription && (
             <Box>
               <Button
                 as="a"

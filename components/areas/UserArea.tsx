@@ -17,7 +17,6 @@ import {
 import { ClerkProfile } from "../widgets/ClerkProfile";
 import { useQuery } from "@apollo/client";
 import { SignOutButton, useUser } from "@clerk/nextjs";
-import { SubscriptionLink } from "../widgets/SubscriptionLink";
 import useScrollableArea, {
   ActiveTitleContext,
 } from "../../hooks/useScrollableArea";
