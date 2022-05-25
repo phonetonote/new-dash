@@ -55,11 +55,11 @@ export const DashboardArea = () => {
   const {
     payment_intent: paymentIntentId,
     payment_intent_client_secret: paymentIntentClientSecret,
-    payment_success: paymentSuccess,
+    checkout_success,
   } = useParams();
 
   const [activeTitle, setActiveTitle] = useScrollableArea();
-  const [justPaid, setJustPaid] = useState(paymentSuccess);
+  const [justPaid, setJustPaid] = useState(checkout_success);
   const user = useUser();
   const stripePromise = loadStripe(
     process.env.NEXT_PUBLIC_STRIPE_KEY ?? "CANNOT FIND STRIPE KEY"
