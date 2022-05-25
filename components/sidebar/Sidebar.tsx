@@ -15,6 +15,7 @@ import {
 } from "react-icons/fi";
 import Link from "next/link";
 import { IoHelpBuoy } from "react-icons/io5";
+import Image from "next/image";
 
 export const Sidebar = () => {
   const pages = [
@@ -65,7 +66,12 @@ export const Sidebar = () => {
               <Link href="/#channels" passHref={true}>
                 <a>
                   <Box mx="3" p="3" ml="0" mt="-3" mb="6">
-                    <img src="images/logo.svg" alt="logo" width="60px" />
+                    <Image
+                      src="/images/logo.svg"
+                      alt="logo"
+                      width="60px"
+                      height="60px"
+                    />
                   </Box>
                 </a>
               </Link>
