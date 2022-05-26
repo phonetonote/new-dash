@@ -108,7 +108,7 @@ export const UserArea = () => {
             for support
           </Text>
         </DashboardSection>
-        <Box height={"800px"}></Box>
+        <Box height={"85vh"}></Box>
       </ActiveTitleContext.Provider>
     </VStack>
   );
