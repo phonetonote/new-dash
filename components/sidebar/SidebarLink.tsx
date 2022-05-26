@@ -32,7 +32,7 @@ export const SidebarLink = (props: SidebarLinkProps) => {
   } = props;
   const router = useRouter();
 
-  const isActiveTitle = router.asPath.includes(title);
+  const isActiveTitle = (router.query.title ?? "") === title;
 
   const activeColor = mode("ptnGreen.700", "ptnGreen.300");
   const activeBgColor = mode("gray.100", "gray.900");

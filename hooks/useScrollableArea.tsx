@@ -7,40 +7,69 @@ import useScrollPosition from "@react-hook/window-scroll";
 export const ActiveTitleContext = createContext("");
 
 const useScrollableArea = () => {
-  const urlParamsWithNewTitle = (newTitle: string) => {
+  const scrollY = useScrollPosition(30);
+
+  const getExistingParams = () => {
     const existingParams = new URLSearchParams(`${window.location.search}`);
-    const newParams = Object.fromEntries(existingParams);
+    return Object.fromEntries(existingParams);
+  };
+  const urlParamsWithNewTitle = (newTitle: string) => {
+    const newParams = getExistingParams();
     newParams["title"] = newTitle;
+
+    if (newParams["go_to_billing"] === "yes") {
+      newParams["go_to_billing"] = "no";
+    }
 
     return new URLSearchParams(newParams).toString();
   };
 
-  const scrollY = useScrollPosition(30);
-
-  const [activeTitle, setActiveTitle] = useState<string>("");
-
-  useEffect(() => {
+  const getSortingHeadings = () => {
     const headings = [
       ...Array.from(document.getElementsByClassName("cl-title")),
       ...Array.from(document.getElementsByClassName(HEADING_CLASS)),
     ];
 
-    const sortedHeadings = headings.sort((heading) => {
+    return headings.sort((heading) => {
       return heading.getBoundingClientRect().top;
     });
+  };
 
+  const getTopHeading = () => {
+    const sortedHeadings = getSortingHeadings();
     const visibleHeadings = sortedHeadings?.filter((heading) => {
       return heading.getBoundingClientRect().top >= 0;
     });
 
     const topHeading =
       visibleHeadings.length > 0 ? visibleHeadings[0] : sortedHeadings[0];
+    return topHeading;
+  };
 
-    if (topHeading) {
+  const getGoToBilling = () =>
+    getExistingParams()["go_to_billing"] === "yes" && scrollY === 0;
+
+  const getBillingHeading = () =>
+    getSortingHeadings().filter(
+      (heading) => heading.innerHTML.trim() === "billing"
+    )[0];
+
+  const getRelevantHeading = () => {
+    const goToBilling = getGoToBilling();
+    const topHeading = getTopHeading();
+    const billingHeading = getBillingHeading();
+    return goToBilling ? billingHeading : topHeading;
+  };
+
+  const [activeTitle, setActiveTitle] = useState<string>("");
+
+  useEffect(() => {
+    const relevantHeading = getRelevantHeading();
+    if (relevantHeading) {
       const newParams = urlParamsWithNewTitle(
-        condenseTitle(topHeading.innerHTML)
+        condenseTitle(relevantHeading.innerHTML)
       );
-      setActiveTitle(condenseTitle(topHeading.innerHTML));
+      setActiveTitle(condenseTitle(relevantHeading.innerHTML));
 
       const newRoute = `${window.location.pathname}?${newParams}`;
 
@@ -50,6 +79,9 @@ const useScrollableArea = () => {
     }
   }, [scrollY]);
 
+  if (getBillingHeading() && getGoToBilling() === true && scrollY === 0) {
+    getBillingHeading().scrollIntoView();
+  }
   return [activeTitle, setActiveTitle];
 };
 
