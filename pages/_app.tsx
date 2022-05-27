@@ -9,6 +9,7 @@ import { PageWithLayout } from "../types/PageWithLayout";
 import React from "react";
 import "focus-visible/dist/focus-visible";
 import Head from "next/head";
+import Script from "next/script";
 
 type AppLayoutProps = {
   Component: PageWithLayout;
@@ -27,7 +28,21 @@ function MyApp({ Component, pageProps }: AppLayoutProps) {
         <ClerkProvider>
           <ClerkLoaded>
             <Layout>
-              <Component {...pageProps} />
+              <>
+                <Component {...pageProps} />
+                <Script
+                  strategy="afterInteractive"
+                  dangerouslySetInnerHTML={{
+                    __html: `(function(w,r){w._rwq=r;w[r]=w[r]||function(){(w[r].q=w[r].q||[]).push(arguments)}})(window,'rewardful');`,
+                  }}
+                />
+                <Script
+                  strategy="afterInteractive"
+                  async
+                  src="https://r.wdfl.co/rw.js"
+                  data-rewardful="7d155f"
+                />
+              </>
             </Layout>
           </ClerkLoaded>
         </ClerkProvider>
