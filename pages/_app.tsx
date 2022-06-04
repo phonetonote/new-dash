@@ -31,12 +31,14 @@ function MyApp({ Component, pageProps }: AppLayoutProps) {
               <>
                 <Component {...pageProps} />
                 <Script
+                  id="rewardful-1"
                   strategy="afterInteractive"
                   dangerouslySetInnerHTML={{
                     __html: `(function(w,r){w._rwq=r;w[r]=w[r]||function(){(w[r].q=w[r].q||[]).push(arguments)}})(window,'rewardful');`,
                   }}
                 />
                 <Script
+                  id="rewardful-2"
                   strategy="afterInteractive"
                   async
                   src="https://r.wdfl.co/rw.js"
