@@ -21,6 +21,10 @@ const useScrollableArea = () => {
       newParams["go_to_billing"] = "no";
     }
 
+    if (newParams["go_to_ptn_key"] === "yes") {
+      newParams["go_to_ptn_key"] = "no";
+    }
+
     return new URLSearchParams(newParams).toString();
   };
 
@@ -49,16 +53,31 @@ const useScrollableArea = () => {
   const getGoToBilling = () =>
     getExistingParams()["go_to_billing"] === "yes" && scrollY === 0;
 
+  const getGoToPtnKey = () =>
+    getExistingParams()["go_to_ptn_key"] === "yes" && scrollY === 0;
+
   const getBillingHeading = () =>
     getSortingHeadings().filter(
       (heading) => heading.innerHTML.trim() === "billing"
     )[0];
 
+  const getPtnKeyHeading = () =>
+    getSortingHeadings().filter(
+      (heading) => heading.innerHTML.trim() === "ptn key"
+    )[0];
+
   const getRelevantHeading = () => {
     const goToBilling = getGoToBilling();
-    const topHeading = getTopHeading();
-    const billingHeading = getBillingHeading();
-    return goToBilling ? billingHeading : topHeading;
+    if (goToBilling) {
+      return getBillingHeading();
+    }
+
+    const goToPtnKey = getGoToPtnKey();
+    if (goToPtnKey) {
+      return getPtnKeyHeading();
+    }
+
+    return getTopHeading();
   };
 
   const [activeTitle, setActiveTitle] = useState<string>("");
