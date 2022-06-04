@@ -101,6 +101,10 @@ const useScrollableArea = () => {
   if (getBillingHeading() && getGoToBilling() === true && scrollY === 0) {
     getBillingHeading().scrollIntoView();
   }
+
+  if (getPtnKeyHeading() && getGoToPtnKey() === true && scrollY === 0) {
+    getPtnKeyHeading().scrollIntoView();
+  }
   return [activeTitle, setActiveTitle];
 };
 
