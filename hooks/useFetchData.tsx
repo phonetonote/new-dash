@@ -2,8 +2,8 @@ import { useQuery } from "@apollo/client";
 import { useUser } from "@clerk/nextjs";
 import * as React from "react";
 import { AggregateCount } from "../components/areas/DashboardArea";
-import { Subscription } from "../components/widgets/SubscriptionBadge";
 import { dashboardQuery } from "../helpers/queries/dashboard-query";
+import { Subscription } from "../types/SubscriptionTypes";
 
 export type AllData = {
   subscriptions: Subscription[];
