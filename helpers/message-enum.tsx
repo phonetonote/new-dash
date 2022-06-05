@@ -27,7 +27,7 @@ export const MESSAGE_ENUM: {
     enumInt: 3,
     desc: (
       <div>
-        <a href="https://gumroad.com/l/alfredtoroam">download alfredtonote</a>{" "}
+        <a href="https://ptn.gumroad.com/l/ptn-alfred">download alfredtonote</a>{" "}
         and edit the script to include your ptn_key.
       </div>
     ),
