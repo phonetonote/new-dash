@@ -119,7 +119,7 @@ export const DashboardArea = () => {
         <MyLink
           href={`${process.env.NEXT_PUBLIC_OLD_MARKETING_SITE}/pages/pricing`}
         >
-          please consider upgrading your plan
+          please choose a plan on the pricing page
         </MyLink>
         .
       </Text>
