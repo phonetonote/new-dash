@@ -71,7 +71,7 @@ export const channelMessages = (
       ready: (
         <Box>
           download{" "}
-          <MyLink href="https://gumroad.com/l/alfredtoroam">
+          <MyLink href="https://ptn.gumroad.com/l/ptn-alfred">
             alfredtonote
           </MyLink>{" "}
           and edit the script to include your ptn key.
