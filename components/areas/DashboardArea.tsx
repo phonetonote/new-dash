@@ -24,8 +24,8 @@ import useScrollableArea, {
 import { loadStripe } from "@stripe/stripe-js";
 import useParams from "../../hooks/useParams";
 import { AllData, useFetchData } from "../../hooks/useFetchData";
-import { Plan, Subscription } from "../widgets/SubscriptionBadge";
 import { MyLink } from "../MyLink";
+import { Plan, Subscription } from "../../types/SubscriptionTypes";
 
 export const inputMethods = [
   "sms",

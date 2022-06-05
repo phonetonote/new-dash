@@ -1,17 +1,7 @@
-import {
-  Box,
-  Button,
-  HStack,
-  Skeleton,
-  useColorModeValue,
-  VStack,
-} from "@chakra-ui/react";
-import { ClerkProp, ClerkProviderProps } from "@clerk/nextjs";
-import { ReactChild } from "react";
-import { ActiveTitleContext } from "../../hooks/useScrollableArea";
-import user from "../../pages/user";
-import { DashboardHeading } from "../headings/DashboardHeading";
-import { Subscription, SubscriptionBadge } from "./SubscriptionBadge";
+import { Box, Button, Skeleton, VStack } from "@chakra-ui/react";
+
+import { Subscription } from "../../types/SubscriptionTypes";
+import { SubscriptionBadge } from "./SubscriptionBadge";
 import { SubscriptionLink } from "./SubscriptionLink";
 
 type BillingWidgetProps = {

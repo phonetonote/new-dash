@@ -9,11 +9,6 @@ import {
 } from "@chakra-ui/react";
 import { FiCreditCard, FiHelpCircle, FiSend, FiSettings } from "react-icons/fi";
 import { DashboardSection } from "../DashboardSection";
-import {
-  Plan,
-  Subscription,
-  SubscriptionBadge,
-} from "../widgets/SubscriptionBadge";
 import { ClerkProfile } from "../widgets/ClerkProfile";
 import { useQuery } from "@apollo/client";
 import { SignOutButton, useUser } from "@clerk/nextjs";
@@ -25,6 +20,7 @@ import { BillingWdiget } from "../widgets/BillingWidget";
 import { useFetchData } from "../../hooks/useFetchData";
 import { IoHelpBuoy } from "react-icons/io5";
 import { TwitterButton } from "../TwitterButton";
+import { Subscription, Plan } from "../../types/SubscriptionTypes";
 
 export const UserArea = () => {
   const [activeTitle, setActiveTitle] = useScrollableArea();
