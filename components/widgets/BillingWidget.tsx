@@ -117,7 +117,9 @@ export const BillingWdiget = (props: BillingWidgetProps) => {
                   ],
                 }}
                 button={
-                  <ActionButton planName="standard">subscribe</ActionButton>
+                  <ActionButton planName="standard" duration={myDuration}>
+                    subscribe
+                  </ActionButton>
                 }
                 duration={myDuration}
               />
