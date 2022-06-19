@@ -15,6 +15,7 @@ export type AllData = {
   alfredCount: AggregateCount;
   telegramCount: AggregateCount;
   zapierCount: AggregateCount;
+  chromeCount: AggregateCount;
   emailCount: AggregateCount;
   telegramChannels: AggregateCount;
   roam_keys: {
