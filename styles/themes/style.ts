@@ -12,6 +12,7 @@ const styles: Styles = {
   global: (props) => ({
     ":root": {
       "--shadowColor": mode("160deg 21% 81%", "150deg 50% 12%")(props),
+      "--boldShadowColor": mode("160deg 58% 21%", "150deg 33% 55%")(props),
       "--outlineColor": mode(
         colors.ptnAqua["700"],
         colors.ptnAqua["300"]

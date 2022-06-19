@@ -88,11 +88,12 @@ const useScrollableArea = () => {
       const newParams = urlParamsWithNewTitle(
         condenseTitle(relevantHeading.innerHTML)
       );
-      setActiveTitle(condenseTitle(relevantHeading.innerHTML));
 
       const newRoute = `${window.location.pathname}?${newParams}`;
 
       if (newRoute !== router.asPath) {
+        setActiveTitle(condenseTitle(relevantHeading.innerHTML));
+
         router.push(`${newRoute}`, undefined, { shallow: true });
       }
     }

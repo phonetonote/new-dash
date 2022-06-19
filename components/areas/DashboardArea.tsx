@@ -65,7 +65,7 @@ export const DashboardArea = () => {
     process.env.NEXT_PUBLIC_STRIPE_KEY ?? "CANNOT FIND STRIPE KEY"
   );
 
-  const { data: liveData, loading, refetch } = useFetchData();
+  const { data: liveData, loading } = useFetchData();
   const totalSentMessages = liveData?.totalCount.aggregate.count ?? 0;
   const totalMonthlyCount = liveData?.totalMonthylMessages.aggregate.count ?? 0;
 
@@ -116,10 +116,8 @@ export const DashboardArea = () => {
       <AlertIcon />
       <Text>
         too many messages sent this month,{" "}
-        <MyLink
-          href={`${process.env.NEXT_PUBLIC_OLD_MARKETING_SITE}/pages/pricing`}
-        >
-          please choose a plan on the pricing page
+        <MyLink href="/user?go_to_billing=yes">
+          please choose a plan in the billing section
         </MyLink>
         .
       </Text>

@@ -23,11 +23,11 @@ import { TwitterButton } from "../TwitterButton";
 import { Subscription, Plan } from "../../types/SubscriptionTypes";
 
 export const UserArea = () => {
-  const [activeTitle, setActiveTitle] = useScrollableArea();
+  const [activeTitle] = useScrollableArea();
 
   const user = useUser();
 
-  const { data: liveData, loading, refetch } = useFetchData();
+  const { data: liveData, loading } = useFetchData();
 
   const liveSubscription: Subscription | undefined =
     liveData?.subscriptions?.[0];

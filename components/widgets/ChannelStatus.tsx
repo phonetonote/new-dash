@@ -10,6 +10,7 @@ import {
 import { channelMessages, InputMethod } from "../../helpers/channelMessages";
 import { AllData } from "../../hooks/useFetchData";
 import { useMutedColor } from "../../hooks/useChannelColors";
+import { CalmSkeleton } from "../indicators/CalmSkeleton";
 
 type ChannelStatusProps = {
   inputMethod: string;
@@ -62,9 +63,9 @@ export const ChannelStatus = (props: ChannelStatusProps) => {
           </Heading>
           {!loading && <CircleStatus type={channelStatus}></CircleStatus>}
         </Flex>
-        <Skeleton isLoaded={!loading}>
+        <CalmSkeleton isLoaded={!loading}>
           <Box>{messages[channelStatus]}</Box>
-        </Skeleton>
+        </CalmSkeleton>
       </VStack>
     </Box>
   );
