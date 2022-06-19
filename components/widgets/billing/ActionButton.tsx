@@ -1,5 +1,5 @@
 import { Button, ButtonProps, useColorModeValue } from "@chakra-ui/react";
-import { useSession, useUser } from "@clerk/nextjs";
+import { useSession } from "@clerk/nextjs";
 import * as React from "react";
 import { useEffect, useState } from "react";
 
@@ -14,18 +14,17 @@ export const ActionButton = (props: ActionButtonProps) => {
   const { getToken, id } = useSession();
   const [token, setToken] = useState("");
 
-  useEffect(() => {
-    if (!token) {
-      generateAndSetToken();
-    }
-  }, []);
-
   const generateAndSetToken = async () => {
     const token = await getToken();
     setToken(token);
   };
 
-  const { id: userId } = useUser();
+  useEffect(() => {
+    if (!token) {
+      generateAndSetToken();
+    }
+  }, [token, generateAndSetToken]);
+
   return (
     <form
       action={`${process.env.NEXT_PUBLIC_APP_URL}/payments/create_checkout_session.json`}
