@@ -27,11 +27,10 @@ export const useFetchData = () => {
 
   const {
     data,
-    refetch,
+
     loading,
   }: {
     data?: AllData;
-    refetch: Function;
     loading: boolean;
   } = useQuery(dashboardQuery, {
     variables: {
@@ -40,5 +39,5 @@ export const useFetchData = () => {
     pollInterval: 2000,
   });
 
-  return { data, loading, refetch };
+  return { data, loading };
 };

@@ -32,7 +32,7 @@ const MobileNavContext = (props: FlexProps) => {
         <Box flexBasis="6rem">
           <ToggleButton isOpen={isOpen} onClick={onToggle} />
         </Box>
-        <Box rel="home" mx={{ md: "auto", base: 0 }}>
+        <Box mx={{ md: "auto", base: 0 }}>
           <Logo h="24px" />
         </Box>
         <Box

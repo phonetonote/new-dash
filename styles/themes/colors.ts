@@ -13,6 +13,8 @@ type PtnColors = {
   ptnAqua: PtnColorObject;
   ptnTeal: PtnColorObject;
   ptnGreen: PtnColorObject;
+  ptnDarkGreen: PtnColorObject;
+  ptnLightGreen: PtnColorObject;
   ptnOrange: PtnColorObject;
   ptnRed: PtnColorObject;
   ptnYellow: PtnColorObject;
@@ -83,7 +85,24 @@ const colors: PtnColors = {
     500: "#4CC746",
     600: "#31A22B",
     700: "#157C10",
+    800: "#166909",
     900: "#175605",
+  },
+
+  // this is a bit chaotic, but it allows us to get higher contrast color schemes for our buttons
+
+  ptnDarkGreen: {
+    50: "#C0F6BD",
+    100: "#97EB91",
+    500: "#31A22B",
+    600: "#166909",
+    700: "#175605",
+  },
+  ptnLightGreen: {
+    100: "#C0F6BD",
+    200: "#97EB91",
+    300: "#6FDC69",
+    400: "#4CC746",
   },
   ptnYellow: {
     100: "#F7F2DE",

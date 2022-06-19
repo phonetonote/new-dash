@@ -112,7 +112,7 @@ document.getElementsByTagName("head")[0].appendChild(s);
           </Heading>
           <Text>
             our <strong>logseq-phonetonote</strong> plugin is available in the
-            logseq plugin marketplace. after installing, open the plugin's
+            logseq plugin marketplace. after installing, open the plugin
             settings to set your ptn key and configure the plugin. issues and
             feature requests are{" "}
             <MyLink href="https://github.com/phonetonote/phonetonote-logseq/issues">
