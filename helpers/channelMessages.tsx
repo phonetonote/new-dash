@@ -97,8 +97,8 @@ export const channelMessages = (
       ),
       received: (
         <Box>
-          <Badge variant="outline">{`${count}`}</Badge> received. continue
-          sending messages with alfred
+          <Badge variant="outline">{`${count}`}</Badge> received. continue using
+          the chrometonote extension.
         </Box>
       ),
     },
