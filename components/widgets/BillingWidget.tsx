@@ -67,7 +67,7 @@ export const BillingWdiget = (props: BillingWidgetProps) => {
         )}
       </CalmSkeleton>
 
-      {!has_subscription && (
+      {!has_subscription && !subscriptionLoading && (
         <Box>
           <Flex
             direction="column"
