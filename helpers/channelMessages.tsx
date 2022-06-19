@@ -84,6 +84,24 @@ export const channelMessages = (
         </Box>
       ),
     },
+    chrome: {
+      notReady: "",
+      ready: (
+        <Box>
+          download{" "}
+          <MyLink href="https://chrome.google.com/webstore/detail/chrometonote/gcmgnllgankcoijeoniebkblidmlppbf">
+            chrometonote from the chrome webstore
+          </MyLink>{" "}
+          and add your ptn key in the plugin settings.
+        </Box>
+      ),
+      received: (
+        <Box>
+          <Badge variant="outline">{`${count}`}</Badge> received. continue
+          sending messages with alfred
+        </Box>
+      ),
+    },
     telegram: {
       notReady: (
         <Box>

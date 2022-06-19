@@ -88,6 +88,13 @@ export const dashboardQuery = gql`
         count
       }
     }
+    chromeCount: messages_aggregate(
+      where: { clerk_id: { _eq: $clerkId }, sender_type: { _eq: 8 } }
+    ) {
+      aggregate {
+        count
+      }
+    }
     emailCount: messages_aggregate(
       where: { clerk_id: { _eq: $clerkId }, sender_type: { _eq: 7 } }
     ) {

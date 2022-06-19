@@ -34,6 +34,7 @@ export const inputMethods = [
   "telegram",
   "zapier",
   "email",
+  "chrome",
 ] as const;
 
 export type AggregateCount = {
@@ -140,6 +141,7 @@ export const DashboardArea = () => {
 
             <SimpleGrid columns={{ base: 1, md: 3 }} spacing="6">
               {inputMethods.map((inputMethod) => {
+                console.log("liveData", liveData);
                 const aggCount: number = (
                   liveData?.[
                     `${inputMethod}Count` as keyof AllData

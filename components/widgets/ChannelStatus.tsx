@@ -40,6 +40,7 @@ export const ChannelStatus = (props: ChannelStatusProps) => {
       data?.telegramCount.aggregate.count ?? 0
     ),
     zapier: determineStatusWithOneCount(data?.zapierCount.aggregate.count ?? 0),
+    chrome: determineStatusWithOneCount(data?.chromeCount.aggregate.count ?? 0),
     email: determineStatusWithTwoCounts(
       user.emailAddresses.length,
       data?.emailCount.aggregate.count ?? 0
