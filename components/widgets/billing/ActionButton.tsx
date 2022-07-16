@@ -14,21 +14,20 @@ export const ActionButton = (props: ActionButtonProps) => {
   const { session } = useSession();
   const [token, setToken] = useState("");
 
-  const generateAndSetToken = async () => {
-    if (session) {
-      const newToken = await session.getToken();
-
-      if (newToken) {
-        setToken(token);
-      }
-    }
-  };
-
   useEffect(() => {
+    const generateAndSetToken = async () => {
+      if (session) {
+        const newToken = await session.getToken();
+
+        if (newToken) {
+          setToken(token);
+        }
+      }
+    };
     if (!token) {
       generateAndSetToken();
     }
-  }, [token, generateAndSetToken]);
+  }, [token]);
 
   return (
     <form
