@@ -19,13 +19,12 @@ import router from "next/router";
 import { BillingWdiget } from "../widgets/BillingWidget";
 import { useFetchData } from "../../hooks/useFetchData";
 import { IoHelpBuoy } from "react-icons/io5";
-import { TwitterButton } from "../TwitterButton";
 import { Subscription, Plan } from "../../types/SubscriptionTypes";
 
 export const UserArea = () => {
   const [activeTitle] = useScrollableArea();
 
-  const user = useUser();
+  const { user } = useUser();
 
   const { data: liveData, loading } = useFetchData();
 
@@ -60,7 +59,6 @@ export const UserArea = () => {
 
             <Flex maxWidth="840px" mt="4" justifyContent="right">
               <HStack spacing="4" align="stretch">
-                {/* <TwitterButton /> */}
                 <SignOutButton
                   signOutCallback={() =>
                     router.push(`${process.env.NEXT_PUBLIC_OLD_MARKETING_SITE}`)
@@ -85,11 +83,15 @@ export const UserArea = () => {
           </ActiveTitleContext.Consumer>
         </Box>
         <DashboardSection id="billing" title="billing" icon={<FiCreditCard />}>
-          <BillingWdiget
-            subscriptionLoading={loading}
-            user={user}
-            stripeData={stripeData as Subscription["stripe_data"]}
-          />
+          <>
+            {user && (
+              <BillingWdiget
+                subscriptionLoading={loading}
+                user={user}
+                stripeData={stripeData as Subscription["stripe_data"]}
+              />
+            )}
+          </>
         </DashboardSection>
         <DashboardSection
           id="preferences"

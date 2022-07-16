@@ -7,6 +7,7 @@ import {
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { useUser } from "@clerk/clerk-react";
+import { useSession } from "@clerk/nextjs";
 import React, { ReactChild } from "react";
 
 const hasuraGraphqlApi = "https://solid-narwhal-13.hasura.app/v1/graphql";
@@ -16,9 +17,10 @@ export const ApolloProviderWrapper = ({
 }: {
   children: ReactChild;
 }) => {
-  const user = useUser();
+  const { user } = useUser();
+  const { session } = useSession();
   const authMiddleware = setContext(async (_, { headers }) => {
-    const token = await user.getToken("hasura");
+    const token = await session?.getToken({ template: "hasura" });
     return {
       headers: {
         ...headers,

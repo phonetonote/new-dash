@@ -11,12 +11,17 @@ interface ActionButtonProps extends ButtonProps {
 export const ActionButton = (props: ActionButtonProps) => {
   const correctScheme = useColorModeValue("ptnDarkGreen", "ptnLightGreen");
   const { duration = "month", planName, ...rest } = props;
-  const { getToken, id } = useSession();
+  const { session } = useSession();
   const [token, setToken] = useState("");
 
   const generateAndSetToken = async () => {
-    const token = await getToken();
-    setToken(token);
+    if (session) {
+      const newToken = await session.getToken();
+
+      if (newToken) {
+        setToken(token);
+      }
+    }
   };
 
   useEffect(() => {
@@ -34,7 +39,7 @@ export const ActionButton = (props: ActionButtonProps) => {
       <input type="hidden" name="plan" value={planName} />
       <input type="hidden" name="duration" value={duration} />
       <input type="hidden" name="session_token" value={token} />
-      <input type="hidden" name="session_id" value={id} />
+      <input type="hidden" name="session_id" value={session?.id} />
 
       <Button
         type="submit"
