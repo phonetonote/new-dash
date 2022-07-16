@@ -6,6 +6,8 @@ import {
   InMemoryCache,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
+import { ApolloLink, concat } from "@apollo/client";
+
 import { useUser } from "@clerk/clerk-react";
 import { useSession } from "@clerk/nextjs";
 import React, { ReactChild } from "react";
@@ -17,16 +19,18 @@ export const ApolloProviderWrapper = ({
 }: {
   children: ReactChild;
 }) => {
-  const { user } = useUser();
   const { session } = useSession();
-  const authMiddleware = setContext(async (_, { headers }) => {
-    const token = await session?.getToken({ template: "hasura" });
-    return {
+
+  const authMiddleware = new ApolloLink((operation, forward) => {
+    const token = session?.getToken({ template: "hasura" });
+
+    operation.setContext({
       headers: {
-        ...headers,
         authorization: `Bearer ${token}`,
       },
-    };
+    });
+
+    return forward(operation);
   });
 
   const httpLink = new HttpLink({
@@ -34,7 +38,7 @@ export const ApolloProviderWrapper = ({
   });
 
   const apolloClient = new ApolloClient({
-    link: from([authMiddleware, httpLink]),
+    link: concat(authMiddleware, httpLink),
     cache: new InMemoryCache(),
   });
 
