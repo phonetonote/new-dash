@@ -61,12 +61,18 @@ export const DashboardArea = () => {
 
   const [activeTitle, setActiveTitle] = useScrollableArea();
   const [justPaid, setJustPaid] = useState(checkout_success);
-  const user = useUser();
+  const maybeHasUser = useUser();
+  const user = maybeHasUser?.user;
   const stripePromise = loadStripe(
     process.env.NEXT_PUBLIC_STRIPE_KEY ?? "CANNOT FIND STRIPE KEY"
   );
 
+  // debugger;
+
   const { data: liveData, loading } = useFetchData();
+
+  // debugger;
+  console.log("ok");
   const totalSentMessages = liveData?.totalCount.aggregate.count ?? 0;
   const totalMonthlyCount = liveData?.totalMonthylMessages.aggregate.count ?? 0;
 
@@ -80,7 +86,9 @@ export const DashboardArea = () => {
   const shouldRenderOverage = totalMonthlyCount > messagesAllowed && !justPaid;
 
   useEffect(() => {
-    Analytics.identify(user.id);
+    if (user) {
+      Analytics.identify(user.id);
+    }
 
     const params = new URLSearchParams(`${window.location.search}`);
     if (params.get("signedUp") && user && user.id) {
@@ -149,13 +157,15 @@ export const DashboardArea = () => {
                 )?.aggregate?.count;
 
                 return (
-                  <ChannelStatus
-                    inputMethod={inputMethod}
-                    data={liveData}
-                    user={user}
-                    loading={loading}
-                    key={inputMethod}
-                  />
+                  user && (
+                    <ChannelStatus
+                      inputMethod={inputMethod}
+                      data={liveData}
+                      user={user}
+                      loading={loading}
+                      key={inputMethod}
+                    />
+                  )
                 );
               })}
             </SimpleGrid>

@@ -24,21 +24,25 @@ export type AllData = {
 };
 
 export const useFetchData = () => {
-  const user = useUser();
+  const { user, isLoaded, isSignedIn } = useUser();
 
-  const {
-    data,
+  console.log("isLoaded", isLoaded);
+  console.log("isSignedIn", isSignedIn);
 
-    loading,
-  }: {
-    data?: AllData;
-    loading: boolean;
-  } = useQuery(dashboardQuery, {
-    variables: {
-      clerkId: user.id,
-    },
-    pollInterval: 2000,
-  });
+  if (isLoaded && isSignedIn) {
+    console.log("locked and loaded");
+    const { data, loading } = useQuery(dashboardQuery, {
+      variables: {
+        clerkId: user?.id,
+      },
+      pollInterval: 2000,
+    });
 
-  return { data, loading };
+    return { data, loading };
+  }
+
+  return {
+    data: undefined,
+    loading: false,
+  };
 };
