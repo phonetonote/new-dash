@@ -27,7 +27,7 @@ export const ActionButton = (props: ActionButtonProps) => {
     if (!token) {
       generateAndSetToken();
     }
-  }, [token]);
+  }, [token, session]);
 
   return (
     <form
