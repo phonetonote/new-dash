@@ -67,12 +67,8 @@ export const DashboardArea = () => {
     process.env.NEXT_PUBLIC_STRIPE_KEY ?? "CANNOT FIND STRIPE KEY"
   );
 
-  // debugger;
-
   const { data: liveData, loading } = useFetchData();
 
-  // debugger;
-  console.log("ok");
   const totalSentMessages = liveData?.totalCount.aggregate.count ?? 0;
   const totalMonthlyCount = liveData?.totalMonthylMessages.aggregate.count ?? 0;
 
@@ -149,13 +145,6 @@ export const DashboardArea = () => {
 
             <SimpleGrid columns={{ base: 1, md: 3 }} spacing="6">
               {inputMethods.map((inputMethod) => {
-                console.log("liveData", liveData);
-                const aggCount: number = (
-                  liveData?.[
-                    `${inputMethod}Count` as keyof AllData
-                  ] as AggregateCount
-                )?.aggregate?.count;
-
                 return (
                   user && (
                     <ChannelStatus

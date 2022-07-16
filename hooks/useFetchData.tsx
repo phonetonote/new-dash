@@ -26,11 +26,7 @@ export type AllData = {
 export const useFetchData = () => {
   const { user, isLoaded, isSignedIn } = useUser();
 
-  console.log("isLoaded", isLoaded);
-  console.log("isSignedIn", isSignedIn);
-
   if (isLoaded && isSignedIn) {
-    console.log("locked and loaded");
     const { data, loading } = useQuery(dashboardQuery, {
       variables: {
         clerkId: user?.id,
