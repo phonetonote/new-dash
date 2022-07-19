@@ -6,6 +6,13 @@ export type Subscription = {
       };
       nickname: string;
     };
+    customer: {
+      discount: {
+        coupon: {
+          id: string;
+        };
+      };
+    };
     status: string;
   };
 };

@@ -1,6 +1,5 @@
 import { Box, HStack, useColorModeValue, VStack } from "@chakra-ui/react";
 import { ReactChild } from "react";
-import { ActiveTitleContext } from "../hooks/useScrollableArea";
 import { DashboardHeading } from "./headings/DashboardHeading";
 
 type DashboardSectionProps = {
@@ -14,15 +13,9 @@ export const DashboardSection = (props: DashboardSectionProps) => {
   const { title, children, icon } = props;
 
   return (
-    <VStack align={"stretch"} spacing={4} id={title}>
+    <VStack align={"stretch"} spacing={4}>
       <HStack align="baseline" pt="4">
-        <ActiveTitleContext.Consumer>
-          {(value) => {
-            return (
-              <DashboardHeading icon={icon} activeTitle={value} title={title} />
-            );
-          }}
-        </ActiveTitleContext.Consumer>
+        <DashboardHeading icon={icon} title={title} />
       </HStack>
       {children}
     </VStack>

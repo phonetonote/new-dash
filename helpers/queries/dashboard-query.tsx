@@ -31,6 +31,15 @@ export const dashboardQuery = gql`
           }
           nickname
         }
+        customer {
+          ... on StripeCustomer {
+            discount {
+              coupon {
+                id
+              }
+            }
+          }
+        }
       }
     }
 
