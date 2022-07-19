@@ -10,6 +10,7 @@ import React from "react";
 import "focus-visible/dist/focus-visible";
 import Head from "next/head";
 import Script from "next/script";
+import { ErrorBoundary } from "../components/ErrorBoundary";
 
 type AppLayoutProps = {
   Component: PageWithLayout;
@@ -29,7 +30,9 @@ function MyApp({ Component, pageProps }: AppLayoutProps) {
           <ClerkLoaded>
             <Layout>
               <>
-                <Component {...pageProps} />
+                <ErrorBoundary>
+                  <Component {...pageProps} />
+                </ErrorBoundary>
               </>
             </Layout>
           </ClerkLoaded>
