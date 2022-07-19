@@ -55,7 +55,7 @@ const Welcome: NextPage = ({
     };
 
     aFunc();
-  }, [signIn, setSession]);
+  }, [signIn, signInToken, isSignedIn, setSession]);
 
   useEffect(() => {
     if (signInStatus === "COMPLETE") {
