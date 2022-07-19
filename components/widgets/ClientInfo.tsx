@@ -127,61 +127,12 @@ document.getElementsByTagName("head")[0].appendChild(s);
           <Heading color={mutedColor} size="md">
             roam
           </Heading>
-          <OrderedList stylePosition="inside" spacing="4">
-            <ListItem>
-              copy the client code to your clipboard
-              <VStack align="stretch">
-                <Code as="pre" my="2" maxWidth="100%" overflowX="scroll">
-                  {roamSnippet}
-                </Code>
-                <Button variant={"outline"} onClick={onCopy}>
-                  {hasCopied ? "copied" : "copy"}
-                </Button>
-              </VStack>
-            </ListItem>
-            <ListItem>
-              open roam, go to the search bar in the top right, and type{" "}
-              <Code>roam/js</Code>
-            </ListItem>
-            <ListItem>
-              in that page type <Code>{`{{[[roam/js]]}}`}</Code> into a block
-            </ListItem>
-            <ListItem>
-              <span>
-                make a child block underneath that by pressing <Kbd>return</Kbd>
-                then <Kbd>tab</Kbd>
-              </span>
-            </ListItem>
-            <ListItem>
-              in the child block type <Code>{`/Javascript`}</Code>, and select
-              the <strong>JavaScript Code Block</strong> command
-            </ListItem>
-            <ListItem>
-              paste the code copied in step 1 into the newly created code block
-            </ListItem>
-            <ListItem>
-              make sure the parent <Code>{`{{[[roam/js]]}}`}</Code> warning is{" "}
-              <Text
-                as="span"
-                background="ptnYellow.300"
-                color="blackAlpha.900"
-                px="1"
-                m="1"
-              >
-                yellow
-              </Text>
-              not{" "}
-              <Text
-                as="span"
-                background="ptnRed.600"
-                px="1"
-                m="1"
-                color="white"
-              >
-                red
-              </Text>
-            </ListItem>
-          </OrderedList>
+          <Text>
+            the <strong>phonetonote</strong> plugin is now available in{" "}
+            <strong>roam depot</strong>. new and existing customers can install
+            the plugin and delete the roam/js script. everything should just
+            work. please contact support with any questions or issues.
+          </Text>
         </VStack>
       </Box>
 

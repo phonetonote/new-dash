@@ -26,6 +26,8 @@ type BillingWidgetProps = {
   stripeData: Subscription["stripe_data"];
 };
 
+const ROAM_DEPOT_COUPON_ID = "YldsnRLT";
+
 export const BillingWdiget = (props: BillingWidgetProps) => {
   const { user, subscriptionLoading, stripeData } = props;
 
@@ -33,6 +35,9 @@ export const BillingWdiget = (props: BillingWidgetProps) => {
 
   const has_subscription =
     stripeData && !stripeData?.status?.includes("expired");
+
+  const hasRoamDepotCoupon =
+    stripeData?.customer.discount.coupon?.id === ROAM_DEPOT_COUPON_ID;
 
   const standardPrice = isYearly ? "$50" : "$5";
   const proPrice = isYearly ? "$100" : "$10";
@@ -44,6 +49,7 @@ export const BillingWdiget = (props: BillingWidgetProps) => {
         loading={subscriptionLoading}
         status={stripeData?.status ?? "starter"}
         nickname={stripeData?.plan?.nickname ?? "free"}
+        hasRoamDepotCoupon={true}
       />
       <CalmSkeleton isLoaded={!subscriptionLoading}>
         {has_subscription && <SubscriptionLink clerkId={user.id} />}

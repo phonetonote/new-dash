@@ -17,15 +17,13 @@ import { DashboardSection } from "../DashboardSection";
 import { ChannelStatus } from "../widgets/ChannelStatus";
 import { ClientInfo } from "../widgets/ClientInfo";
 import { PtnKey } from "../widgets/PtnKey";
-import useScrollableArea, {
-  ActiveTitleContext,
-} from "../../hooks/useScrollableArea";
 
 import { loadStripe } from "@stripe/stripe-js";
 import useParams from "../../hooks/useParams";
 import { AllData, useFetchData } from "../../hooks/useFetchData";
 import { MyLink } from "../MyLink";
 import { Plan, Subscription } from "../../types/SubscriptionTypes";
+import router from "next/router";
 
 export const inputMethods = [
   "sms",
@@ -53,16 +51,26 @@ export const messagesAllowedMap: MessagesAllowed = {
 };
 
 export const DashboardArea = () => {
+  useEffect(() => {
+    const titles = ["channels", "ptn-key", "clients"];
+    for (var i = 0; i < titles.length; i++) {
+      const title = titles[i];
+      if (router.asPath.includes(title)) {
+        document.getElementById(title)?.scrollIntoView();
+      }
+    }
+  }, []);
+
   const {
     payment_intent: paymentIntentId,
     payment_intent_client_secret: paymentIntentClientSecret,
     checkout_success,
   } = useParams();
 
-  const [activeTitle, setActiveTitle] = useScrollableArea();
   const [justPaid, setJustPaid] = useState(checkout_success);
   const maybeHasUser = useUser();
   const user = maybeHasUser?.user;
+
   const stripePromise = loadStripe(
     process.env.NEXT_PUBLIC_STRIPE_KEY ?? "CANNOT FIND STRIPE KEY"
   );
@@ -116,12 +124,13 @@ export const DashboardArea = () => {
     }
   }, [paymentIntentClientSecret, stripePromise]);
 
+  const noPhone = user && user.phoneNumbers.length === 0;
   const overageAlert = (
     <Alert status="warning" rounded="md">
       <AlertIcon />
       <Text>
         too many messages sent this month,{" "}
-        <MyLink href="/user?go_to_billing=yes">
+        <MyLink href="/user#billing">
           please choose a plan in the billing section
         </MyLink>
         .
@@ -133,53 +142,64 @@ export const DashboardArea = () => {
 
   return (
     <VStack align="stretch" spacing="20">
-      <ActiveTitleContext.Provider value={activeTitle.toString()}>
-        <DashboardSection title="channels" icon={<FiSend />}>
-          <>
-            {justPaid && (
-              <Alert status="success" rounded="md">
-                <AlertIcon />
-                payment successful, thanks for subscribing!
-              </Alert>
-            )}
+      <DashboardSection title="channels" icon={<FiSend />}>
+        <>
+          {noPhone && (
+            <Alert status="warning" rounded="md">
+              <AlertIcon />
+              <Text>
+                you have no phone numbers added, consider adding one{" "}
+                <MyLink href="/user#account">
+                  <strong>in the user section</strong>
+                </MyLink>{" "}
+                to start using sms quick capture.
+              </Text>
+            </Alert>
+          )}
 
-            <SimpleGrid columns={{ base: 1, md: 3 }} spacing="6">
-              {inputMethods.map((inputMethod) => {
-                return (
-                  user && (
-                    <ChannelStatus
-                      inputMethod={inputMethod}
-                      data={liveData}
-                      user={user}
-                      loading={loading}
-                      key={inputMethod}
-                    />
-                  )
-                );
-              })}
-            </SimpleGrid>
-            <Skeleton isLoaded={!loading}>
-              {shouldRenderOverage && overageAlert}
-            </Skeleton>
-          </>
-        </DashboardSection>
-        <DashboardSection title="ptn-key" icon={<FiKey />}>
-          <PtnKey ptnKey={ptnKey} />
-        </DashboardSection>
-        <DashboardSection title="clients" icon={<FiPackage />}>
-          <>
-            <ClientInfo
-              totalSentMessages={totalSentMessages}
-              loading={loading}
-              ptnKey={ptnKey}
-            />
-            <Skeleton isLoaded={!loading}>
-              {shouldRenderOverage && overageAlert}
-            </Skeleton>
-          </>
-        </DashboardSection>
-        <Box height={"650px"}></Box>
-      </ActiveTitleContext.Provider>
+          {justPaid && (
+            <Alert status="success" rounded="md">
+              <AlertIcon />
+              payment successful, thanks for subscribing!
+            </Alert>
+          )}
+
+          <SimpleGrid columns={{ base: 1, md: 3 }} spacing="6">
+            {inputMethods.map((inputMethod) => {
+              return (
+                user && (
+                  <ChannelStatus
+                    inputMethod={inputMethod}
+                    data={liveData}
+                    user={user}
+                    loading={loading}
+                    key={inputMethod}
+                  />
+                )
+              );
+            })}
+          </SimpleGrid>
+          <Skeleton isLoaded={!loading}>
+            {shouldRenderOverage && overageAlert}
+          </Skeleton>
+        </>
+      </DashboardSection>
+      <DashboardSection title="ptn-key" icon={<FiKey />}>
+        <PtnKey ptnKey={ptnKey} />
+      </DashboardSection>
+      <DashboardSection title="clients" icon={<FiPackage />}>
+        <>
+          <ClientInfo
+            totalSentMessages={totalSentMessages}
+            loading={loading}
+            ptnKey={ptnKey}
+          />
+          <Skeleton isLoaded={!loading}>
+            {shouldRenderOverage && overageAlert}
+          </Skeleton>
+        </>
+      </DashboardSection>
+      <Box height={"650px"}></Box>
     </VStack>
   );
 };
