@@ -49,7 +49,7 @@ export const BillingWdiget = (props: BillingWidgetProps) => {
         loading={subscriptionLoading}
         status={stripeData?.status ?? "starter"}
         nickname={stripeData?.plan?.nickname ?? "free"}
-        hasRoamDepotCoupon={true}
+        hasRoamDepotCoupon
       />
       <CalmSkeleton isLoaded={!subscriptionLoading}>
         {has_subscription && <SubscriptionLink clerkId={user.id} />}
