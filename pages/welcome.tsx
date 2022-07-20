@@ -38,20 +38,14 @@ const Welcome: NextPage = ({
     }
 
     const aFunc = async () => {
-      try {
-        const res = await signIn.create({
-          strategy: "ticket",
-          ticket: signInToken as string,
-        });
+      const res = await signIn.create({
+        strategy: "ticket",
+        ticket: signInToken as string,
+      });
 
-        setSession(res.createdSessionId, () => {
-          setSignInStatus("COMPLETE");
-        });
-      } catch (err) {
-        if (signInStatus !== "COMPLETE") {
-          setSignInStatus("ERROR");
-        }
-      }
+      setSession(res.createdSessionId, () => {
+        setSignInStatus("COMPLETE");
+      });
     };
 
     aFunc();
