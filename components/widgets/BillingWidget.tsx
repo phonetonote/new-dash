@@ -37,7 +37,7 @@ export const BillingWdiget = (props: BillingWidgetProps) => {
     stripeData && !stripeData?.status?.includes("expired");
 
   const hasRoamDepotCoupon =
-    stripeData?.customer.discount.coupon?.id === ROAM_DEPOT_COUPON_ID;
+    stripeData?.customer?.discount?.coupon?.id === ROAM_DEPOT_COUPON_ID;
 
   const standardPrice = isYearly ? "$50" : "$5";
   const proPrice = isYearly ? "$100" : "$10";
