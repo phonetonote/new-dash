@@ -144,14 +144,6 @@ export const DashboardArea = () => {
     <VStack align="stretch" spacing="20">
       <DashboardSection title="channels" icon={<FiSend />}>
         <>
-          <button
-            type="button"
-            onClick={() => {
-              throw new Error("Sentry Frontend Error");
-            }}
-          >
-            Throw error
-          </button>
           {noPhone && (
             <Alert status="warning" rounded="md">
               <AlertIcon />
