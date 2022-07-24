@@ -47,13 +47,15 @@ const Welcome: NextPage = ({
       try {
         console.log("session in aFunc", session);
         if (session) {
-          //
-          if (!clerkIdFromRoam) {
+          if (typeof clerkIdFromRoam !== "string") {
             console.log(
               "no conflicting clerk id from roam, skipping to new session"
             );
             setGoToRedirect(true);
-          } else if (clerkIdFromRoam && session.user.id !== clerkIdFromRoam) {
+          } else if (
+            typeof clerkIdFromRoam === "string" &&
+            session.user.id !== clerkIdFromRoam
+          ) {
             console.log("clerkIdFromRoam", clerkIdFromRoam);
 
             signOut();
