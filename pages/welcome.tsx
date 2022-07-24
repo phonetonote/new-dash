@@ -76,6 +76,7 @@ const Welcome: NextPage = ({
   }, [signIn, setSession, signInToken, clerkIdFromRoam]);
 
   useEffect(() => {
+    console.log("session", session);
     if (session) {
       Router.push("/");
     }
