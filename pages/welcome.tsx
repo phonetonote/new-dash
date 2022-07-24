@@ -28,30 +28,37 @@ const Welcome: NextPage = ({
   const [signInStatus, setSignInStatus] = useState<string>("WAITING");
 
   useEffect(() => {
+    if (isSignedIn && setSession) {
+      setSession(null);
+      setSignInStatus("RESTART");
+      return;
+    }
     if (!signIn || !signInToken || !setSession) {
       setSignInStatus("ERROR");
       return;
     }
 
-    if (signInToken) {
-      const aFunc = async () => {
-        const res = await signIn.create({
-          strategy: "ticket",
-          ticket: signInToken as string,
-        });
+    const aFunc = async () => {
+      const res = await signIn.create({
+        strategy: "ticket",
+        ticket: signInToken as string,
+      });
 
-        setSession(res.createdSessionId, () => {
-          setSignInStatus("COMPLETE");
-        });
-      };
+      setSession(res.createdSessionId, () => {
+        setSignInStatus("COMPLETE");
+      });
+    };
 
-      aFunc();
-    }
+    aFunc();
   }, [signIn, signInToken, isSignedIn, setSession]);
 
   useEffect(() => {
     if (signInStatus === "COMPLETE") {
       Router.push("/");
+    }
+
+    if (signInStatus === "RESTART") {
+      Router.push("/welcome?token=" + signInToken);
     }
   }, [signInStatus]);
 
