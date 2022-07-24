@@ -33,76 +33,67 @@ const Welcome: NextPage = ({
   const { signOut } = useClerk();
   const { signIn, setSession } = useSignIn();
   const { isSignedIn, user } = useUser();
-  const [signInStatus, setSignInStatus] = useState<string>("WAITING");
+  const [signInProcessed, setSignInProcessed] = useState<boolean>(false);
 
   useEffect(() => {
-    const doSomething = async () => {
-      if (!user?.id) {
-        return;
-      } else {
-        if (isSignedIn && signInStatus === "WAITING") {
-          console.log("isSignedIn already");
-          if (clerkIdFromRoam && user.id !== clerkIdFromRoam) {
-            alert(
-              "you were previously logged into phonetonote with a different account. you are now logged out of the old one. please relick the dashboard link to sign in with the correct account."
-            );
-            setSignInStatus("SIGN_OUT_THEN_COMPLETE");
-          } else {
-            setSignInStatus("COMPLETE");
+    if (!signIn || !setSession || !signInToken) {
+      return;
+    }
+
+    const aFunc = async () => {
+      try {
+        // check if already logged in to old account
+        console.log("isSignedIn", isSignedIn);
+        console.log("clerkIdFromRoam", clerkIdFromRoam);
+
+        if (isSignedIn) {
+          if (clerkIdFromRoam && clerkIdFromRoam !== user.id) {
+            // sign out of old account
+            await signOut();
+            setSignInProcessed(true);
+          } else if (clerkIdFromRoam && clerkIdFromRoam === user.id) {
+            // already logged in to old account
+            setSignInProcessed(true);
           }
         }
-      }
-    };
 
-    doSomething();
-  }, [isSignedIn, user, clerkIdFromRoam]);
-
-  useEffect(() => {
-    if (!signIn || !signInToken || !setSession) {
-      console.log("error ??");
-      setSignInStatus("ERROR");
-      return;
-    } else if (signInStatus === "WAITING") {
-      setSignInStatus("WORKING");
-      const getAndSetSession = async () => {
-        console.log("getAndSetSession getting new session from clerk");
         const res = await signIn.create({
           strategy: "ticket",
           ticket: signInToken as string,
         });
 
-        console.log("response from clerk: ", res);
-        console.log("setting new session", res.createdSessionId);
-
         setSession(res.createdSessionId, () => {
-          setSignInStatus("COMPLETE");
+          setSignInProcessed(true);
         });
-      };
+      } catch (err) {
+        setSignInProcessed(true);
+      }
+    };
 
-      getAndSetSession();
-    }
-
-    console.log("\n\n");
-  }, [signIn, signInToken, setSession]);
+    aFunc();
+  }, [signIn, setSession, isSignedIn]);
 
   useEffect(() => {
-    console.log("signInStatus: ", signInStatus);
-    if (signInStatus === "COMPLETE") {
-      console.log("redirecting to /");
+    if (isSignedIn) {
       Router.push("/");
-    } else if (signInStatus === "SIGN_OUT_THEN_COMPLETE") {
-      signOut().then(() => {
-        setSignInStatus("COMPLETE");
-      });
     }
-  }, [signInStatus, signOut]);
+  }, [signInProcessed]);
 
-  return (
-    <div>
-      {signInStatus === "WAITING" && <Spinner />}
-      {signInStatus === "ERROR" && <SignedOutArea />}
-    </div>
-  );
+  if (!signInToken) {
+    return <div>no token provided</div>;
+  }
+
+  if (!signInProcessed) {
+    return <div>loading</div>;
+  } else {
+    console.log("user", user);
+
+    if (!user) {
+      return <div>error invalid token</div>;
+    }
+
+    return <div>redirecting...</div>;
+  }
 };
 
 (Welcome as PageWithLayout).layout = EmptyPage;
