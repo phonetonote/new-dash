@@ -32,8 +32,7 @@ const Welcome: NextPage = ({
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const { signOut } = useClerk();
   const { signIn, setSession } = useSignIn();
-  const { user } = useUser();
-  const [signInProcessed, setSignInProcessed] = useState<boolean>(false);
+  const { session } = useClerk();
 
   useEffect(() => {
     if (!signIn || !setSession || !signInToken) {
@@ -41,65 +40,46 @@ const Welcome: NextPage = ({
     }
 
     const aFunc = async () => {
-      try {
-        // check if already logged in to old account
-        console.log("user in aFunc", user);
-        console.log("clerkIdFromRoam", clerkIdFromRoam);
+      console.log("aFunc session", session);
 
-        if (user) {
-          if (clerkIdFromRoam && clerkIdFromRoam !== user.id) {
-            // sign out of old account
-            await signOut();
-            setSignInProcessed(true);
-          } else if (clerkIdFromRoam && clerkIdFromRoam === user.id) {
-            // already logged in to old account
-            setSignInProcessed(true);
-          } else if (!clerkIdFromRoam && user.id) {
-            // already logged in to old account
-            setSignInProcessed(true);
+      try {
+        if (session) {
+          //
+          if (!clerkIdFromRoam) {
+            Router.push("/");
+            return;
+          } else if (session.user.id !== clerkIdFromRoam) {
+            signOut();
+            const res = await signIn.create({
+              strategy: "ticket",
+              ticket: signInToken as string,
+            });
+
+            await setSession(res.createdSessionId);
           }
-        } else if (!signInProcessed) {
+        } else {
           const res = await signIn.create({
             strategy: "ticket",
             ticket: signInToken as string,
           });
 
-          setSession(res.createdSessionId, () => {
-            setSignInProcessed(true);
-          });
+          await setSession(res.createdSessionId);
         }
       } catch (err) {
-        setSignInProcessed(true);
+        console.error(err);
       }
     };
 
     aFunc();
-  }, [user]);
+  }, [signIn, setSession, signInToken, clerkIdFromRoam]);
 
   useEffect(() => {
-    console.log("signInProcessed", signInProcessed);
-    console.log("user in router effect", user);
-
-    if (user && signInProcessed) {
+    if (session) {
       Router.push("/");
     }
-  }, [signInProcessed, user]);
+  }, [session]);
 
-  if (!signInToken) {
-    return <div>no token provided</div>;
-  }
-
-  if (!signInProcessed) {
-    return <div>loading</div>;
-  } else {
-    console.log("user before return", user);
-
-    if (!user) {
-      return <div>error invalid token</div>;
-    }
-
-    return <div>redirecting...</div>;
-  }
+  return <div>hello</div>;
 };
 
 (Welcome as PageWithLayout).layout = EmptyPage;
