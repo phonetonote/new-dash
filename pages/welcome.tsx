@@ -67,7 +67,7 @@ const Welcome: NextPage = ({
       console.log("error ??");
       setSignInStatus("ERROR");
       return;
-    } else {
+    } else if (signInStatus === "WAITING") {
       const getAndSetSession = async () => {
         console.log("getAndSetSession getting new session from clerk");
         const res = await signIn.create({
