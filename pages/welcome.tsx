@@ -67,7 +67,6 @@ const Welcome: NextPage = ({
 
           console.log("res", res);
 
-          await setSession(res.createdSessionId);
           setMySessionId(res.createdSessionId as string);
         }
       } catch (err) {
@@ -80,10 +79,12 @@ const Welcome: NextPage = ({
 
   useEffect(() => {
     console.log("mySessionId", mySessionId);
-    if (mySessionId) {
+    if (mySessionId && setSession) {
+      setSession(mySessionId);
+
       Router.push("/");
     }
-  }, [mySessionId]);
+  }, [mySessionId, setSession]);
 
   return <div>hello</div>;
 };
