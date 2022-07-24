@@ -63,6 +63,8 @@ const Welcome: NextPage = ({
             ticket: signInToken as string,
           });
 
+          console.log("res", res);
+
           await setSession(res.createdSessionId);
         }
       } catch (err) {
