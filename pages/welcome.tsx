@@ -36,23 +36,34 @@ const Welcome: NextPage = ({
   const [signInStatus, setSignInStatus] = useState<string>("WAITING");
 
   useEffect(() => {
-    console.log("beginning: signInToken", signInToken);
-    console.log("beginning: isSignedIn", isSignedIn);
-    console.log("beginning: isSignedIn", user);
-    if (isSignedIn) {
-      console.log("isSignedIn?!");
-      if (user && user.id && clerkIdFromRoam && user.id !== clerkIdFromRoam) {
-        alert(
-          "you were previously logged into phonetonote with a different account. you are now logged out of the old one. please relick the dashboard link to sign in with the correct account."
-        );
-
-        signOut().then(() => {
-          setSignInStatus("COMPLETE");
-        });
+    const doSomething = async () => {
+      if (!user || !clerkIdFromRoam) {
+        return;
       } else {
-        setSignInStatus("COMPLETE");
+        if (isSignedIn) {
+          console.log("isSignedIn already");
+          if (
+            user &&
+            user.id &&
+            clerkIdFromRoam &&
+            user.id !== clerkIdFromRoam
+          ) {
+            alert(
+              "you were previously logged into phonetonote with a different account. you are now logged out of the old one. please relick the dashboard link to sign in with the correct account."
+            );
+            setSignInStatus("SIGN_OUT_THEN_COMPLETE");
+          } else {
+            setSignInStatus("COMPLETE");
+          }
+        }
       }
-    } else if (!signIn || !signInToken || !setSession) {
+    };
+
+    doSomething();
+  }, [isSignedIn, user, clerkIdFromRoam]);
+
+  useEffect(() => {
+    if (!signIn || !signInToken || !setSession) {
       console.log("error ??");
       setSignInStatus("ERROR");
       return;
@@ -76,13 +87,19 @@ const Welcome: NextPage = ({
     }
 
     console.log("\n\n");
-  }, [signIn, signInToken, clerkIdFromRoam, isSignedIn]);
+  }, [signIn, signInToken, setSession]);
 
   useEffect(() => {
+    console.log("signInStatus: ", signInStatus);
     if (signInStatus === "COMPLETE") {
+      console.log("redirecting to /");
       Router.push("/");
+    } else if (signInStatus === "SIGN_OUT_THEN_COMPLETE") {
+      signOut().then(() => {
+        setSignInStatus("COMPLETE");
+      });
     }
-  }, [signInStatus]);
+  }, [signInStatus, signOut]);
 
   return (
     <div>
