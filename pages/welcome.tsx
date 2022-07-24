@@ -54,6 +54,9 @@ const Welcome: NextPage = ({
           } else if (clerkIdFromRoam && clerkIdFromRoam === user.id) {
             // already logged in to old account
             setSignInProcessed(true);
+          } else if (!clerkIdFromRoam && user.id) {
+            // already logged in to old account
+            setSignInProcessed(true);
           }
         }
 
