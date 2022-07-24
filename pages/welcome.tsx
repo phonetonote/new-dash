@@ -34,7 +34,7 @@ const Welcome: NextPage = ({
   const { signIn, setSession } = useSignIn();
   const { session } = useClerk();
   const [mySessionId, setMySessionId] = useState<string>();
-  const [skipNewSession, setSkipNewSession] = useState<boolean>(false);
+  const [goToRedirect, setGoToRedirect] = useState<boolean>(false);
 
   useEffect(() => {
     if (!signIn || !setSession || !signInToken) {
@@ -52,7 +52,7 @@ const Welcome: NextPage = ({
             console.log(
               "no conflicting clerk id from roam, skipping to new session"
             );
-            setSkipNewSession(true);
+            setGoToRedirect(true);
           } else if (clerkIdFromRoam && session.user.id !== clerkIdFromRoam) {
             console.log("clerkIdFromRoam", clerkIdFromRoam);
 
@@ -84,17 +84,17 @@ const Welcome: NextPage = ({
 
   useEffect(() => {
     console.log("mySessionId", mySessionId);
-    if (mySessionId && setSession && !skipNewSession) {
+    if (mySessionId && setSession && !goToRedirect) {
       setSession(mySessionId);
-      Router.push("/");
+      setGoToRedirect(true);
     }
-  }, [mySessionId, setSession, skipNewSession]);
+  }, [mySessionId, setSession, setGoToRedirect, goToRedirect]);
 
   useEffect(() => {
-    if (skipNewSession) {
+    if (goToRedirect) {
       Router.push("/");
     }
-  }, [skipNewSession]);
+  }, [goToRedirect]);
 
   return <div>hello</div>;
 };
