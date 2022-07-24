@@ -49,29 +49,29 @@ const Welcome: NextPage = ({
         signOut().then(() => {
           setSignInStatus("COMPLETE");
         });
+      } else {
+        setSignInStatus("COMPLETE");
       }
-      setSignInStatus("COMPLETE");
-      return;
-    }
-    if (!signIn || !signInToken || !setSession) {
+    } else if (!signIn || !signInToken || !setSession) {
       console.log("error ??");
       setSignInStatus("ERROR");
       return;
+    } else {
+      const getAndSetSession = async () => {
+        console.log("getAndSetSession getting new session from clerk");
+        const res = await { createdSessionId: "foobar" };
+
+        console.log("response from clerk: ", res);
+        console.log("setting new session", res.createdSessionId);
+
+        setSession(res.createdSessionId, () => {
+          setSignInStatus("COMPLETE");
+        });
+      };
+
+      getAndSetSession();
     }
 
-    const aFunc = async () => {
-      console.log("aFunc awaiting");
-      const res = await { createdSessionId: "foobar" };
-
-      console.log("aFunc res:", res);
-
-      console.log("setting session", res.createdSessionId);
-      setSession(res.createdSessionId, () => {
-        setSignInStatus("COMPLETE");
-      });
-    };
-
-    aFunc();
     console.log("\n\n");
   }, [signIn, signInToken, clerkIdFromRoam, isSignedIn]);
 
