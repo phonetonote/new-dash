@@ -40,7 +40,7 @@ const Welcome: NextPage = ({
       if (!user || !clerkIdFromRoam) {
         return;
       } else {
-        if (isSignedIn) {
+        if (isSignedIn && signInStatus === "WAITING") {
           console.log("isSignedIn already");
           if (
             user &&
@@ -68,6 +68,7 @@ const Welcome: NextPage = ({
       setSignInStatus("ERROR");
       return;
     } else if (signInStatus === "WAITING") {
+      setSignInStatus("WORKING");
       const getAndSetSession = async () => {
         console.log("getAndSetSession getting new session from clerk");
         const res = await signIn.create({
