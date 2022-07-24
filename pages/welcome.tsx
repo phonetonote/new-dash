@@ -63,7 +63,7 @@ const Welcome: NextPage = ({
       console.log("aFunc awaiting");
       const res = await { createdSessionId: "foobar" };
 
-      console.log("aFunc res", res);
+      console.log("aFunc res:", res);
 
       console.log("setting session", res.createdSessionId);
       setSession(res.createdSessionId, () => {
