@@ -73,7 +73,7 @@ const Welcome: NextPage = ({
 
     aFunc();
     console.log("\n\n");
-  }, [signIn, signInToken]);
+  }, [signIn, signInToken, clerkIdFromRoam]);
 
   useEffect(() => {
     if (signInStatus === "COMPLETE") {
