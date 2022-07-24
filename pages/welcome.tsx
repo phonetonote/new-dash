@@ -48,8 +48,13 @@ const Welcome: NextPage = ({
         if (session) {
           //
           if (!clerkIdFromRoam) {
+            console.log(
+              "no conflicting clerk id from roam, skipping to new session"
+            );
             setSkipNewSession(true);
           } else if (session.user.id !== clerkIdFromRoam) {
+            console.log("clerkIdFromRoam", clerkIdFromRoam);
+
             signOut();
             const res = await signIn.create({
               strategy: "ticket",
