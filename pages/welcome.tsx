@@ -64,7 +64,7 @@ const Welcome: NextPage = ({
           ) {
             console.log("clerkIdFromRoam", clerkIdFromRoam);
 
-            signOut();
+            await signOut();
             const res = await signIn.create({
               strategy: "ticket",
               ticket: signInToken as string,
