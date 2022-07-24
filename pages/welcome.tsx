@@ -47,6 +47,12 @@ const Welcome: NextPage = ({
       try {
         console.log("session in aFunc", session);
         if (session) {
+          console.log("clerkIdFromRoam in a func", clerkIdFromRoam);
+          console.log("clerkIdFromRoam in a func type", typeof clerkIdFromRoam);
+          console.log(
+            "clerkIdFromRoam in a func length",
+            clerkIdFromRoam.length
+          );
           if (typeof clerkIdFromRoam !== "string") {
             console.log(
               "no conflicting clerk id from roam, skipping to new session"
