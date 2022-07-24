@@ -77,11 +77,10 @@ const Welcome: NextPage = ({
 
   useEffect(() => {
     console.log("mySessionId", mySessionId);
-    if (mySessionId && setSession) {
+    if (mySessionId && setSession && mySessionId !== session?.id) {
       setSession(mySessionId);
-
-      Router.push("/");
     }
+    Router.push("/");
   }, [mySessionId, setSession]);
 
   return <div>hello</div>;
