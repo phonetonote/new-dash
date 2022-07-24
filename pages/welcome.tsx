@@ -33,18 +33,20 @@ const Welcome: NextPage = ({
       return;
     }
 
-    const aFunc = async () => {
-      const res = await signIn.create({
-        strategy: "ticket",
-        ticket: signInToken as string,
-      });
+    if (signInToken) {
+      const aFunc = async () => {
+        const res = await signIn.create({
+          strategy: "ticket",
+          ticket: signInToken as string,
+        });
 
-      setSession(res.createdSessionId, () => {
-        setSignInStatus("COMPLETE");
-      });
-    };
+        setSession(res.createdSessionId, () => {
+          setSignInStatus("COMPLETE");
+        });
+      };
 
-    aFunc();
+      aFunc();
+    }
   }, [signIn, signInToken, isSignedIn, setSession]);
 
   useEffect(() => {
