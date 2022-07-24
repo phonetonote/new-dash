@@ -74,7 +74,7 @@ const Welcome: NextPage = ({
     };
 
     aFunc();
-  }, [signIn, setSession, user]);
+  }, [user]);
 
   useEffect(() => {
     console.log("signInProcessed", signInProcessed);
