@@ -37,7 +37,7 @@ const Welcome: NextPage = ({
   const [goToRedirect, setGoToRedirect] = useState<boolean>(false);
 
   useEffect(() => {
-    if (!signIn || !setSession || !signInToken) {
+    if (!signIn || !setSession || !signInToken || !signOut) {
       return;
     }
 
@@ -45,14 +45,7 @@ const Welcome: NextPage = ({
       console.log("aFunc session", session);
 
       try {
-        console.log("session in aFunc", session);
         if (session) {
-          console.log("clerkIdFromRoam in a func", clerkIdFromRoam);
-          console.log("clerkIdFromRoam in a func type", typeof clerkIdFromRoam);
-          console.log(
-            "clerkIdFromRoam in a func length",
-            clerkIdFromRoam.length
-          );
           if (clerkIdFromRoam === "null") {
             console.log(
               "no conflicting clerk id from roam, skipping to new session"
@@ -62,8 +55,6 @@ const Welcome: NextPage = ({
             clerkIdFromRoam !== "null" &&
             session.user.id !== clerkIdFromRoam
           ) {
-            console.log("clerkIdFromRoam", clerkIdFromRoam);
-
             await signOut();
             const res = await signIn.create({
               strategy: "ticket",
@@ -99,7 +90,7 @@ const Welcome: NextPage = ({
     };
 
     aFunc();
-  }, [session, signInToken, clerkIdFromRoam]);
+  }, [session, signInToken, clerkIdFromRoam, signIn, signOut, setSession]);
 
   useEffect(() => {
     console.log("mySessionId", mySessionId);
