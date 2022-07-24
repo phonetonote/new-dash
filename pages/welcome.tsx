@@ -45,6 +45,7 @@ const Welcome: NextPage = ({
       console.log("aFunc session", session);
 
       try {
+        console.log("session in aFunc", session);
         if (session) {
           //
           if (!clerkIdFromRoam) {
