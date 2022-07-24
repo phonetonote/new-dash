@@ -52,7 +52,7 @@ const Welcome: NextPage = ({
               "no conflicting clerk id from roam, skipping to new session"
             );
             setSkipNewSession(true);
-          } else if (session.user.id !== clerkIdFromRoam) {
+          } else if (clerkIdFromRoam && session.user.id !== clerkIdFromRoam) {
             console.log("clerkIdFromRoam", clerkIdFromRoam);
 
             signOut();
