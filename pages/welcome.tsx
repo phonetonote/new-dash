@@ -28,10 +28,6 @@ const Welcome: NextPage = ({
   const [signInStatus, setSignInStatus] = useState<string>("WAITING");
 
   useEffect(() => {
-    if (isSignedIn) {
-      setSignInStatus("COMPLETE");
-      return;
-    }
     if (!signIn || !signInToken || !setSession) {
       setSignInStatus("ERROR");
       return;
