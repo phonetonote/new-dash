@@ -39,7 +39,7 @@ const Welcome: NextPage = ({
     if (isSignedIn) {
       console.log("signed in with user", user);
 
-      if (user && user.id && user.id !== clerkIdFromRoam) {
+      if (user && user.id && clerkIdFromRoam && user.id !== clerkIdFromRoam) {
         alert(
           "you were previously logged into phonetonote with a different account. you are now logged out of the old one. please relick the dashboard link to sign in with the correct account."
         );
