@@ -32,7 +32,7 @@ const Welcome: NextPage = ({
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const { signOut } = useClerk();
   const { signIn, setSession } = useSignIn();
-  const { isSignedIn, user } = useUser();
+  const { user } = useUser();
   const [signInProcessed, setSignInProcessed] = useState<boolean>(false);
 
   useEffect(() => {
@@ -43,10 +43,10 @@ const Welcome: NextPage = ({
     const aFunc = async () => {
       try {
         // check if already logged in to old account
-        console.log("isSignedIn", isSignedIn);
+        console.log("user", user);
         console.log("clerkIdFromRoam", clerkIdFromRoam);
 
-        if (isSignedIn) {
+        if (user) {
           if (clerkIdFromRoam && clerkIdFromRoam !== user.id) {
             // sign out of old account
             await signOut();
@@ -71,13 +71,16 @@ const Welcome: NextPage = ({
     };
 
     aFunc();
-  }, [signIn, setSession, isSignedIn]);
+  }, [signIn, setSession, user]);
 
   useEffect(() => {
-    if (isSignedIn) {
+    console.log("signInProcessed", signInProcessed);
+    console.log("user", user);
+
+    if (user && signInProcessed) {
       Router.push("/");
     }
-  }, [signInProcessed]);
+  }, [signInProcessed, user]);
 
   if (!signInToken) {
     return <div>no token provided</div>;
