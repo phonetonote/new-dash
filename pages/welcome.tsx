@@ -53,13 +53,13 @@ const Welcome: NextPage = ({
             "clerkIdFromRoam in a func length",
             clerkIdFromRoam.length
           );
-          if (typeof clerkIdFromRoam !== "string") {
+          if (clerkIdFromRoam === "null") {
             console.log(
               "no conflicting clerk id from roam, skipping to new session"
             );
             setGoToRedirect(true);
           } else if (
-            typeof clerkIdFromRoam === "string" &&
+            clerkIdFromRoam !== "null" &&
             session.user.id !== clerkIdFromRoam
           ) {
             console.log("clerkIdFromRoam", clerkIdFromRoam);
