@@ -60,7 +60,7 @@ const Welcome: NextPage = ({
     if (signInStatus === "RESTART") {
       Router.push("/welcome?token=" + signInToken);
     }
-  }, [signInStatus]);
+  }, [signInStatus, signInToken]);
 
   return (
     <div>
