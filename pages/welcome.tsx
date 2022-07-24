@@ -3,7 +3,7 @@ import {
   GetServerSideProps,
   NextPage,
 } from "next";
-import { useUser, useSignIn } from "@clerk/nextjs";
+import { useUser, useSignIn, useClerk } from "@clerk/nextjs";
 import { useEffect, useState } from "react";
 import { PageWithLayout } from "../types/PageWithLayout";
 import WithSidebar from "../components/layouts/WithSidebar";
@@ -24,12 +24,13 @@ const Welcome: NextPage = ({
   signInToken,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const { signIn, setSession } = useSignIn();
+  const { signOut } = useClerk();
   const { isSignedIn } = useUser();
   const [signInStatus, setSignInStatus] = useState<string>("WAITING");
 
   useEffect(() => {
     if (isSignedIn && setSession) {
-      setSession(null, () => {
+      signOut().then(() => {
         setSignInStatus("RESTART");
         return;
       });
@@ -51,7 +52,7 @@ const Welcome: NextPage = ({
     };
 
     aFunc();
-  }, [signIn, signInToken, isSignedIn, setSession]);
+  }, [signIn, signInToken, isSignedIn, setSession, signOut]);
 
   useEffect(() => {
     if (signInStatus === "COMPLETE") {
