@@ -34,6 +34,7 @@ const Welcome: NextPage = ({
   const { signIn, setSession } = useSignIn();
   const { session } = useClerk();
   const [mySessionId, setMySessionId] = useState<string>();
+  const [skipNewSession, setSkipNewSession] = useState<boolean>(false);
 
   useEffect(() => {
     if (!signIn || !setSession || !signInToken) {
@@ -47,7 +48,7 @@ const Welcome: NextPage = ({
         if (session) {
           //
           if (!clerkIdFromRoam) {
-            setMySessionId(session.id);
+            setSkipNewSession(true);
           } else if (session.user.id !== clerkIdFromRoam) {
             signOut();
             const res = await signIn.create({
@@ -77,11 +78,17 @@ const Welcome: NextPage = ({
 
   useEffect(() => {
     console.log("mySessionId", mySessionId);
-    if (mySessionId && setSession && mySessionId !== session?.id) {
+    if (mySessionId && setSession && !skipNewSession) {
       setSession(mySessionId);
+      Router.push("/");
     }
-    Router.push("/");
-  }, [mySessionId, setSession]);
+  }, [mySessionId, setSession, skipNewSession]);
+
+  useEffect(() => {
+    if (skipNewSession) {
+      Router.push("/");
+    }
+  }, [skipNewSession]);
 
   return <div>hello</div>;
 };
