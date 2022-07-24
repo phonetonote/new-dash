@@ -59,7 +59,10 @@ const Welcome: NextPage = ({
     } else {
       const getAndSetSession = async () => {
         console.log("getAndSetSession getting new session from clerk");
-        const res = await { createdSessionId: "foobar" };
+        const res = await signIn.create({
+          strategy: "ticket",
+          ticket: signInToken as string,
+        });
 
         console.log("response from clerk: ", res);
         console.log("setting new session", res.createdSessionId);
