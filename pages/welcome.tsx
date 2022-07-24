@@ -70,7 +70,18 @@ const Welcome: NextPage = ({
               ticket: signInToken as string,
             });
 
+            console.log("new sign in res", res);
+
             setMySessionId(res.createdSessionId as string);
+          } else if (
+            clerkIdFromRoam !== "null" &&
+            session.user.id === clerkIdFromRoam
+          ) {
+            console.log(
+              "clerkIdFromRoam is set and the same as the current session, go to redirect",
+              clerkIdFromRoam
+            );
+            setGoToRedirect(true);
           }
         } else {
           const res = await signIn.create({
