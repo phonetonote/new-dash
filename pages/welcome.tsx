@@ -29,9 +29,10 @@ const Welcome: NextPage = ({
 
   useEffect(() => {
     if (isSignedIn && setSession) {
-      setSession(null);
-      setSignInStatus("RESTART");
-      return;
+      setSession(null, () => {
+        setSignInStatus("RESTART");
+        return;
+      });
     }
     if (!signIn || !signInToken || !setSession) {
       setSignInStatus("ERROR");
