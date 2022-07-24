@@ -56,7 +56,6 @@ const Welcome: NextPage = ({
               ticket: signInToken as string,
             });
 
-            await setSession(res.createdSessionId);
             setMySessionId(res.createdSessionId as string);
           }
         } else {
@@ -75,7 +74,7 @@ const Welcome: NextPage = ({
     };
 
     aFunc();
-  }, [signIn, setSession, signInToken, clerkIdFromRoam]);
+  }, [session, signInToken, clerkIdFromRoam]);
 
   useEffect(() => {
     console.log("mySessionId", mySessionId);
