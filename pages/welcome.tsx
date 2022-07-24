@@ -58,7 +58,7 @@ const Welcome: NextPage = ({
             // already logged in to old account
             setSignInProcessed(true);
           }
-        } else {
+        } else if (!signInProcessed) {
           const res = await signIn.create({
             strategy: "ticket",
             ticket: signInToken as string,
