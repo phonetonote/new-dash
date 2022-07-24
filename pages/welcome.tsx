@@ -43,7 +43,7 @@ const Welcome: NextPage = ({
     const aFunc = async () => {
       try {
         // check if already logged in to old account
-        console.log("user", user);
+        console.log("user in aFunc", user);
         console.log("clerkIdFromRoam", clerkIdFromRoam);
 
         if (user) {
@@ -75,7 +75,7 @@ const Welcome: NextPage = ({
 
   useEffect(() => {
     console.log("signInProcessed", signInProcessed);
-    console.log("user", user);
+    console.log("user in router effect", user);
 
     if (user && signInProcessed) {
       Router.push("/");
@@ -89,7 +89,7 @@ const Welcome: NextPage = ({
   if (!signInProcessed) {
     return <div>loading</div>;
   } else {
-    console.log("user", user);
+    console.log("user before return", user);
 
     if (!user) {
       return <div>error invalid token</div>;
