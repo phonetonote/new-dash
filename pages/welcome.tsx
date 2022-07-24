@@ -36,9 +36,11 @@ const Welcome: NextPage = ({
   const [signInStatus, setSignInStatus] = useState<string>("WAITING");
 
   useEffect(() => {
+    console.log("beginning: signInToken", signInToken);
+    console.log("beginning: isSignedIn", isSignedIn);
+    console.log("beginning: isSignedIn", user);
     if (isSignedIn) {
-      console.log("signed in with user", user);
-
+      console.log("isSignedIn?!");
       if (user && user.id && clerkIdFromRoam && user.id !== clerkIdFromRoam) {
         alert(
           "you were previously logged into phonetonote with a different account. you are now logged out of the old one. please relick the dashboard link to sign in with the correct account."
@@ -52,23 +54,26 @@ const Welcome: NextPage = ({
       return;
     }
     if (!signIn || !signInToken || !setSession) {
+      console.log("error ??");
       setSignInStatus("ERROR");
       return;
     }
 
     const aFunc = async () => {
-      const res = await signIn.create({
-        strategy: "ticket",
-        ticket: signInToken as string,
-      });
+      console.log("aFunc awaiting");
+      const res = await { createdSessionId: "foobar" };
 
+      console.log("aFunc res", res);
+
+      console.log("setting session", res.createdSessionId);
       setSession(res.createdSessionId, () => {
         setSignInStatus("COMPLETE");
       });
     };
 
     aFunc();
-  }, [signIn, signInToken, isSignedIn, setSession, user]);
+    console.log("\n\n");
+  }, [signIn, signInToken]);
 
   useEffect(() => {
     if (signInStatus === "COMPLETE") {
