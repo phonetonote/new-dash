@@ -37,17 +37,12 @@ const Welcome: NextPage = ({
 
   useEffect(() => {
     const doSomething = async () => {
-      if (!user || !clerkIdFromRoam) {
+      if (!user?.id) {
         return;
       } else {
         if (isSignedIn && signInStatus === "WAITING") {
           console.log("isSignedIn already");
-          if (
-            user &&
-            user.id &&
-            clerkIdFromRoam &&
-            user.id !== clerkIdFromRoam
-          ) {
+          if (clerkIdFromRoam && user.id !== clerkIdFromRoam) {
             alert(
               "you were previously logged into phonetonote with a different account. you are now logged out of the old one. please relick the dashboard link to sign in with the correct account."
             );
