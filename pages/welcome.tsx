@@ -33,6 +33,7 @@ const Welcome: NextPage = ({
   const { signOut } = useClerk();
   const { signIn, setSession } = useSignIn();
   const { session } = useClerk();
+  const [mySessionId, setMySessionId] = useState<string>();
 
   useEffect(() => {
     if (!signIn || !setSession || !signInToken) {
@@ -56,6 +57,7 @@ const Welcome: NextPage = ({
             });
 
             await setSession(res.createdSessionId);
+            setMySessionId(res.createdSessionId as string);
           }
         } else {
           const res = await signIn.create({
@@ -66,6 +68,7 @@ const Welcome: NextPage = ({
           console.log("res", res);
 
           await setSession(res.createdSessionId);
+          setMySessionId(res.createdSessionId as string);
         }
       } catch (err) {
         console.error(err);
@@ -76,11 +79,11 @@ const Welcome: NextPage = ({
   }, [signIn, setSession, signInToken, clerkIdFromRoam]);
 
   useEffect(() => {
-    console.log("session", session);
-    if (session) {
+    console.log("mySessionId", mySessionId);
+    if (mySessionId) {
       Router.push("/");
     }
-  }, [session]);
+  }, [mySessionId]);
 
   return <div>hello</div>;
 };
