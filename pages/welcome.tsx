@@ -28,7 +28,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
 const Welcome: NextPage = ({
   signInToken,
-  clerkIdFromRoam,
+  clerkIdFromRoam: clerkId,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const { signOut } = useClerk();
   const { signIn, setSession } = useSignIn();
@@ -41,59 +41,45 @@ const Welcome: NextPage = ({
       return;
     }
 
-    const aFunc = async () => {
-      console.log("aFunc session", session);
+    const determineSession = async () => {
+      const prepareToSignIn = async () => {
+        const { createdSessionId } = await signIn.create({
+          strategy: "ticket",
+          ticket: signInToken as string,
+        });
 
+        setMySessionId(createdSessionId as string);
+      };
       try {
         if (session) {
-          if (clerkIdFromRoam === "null") {
-            console.log(
-              "no conflicting clerk id from roam, skipping to new session"
-            );
+          const {
+            user: { id: sessionUserId },
+          } = session;
+          const hasClerkId = clerkId !== "null";
+          const sessionIsValid = hasClerkId && sessionUserId === clerkId;
+
+          if (!hasClerkId || (hasClerkId && sessionIsValid)) {
             setGoToRedirect(true);
-          } else if (
-            clerkIdFromRoam !== "null" &&
-            session.user.id !== clerkIdFromRoam
-          ) {
+          } else if (hasClerkId && !sessionIsValid) {
             await signOut();
-            const res = await signIn.create({
-              strategy: "ticket",
-              ticket: signInToken as string,
-            });
-
-            console.log("new sign in res", res);
-
-            setMySessionId(res.createdSessionId as string);
-          } else if (
-            clerkIdFromRoam !== "null" &&
-            session.user.id === clerkIdFromRoam
-          ) {
-            console.log(
-              "clerkIdFromRoam is set and the same as the current session, go to redirect",
-              clerkIdFromRoam
+            await prepareToSignIn();
+          } else {
+            console.error(
+              "error state, please contact support@phonetonote.com"
             );
-            setGoToRedirect(true);
           }
         } else {
-          const res = await signIn.create({
-            strategy: "ticket",
-            ticket: signInToken as string,
-          });
-
-          console.log("res", res);
-
-          setMySessionId(res.createdSessionId as string);
+          await prepareToSignIn();
         }
       } catch (err) {
         console.error(err);
       }
     };
 
-    aFunc();
-  }, [session, signInToken, clerkIdFromRoam, signIn, signOut, setSession]);
+    determineSession();
+  }, [session, signInToken, clerkId, signIn, signOut, setSession]);
 
   useEffect(() => {
-    console.log("mySessionId", mySessionId);
     if (mySessionId && setSession && !goToRedirect) {
       setSession(mySessionId);
       setGoToRedirect(true);
@@ -106,7 +92,7 @@ const Welcome: NextPage = ({
     }
   }, [goToRedirect]);
 
-  return <div>hello</div>;
+  return <div>loading...</div>;
 };
 
 (Welcome as PageWithLayout).layout = EmptyPage;
