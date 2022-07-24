@@ -47,8 +47,7 @@ const Welcome: NextPage = ({
         if (session) {
           //
           if (!clerkIdFromRoam) {
-            Router.push("/");
-            return;
+            setMySessionId(session.id);
           } else if (session.user.id !== clerkIdFromRoam) {
             signOut();
             const res = await signIn.create({
