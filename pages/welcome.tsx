@@ -58,16 +58,16 @@ const Welcome: NextPage = ({
             // already logged in to old account
             setSignInProcessed(true);
           }
+        } else {
+          const res = await signIn.create({
+            strategy: "ticket",
+            ticket: signInToken as string,
+          });
+
+          setSession(res.createdSessionId, () => {
+            setSignInProcessed(true);
+          });
         }
-
-        const res = await signIn.create({
-          strategy: "ticket",
-          ticket: signInToken as string,
-        });
-
-        setSession(res.createdSessionId, () => {
-          setSignInProcessed(true);
-        });
       } catch (err) {
         setSignInProcessed(true);
       }
