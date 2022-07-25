@@ -33,7 +33,7 @@ const Welcome: NextPage = ({
   const [goToRedirect, setGoToRedirect] = useState<boolean>(false);
 
   useEffect(() => {
-    if (!signIn || !setSession || !signInToken || !signOut) {
+    if (!signIn || !signInToken || !signOut) {
       return;
     }
 
@@ -52,11 +52,12 @@ const Welcome: NextPage = ({
             user: { id: sessionUserId },
           } = session;
           const hasClerkId = clerkId !== "null";
-          const sessionIsValid = hasClerkId && sessionUserId === clerkId;
+          const sameSession = hasClerkId && sessionUserId === clerkId;
+          const sessionIsValid = !hasClerkId || sameSession;
 
-          if (!hasClerkId || (hasClerkId && sessionIsValid)) {
+          if (sessionIsValid) {
             setGoToRedirect(true);
-          } else if (hasClerkId && !sessionIsValid) {
+          } else if (hasClerkId && !sameSession) {
             await signOut();
             await prepareToSignIn();
           } else {
@@ -73,7 +74,7 @@ const Welcome: NextPage = ({
     };
 
     determineSession();
-  }, [session, signInToken, clerkId, signIn, signOut, setSession]);
+  }, [session, signInToken, clerkId, signIn, signOut]);
 
   useEffect(() => {
     if (mySessionId && setSession && !goToRedirect) {
