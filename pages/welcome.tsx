@@ -61,8 +61,8 @@ const Welcome: NextPage = ({
             await signOut();
             await prepareToSignIn();
           } else {
-            console.error(
-              "error state, please contact support@phonetonote.com"
+            throw new Error(
+              "error state 1, please contact support@phonetonote.com"
             );
           }
         } else {
@@ -85,9 +85,15 @@ const Welcome: NextPage = ({
 
   useEffect(() => {
     if (goToRedirect) {
-      Router.push("/");
+      if (!session) {
+        throw new Error(
+          "error state 2, please contact support@phonetonote.com"
+        );
+      } else {
+        Router.push("/");
+      }
     }
-  }, [goToRedirect]);
+  }, [goToRedirect, session]);
 
   return <div>loading...</div>;
 };
