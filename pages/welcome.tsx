@@ -78,8 +78,12 @@ const Welcome: NextPage = ({
 
   useEffect(() => {
     if (mySessionId && setSession && !goToRedirect) {
-      setSession(mySessionId);
-      setGoToRedirect(true);
+      const setSessionAsync = async () => {
+        await setSession(mySessionId);
+        setGoToRedirect(true);
+      };
+
+      setSessionAsync();
     }
   }, [mySessionId, setSession, setGoToRedirect, goToRedirect]);
 
