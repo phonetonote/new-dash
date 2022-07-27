@@ -120,6 +120,7 @@ export const BillingWdiget = (props: BillingWidgetProps) => {
                     "telegram",
                     "facebook",
                     "alfred",
+                    "zapier",
                   ],
                 }}
                 button={

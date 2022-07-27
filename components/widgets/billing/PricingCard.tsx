@@ -89,17 +89,7 @@ export const PricingCard = (props: PricingCardProps) => {
             {feature}
           </ListItem>
         ))}
-        {isPro && (
-          <ListItem fontWeight="medium" key={features.length}>
-            <ListIcon
-              fontSize="xl"
-              as={SiZapier}
-              marginEnd={2}
-              color={accentColor}
-            />
-            zapier
-          </ListItem>
-        )}
+
         {isPro && (
           <ListItem fontWeight="medium" key={features.length + 1}>
             <ListIcon
