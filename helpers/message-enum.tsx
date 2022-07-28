@@ -16,7 +16,7 @@ export const MESSAGE_ENUM: {
     enumInt: 1,
     desc: (
       <div>
-        <a href="http://m.me/phonetoroam">
+        <a href="http://m.me/phonetonote">
           send us your ptn key on facebook messenger
         </a>
         , then you can start sending us messages
