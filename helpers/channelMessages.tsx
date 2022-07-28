@@ -47,7 +47,7 @@ export const channelMessages = (
       notReady: (
         <Box>
           send us your ptn key{" "}
-          <MyLink href="http://m.me/phonetoroam">on facebook messenger</MyLink>{" "}
+          <MyLink href="http://m.me/phonetonote">on facebook messenger</MyLink>{" "}
           to get started. send your ptn key with nothing else.
         </Box>
       ),
@@ -55,14 +55,14 @@ export const channelMessages = (
         <VStack align="stretch" spacing="6">
           <Box>
             facebook connected, send messages{" "}
-            <MyLink href="http://m.me/phonetoroam">to our facebook bot</MyLink>.
+            <MyLink href="http://m.me/phonetonote">to our facebook bot</MyLink>.
           </Box>
         </VStack>
       ),
       received: (
         <Box>
           <Badge variant="outline">{`${count}`}</Badge> received. continiue{" "}
-          <MyLink href="http://m.me/phonetoroam">sending us messages</MyLink>.
+          <MyLink href="http://m.me/phonetonote">sending us messages</MyLink>.
         </Box>
       ),
     },
