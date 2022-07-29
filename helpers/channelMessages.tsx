@@ -1,8 +1,8 @@
 import { inputMethods } from "../components/areas/DashboardArea";
 import { ChannelStatusTypes } from "../components/widgets/ChannelStatus";
-import { Box, VStack, Badge } from "@chakra-ui/react";
 import { MyLink } from "../components/MyLink";
 import { CopyText } from "../components/widgets/CopyText";
+import { Alert, AlertIcon, Badge, Box, Text, VStack } from "@chakra-ui/react";
 
 export type InputMethod = typeof inputMethods[number];
 
@@ -15,6 +15,17 @@ export const channelMessages = (
 } => {
   const copyPhoneNumber = <CopyText text="+1 (310) 919-1008" />;
   const copyEmail = <CopyText text="hello@inbound.phonetonote.com" />;
+  const facebookDown = (
+    <Box>
+      <Alert status="warning" rounded="md">
+        <AlertIcon />
+        <Text>
+          facebook bot is broken and can't onboard new accounts. we have a
+          support ticket open with twilio. check back soon!
+        </Text>
+      </Alert>
+    </Box>
+  );
 
   return {
     sms: {
@@ -44,13 +55,7 @@ export const channelMessages = (
       ),
     },
     facebook: {
-      notReady: (
-        <Box>
-          send us your ptn key{" "}
-          <MyLink href="http://m.me/phonetonote">on facebook messenger</MyLink>{" "}
-          to get started. send your ptn key with nothing else.
-        </Box>
-      ),
+      notReady: facebookDown,
       ready: (
         <VStack align="stretch" spacing="6">
           <Box>
