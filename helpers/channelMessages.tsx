@@ -15,17 +15,17 @@ export const channelMessages = (
 } => {
   const copyPhoneNumber = <CopyText text="+1 (310) 919-1008" />;
   const copyEmail = <CopyText text="hello@inbound.phonetonote.com" />;
-  const facebookDown = (
-    <Box>
-      <Alert status="warning" rounded="md">
-        <AlertIcon />
-        <Text>
-          facebook bot is broken and can't onboard new accounts. we have a
-          support ticket open with twilio. check back soon!
-        </Text>
-      </Alert>
-    </Box>
-  );
+  // const facebookDown = (
+  //   <Box>
+  //     <Alert status="warning" rounded="md">
+  //       <AlertIcon />
+  //       <Text>
+  //         facebook bot is currently down, we have a support ticket open with
+  //         twilio. check back soon!
+  //       </Text>
+  //     </Alert>
+  //   </Box>
+  // );
 
   return {
     sms: {
@@ -55,7 +55,16 @@ export const channelMessages = (
       ),
     },
     facebook: {
-      notReady: facebookDown,
+      notReady: (
+        <Box>
+          send a message to{" "}
+          <MyLink href="http://m.me/phonetonote">
+            ptn on facebook messenger
+          </MyLink>{" "}
+          to get started. the bot will ask for your ptn key. if you don't get a
+          response, please contact support.
+        </Box>
+      ),
       ready: (
         <VStack align="stretch" spacing="6">
           <Box>

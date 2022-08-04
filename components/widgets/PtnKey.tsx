@@ -1,17 +1,4 @@
-import { CheckIcon } from "@chakra-ui/icons";
-import {
-  Box,
-  Button,
-  Flex,
-  Heading,
-  Input,
-  InputGroup,
-  InputLeftElement,
-  InputRightElement,
-  useClipboard,
-  useColorModeValue,
-  VStack,
-} from "@chakra-ui/react";
+import { Box, VStack } from "@chakra-ui/react";
 import { useMutedColor } from "../../hooks/useChannelColors";
 import { CopyText } from "./CopyText";
 
