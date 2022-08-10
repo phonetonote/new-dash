@@ -41,7 +41,7 @@ export const links: Link[] = [
       },
       {
         label: "clients",
-        description: "sync your notes to logseq, roam and craft",
+        description: "sync your notes to logseq or roam",
         href: "#",
         icon: <FiMonitor />,
       },

@@ -135,36 +135,6 @@ document.getElementsByTagName("head")[0].appendChild(s);
           </Text>
         </VStack>
       </Box>
-
-      <Box border="thinborder" rounded="md" p="5">
-        <VStack align="stretch" spacing={"2"}>
-          <Heading color={mutedColor} size="md">
-            craft
-          </Heading>
-          <VStack spacing="4">
-            <Text>
-              the{" "}
-              <MyLink href="https://github.com/phonetonote/phonetocraft-builds">
-                phonetocraft-builds repo
-              </MyLink>{" "}
-              contains <strong>.craftx</strong> files ready to download and
-              install on your computer. full source code is{" "}
-              <MyLink href="https://github.com/phonetonote/phonetocraft">
-                available here
-              </MyLink>
-              .
-            </Text>
-            <Text>
-              please note this is an alpha release and does not contain all of
-              the features of the roam client. see and participate in our{" "}
-              <MyLink href="https://github.com/phonetonote/phonetocraft/discussions/2">
-                craft roadmap
-              </MyLink>{" "}
-              for more details.
-            </Text>
-          </VStack>
-        </VStack>
-      </Box>
     </SimpleGrid>
   );
 };
