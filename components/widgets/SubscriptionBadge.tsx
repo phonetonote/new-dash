@@ -1,13 +1,4 @@
-import {
-  Alert,
-  AlertIcon,
-  Badge,
-  HStack,
-  Skeleton,
-  SkeletonText,
-  useColorModeValue,
-  VStack,
-} from "@chakra-ui/react";
+import { Alert, AlertIcon, Badge, HStack, VStack } from "@chakra-ui/react";
 import { CalmSkeleton } from "../indicators/CalmSkeleton";
 
 type SubscriptionBadgeProps = {
@@ -47,7 +38,7 @@ export const SubscriptionBadge = (props: SubscriptionBadgeProps) => {
         </HStack>
 
         {hasRoamDepotCoupon && (
-          <Alert status="success" variant="subtle">
+          <Alert status="success" variant="subtle" rounded="md">
             <AlertIcon />
             you get an extra $5 off per month from roam depot. {extraWords}
           </Alert>
