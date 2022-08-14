@@ -88,7 +88,8 @@ export const channelMessages = (
           <MyLink href="https://ptn.gumroad.com/l/ptn-alfred">
             alfredtonote
           </MyLink>{" "}
-          and edit the script to include your ptn key.
+          and edit the script to include your ptn key. please note an internet
+          connection is required for alfredtonote to work.
         </Box>
       ),
       received: (
