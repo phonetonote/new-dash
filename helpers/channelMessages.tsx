@@ -2,17 +2,8 @@ import { inputMethods } from "../components/areas/DashboardArea";
 import { ChannelStatusTypes } from "../components/widgets/ChannelStatus";
 import { MyLink } from "../components/MyLink";
 import { CopyText } from "../components/widgets/CopyText";
-import {
-  Alert,
-  AlertIcon,
-  Badge,
-  Box,
-  Icon,
-  Text,
-  VStack,
-} from "@chakra-ui/react";
-
-import { BsPatchExclamation } from "react-icons/bs";
+import { Alert, Badge, Box, Text, VStack } from "@chakra-ui/react";
+import styles from "../styles/Channels.module.css";
 
 export type InputMethod = typeof inputMethods[number];
 
@@ -36,6 +27,22 @@ export const channelMessages = (
   //     </Alert>
   //   </Box>
   // );
+
+  const telegramDocsAnnouncement = (
+    <Alert status="success" rounded="md">
+      <Text>
+        <VStack align="stretch">
+          <Text>now you can send files</Text>
+          <a
+            href="https://phonetonote.com/changelog/telegram-documents"
+            className={styles["telegram-announcement"]}
+          >
+            click here to learn more
+          </a>
+        </VStack>
+      </Text>
+    </Alert>
+  );
 
   return {
     sms: {
@@ -66,7 +73,7 @@ export const channelMessages = (
     },
     telegram: {
       notReady: (
-        <VStack>
+        <VStack spacing={5}>
           <Box>
             send your ptn key to our{" "}
             <MyLink href="https://telegram.me/phonetoroam_bot">
@@ -74,22 +81,11 @@ export const channelMessages = (
             </MyLink>{" "}
             to get started. send your ptn key with nothing else.
           </Box>
-          //{" "}
-          <Alert status="success" rounded="md">
-            <AlertIcon>
-              <>
-                <BsPatchExclamation />
-              </>
-            </AlertIcon>
-            <Text>
-              telegram now supports sending files,{" "}
-              <a href="#">click here to learn more</a>.
-            </Text>
-          </Alert>
+          {telegramDocsAnnouncement}
         </VStack>
       ),
       ready: (
-        <VStack align="stretch" spacing="4">
+        <VStack align="stretch" spacing={5}>
           <Box>
             telegram connected, send messages to our{" "}
             <MyLink href="https://telegram.me/phonetoroam_bot">
@@ -97,22 +93,20 @@ export const channelMessages = (
             </MyLink>{" "}
             to get started.
           </Box>
+          {telegramDocsAnnouncement}
         </VStack>
       ),
       received: (
-        <Box>
-          <Badge variant="outline">{`${count}`}</Badge> received. continue
-          sending messages to our{" "}
-          <MyLink href="https://telegram.me/phonetoroam_bot">
-            telegram bot
-          </MyLink>
-          {/* //     <Alert status="warning" rounded="md">
-  //       <AlertIcon />
-  //       <Text>
-  //         facebook bot is currently down, we have a support ticket open with
-  //         twilio. check back soon!
-  //       </Text> */}
-        </Box>
+        <VStack align="stretch" spacing={5}>
+          <Box>
+            <Badge variant="outline">{`${count}`}</Badge> received. continue
+            sending messages to our{" "}
+            <MyLink href="https://telegram.me/phonetoroam_bot">
+              telegram bot
+            </MyLink>
+          </Box>
+          {telegramDocsAnnouncement}
+        </VStack>
       ),
     },
     alfred: {

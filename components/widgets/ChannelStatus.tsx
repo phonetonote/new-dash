@@ -26,6 +26,10 @@ export const ChannelStatus = (props: ChannelStatusProps) => {
   const mutedColor = useMutedColor();
 
   const statusByInputMethod = {
+    telegram: determineStatusWithTwoCounts(
+      data?.telegramChannels.aggregate.count ?? 0,
+      data?.telegramCount.aggregate.count ?? 0
+    ),
     sms: determineStatusWithTwoCounts(
       user.phoneNumbers.length,
       data?.smsCount.aggregate.count ?? 0
@@ -35,10 +39,7 @@ export const ChannelStatus = (props: ChannelStatusProps) => {
       data?.facebookCount.aggregate.count ?? 0
     ),
     alfred: determineStatusWithOneCount(data?.alfredCount.aggregate.count ?? 0),
-    telegram: determineStatusWithTwoCounts(
-      data?.telegramChannels.aggregate.count ?? 0,
-      data?.telegramCount.aggregate.count ?? 0
-    ),
+
     zapier: determineStatusWithOneCount(data?.zapierCount.aggregate.count ?? 0),
     chrome: determineStatusWithOneCount(data?.chromeCount.aggregate.count ?? 0),
     email: determineStatusWithTwoCounts(

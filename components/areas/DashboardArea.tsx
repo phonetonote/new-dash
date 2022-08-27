@@ -27,12 +27,12 @@ import router from "next/router";
 
 export const inputMethods = [
   "sms",
-  "facebook",
-  "alfred",
   "telegram",
-  "zapier",
-  "email",
+  "alfred",
   "chrome",
+  "zapier",
+  "facebook",
+  "email",
 ] as const;
 
 export type AggregateCount = {

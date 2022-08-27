@@ -1,0 +1,14 @@
+.telegram-announcement {
+  display: block;
+  border: 1px dashed;
+  border-radius: 20px;
+  width: 200px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.telegram-announcement:hover,
+.telegram-announcement[data-hover] {
+  background: #eeeeee24;
+  border-style: solid;
+}
