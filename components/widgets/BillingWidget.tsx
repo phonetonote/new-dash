@@ -5,16 +5,14 @@ import {
   Flex,
   SimpleGrid,
   Text,
-  useRadio,
   VStack,
 } from "@chakra-ui/react";
 
-import { Subscription } from "../../types/SubscriptionTypes";
+import { Plan, Subscription } from "../../types/SubscriptionTypes";
 import { ActionButton } from "./billing/ActionButton";
 import { PricingCard } from "./billing/PricingCard";
 import { SubscriptionBadge } from "./SubscriptionBadge";
 import { SubscriptionLink } from "./SubscriptionLink";
-import { SiHive, SiMicrosoft, SiMarketo } from "react-icons/si";
 import { CalmSkeleton } from "../indicators/CalmSkeleton";
 import { MyLink } from "../MyLink";
 import { DurationSwitcher } from "./billing/DurationSwitcher";
@@ -24,12 +22,13 @@ type BillingWidgetProps = {
   user: { id: string };
   subscriptionLoading: boolean;
   stripeData: Subscription["stripe_data"];
+  currentPlan: Plan;
 };
 
 const ROAM_DEPOT_COUPON_ID = "YldsnRLT";
 
 export const BillingWdiget = (props: BillingWidgetProps) => {
-  const { user, subscriptionLoading, stripeData } = props;
+  const { currentPlan, user, subscriptionLoading, stripeData } = props;
 
   const [isYearly, setIsYearly] = useState<boolean>(false);
 
@@ -49,7 +48,7 @@ export const BillingWdiget = (props: BillingWidgetProps) => {
         loading={subscriptionLoading}
         status={stripeData?.status ?? "starter"}
         nickname={stripeData?.plan?.nickname ?? "free"}
-        hasRoamDepotCoupon
+        hasRoamDepotCoupon={hasRoamDepotCoupon}
       />
       <CalmSkeleton isLoaded={!subscriptionLoading}>
         {has_subscription && <SubscriptionLink clerkId={user.id} />}
@@ -73,7 +72,7 @@ export const BillingWdiget = (props: BillingWidgetProps) => {
         )}
       </CalmSkeleton>
 
-      {!has_subscription && !subscriptionLoading && (
+      {!subscriptionLoading && (
         <Box>
           <Flex
             direction="column"
@@ -124,9 +123,15 @@ export const BillingWdiget = (props: BillingWidgetProps) => {
                   ],
                 }}
                 button={
-                  <ActionButton planName="standard" duration={myDuration}>
-                    subscribe
-                  </ActionButton>
+                  <>
+                    {currentPlan === "standard" ? (
+                      <></>
+                    ) : (
+                      <ActionButton planName="standard" duration={myDuration}>
+                        subscribe
+                      </ActionButton>
+                    )}
+                  </>
                 }
                 duration={myDuration}
               />
@@ -146,14 +151,18 @@ export const BillingWdiget = (props: BillingWidgetProps) => {
                 }}
                 duration={myDuration}
                 button={
-                  <ActionButton
-                    variant="outline"
-                    borderWidth="2px"
-                    planName="pro"
-                    duration={myDuration}
-                  >
-                    subscribe
-                  </ActionButton>
+                  currentPlan === "pro" ? (
+                    <></>
+                  ) : (
+                    <ActionButton
+                      variant="outline"
+                      borderWidth="2px"
+                      planName="pro"
+                      duration={myDuration}
+                    >
+                      subscribe
+                    </ActionButton>
+                  )
                 }
               />
             </SimpleGrid>

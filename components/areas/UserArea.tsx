@@ -1,16 +1,7 @@
-import {
-  Box,
-  Button,
-  Flex,
-  HStack,
-  Skeleton,
-  Text,
-  VStack,
-} from "@chakra-ui/react";
-import { FiCreditCard, FiHelpCircle, FiSend, FiSettings } from "react-icons/fi";
+import { Box, Button, Flex, HStack, Text, VStack } from "@chakra-ui/react";
+import { FiCreditCard, FiSettings } from "react-icons/fi";
 import { DashboardSection } from "../DashboardSection";
 import { ClerkProfile } from "../widgets/ClerkProfile";
-import { useQuery } from "@apollo/client";
 import { SignOutButton, useUser } from "@clerk/nextjs";
 import router from "next/router";
 import { BillingWdiget } from "../widgets/BillingWidget";
@@ -76,6 +67,7 @@ export const UserArea = () => {
               subscriptionLoading={loading}
               user={user}
               stripeData={stripeData as Subscription["stripe_data"]}
+              currentPlan={currentPlan}
             />
           )}
         </>

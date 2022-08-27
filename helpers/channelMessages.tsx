@@ -16,17 +16,6 @@ export const channelMessages = (
 } => {
   const copyPhoneNumber = <CopyText text="+1 (310) 919-1008" />;
   const copyEmail = <CopyText text="hello@inbound.phonetonote.com" />;
-  // const facebookDown = (
-  //   <Box>
-  //     <Alert status="warning" rounded="md">
-  //       <AlertIcon />
-  //       <Text>
-  //         facebook bot is currently down, we have a support ticket open with
-  //         twilio. check back soon!
-  //       </Text>
-  //     </Alert>
-  //   </Box>
-  // );
 
   const telegramDocsAnnouncement = (
     <Alert status="success" rounded="md">

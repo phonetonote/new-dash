@@ -1,7 +1,6 @@
 import {
   Flex,
   Heading,
-  Icon,
   List,
   ListIcon,
   ListItem,
@@ -10,14 +9,8 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import * as React from "react";
-import { FiZap } from "react-icons/fi";
 import { HiCheckCircle } from "react-icons/hi";
-import {
-  MdContactMail,
-  MdContactSupport,
-  MdOutlineContactSupport,
-} from "react-icons/md";
-import { SiZapier } from "react-icons/si";
+import { MdContactSupport } from "react-icons/md";
 import { BillingCard, BillingCardProps } from "./BillingCard";
 
 export interface PricingCardData {
@@ -36,11 +29,9 @@ interface PricingCardProps extends BillingCardProps {
 
 export const PricingCard = (props: PricingCardProps) => {
   const { data, button, isPro, duration = "month", ...rest } = props;
-  const { features, iconFeatures, price, name } = data;
+  const { features, price, name } = data;
   const accentColor = useColorModeValue("ptnGreen.700", "ptnGreen.300");
   const freeCard = data.price === "free";
-  const headingSize = freeCard ? "lg" : "2xl";
-  const headingWeight = freeCard ? "thin" : "thin";
 
   return (
     <BillingCard
