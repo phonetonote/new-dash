@@ -2,7 +2,17 @@ import { inputMethods } from "../components/areas/DashboardArea";
 import { ChannelStatusTypes } from "../components/widgets/ChannelStatus";
 import { MyLink } from "../components/MyLink";
 import { CopyText } from "../components/widgets/CopyText";
-import { Alert, AlertIcon, Badge, Box, Text, VStack } from "@chakra-ui/react";
+import {
+  Alert,
+  AlertIcon,
+  Badge,
+  Box,
+  Icon,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
+
+import { BsPatchExclamation } from "react-icons/bs";
 
 export type InputMethod = typeof inputMethods[number];
 
@@ -54,6 +64,76 @@ export const channelMessages = (
         </VStack>
       ),
     },
+    telegram: {
+      notReady: (
+        <VStack>
+          <Box>
+            send your ptn key to our{" "}
+            <MyLink href="https://telegram.me/phonetoroam_bot">
+              telegram bot
+            </MyLink>{" "}
+            to get started. send your ptn key with nothing else.
+          </Box>
+          //{" "}
+          <Alert status="success" rounded="md">
+            <AlertIcon>
+              <>
+                <BsPatchExclamation />
+              </>
+            </AlertIcon>
+            <Text>
+              telegram now supports sending files,{" "}
+              <a href="#">click here to learn more</a>.
+            </Text>
+          </Alert>
+        </VStack>
+      ),
+      ready: (
+        <VStack align="stretch" spacing="4">
+          <Box>
+            telegram connected, send messages to our{" "}
+            <MyLink href="https://telegram.me/phonetoroam_bot">
+              telegram bot
+            </MyLink>{" "}
+            to get started.
+          </Box>
+        </VStack>
+      ),
+      received: (
+        <Box>
+          <Badge variant="outline">{`${count}`}</Badge> received. continue
+          sending messages to our{" "}
+          <MyLink href="https://telegram.me/phonetoroam_bot">
+            telegram bot
+          </MyLink>
+          {/* //     <Alert status="warning" rounded="md">
+  //       <AlertIcon />
+  //       <Text>
+  //         facebook bot is currently down, we have a support ticket open with
+  //         twilio. check back soon!
+  //       </Text> */}
+        </Box>
+      ),
+    },
+    alfred: {
+      notReady: "",
+      ready: (
+        <Box>
+          download{" "}
+          <MyLink href="https://ptn.gumroad.com/l/ptn-alfred">
+            alfredtonote
+          </MyLink>{" "}
+          and edit the script to include your ptn key. please note an internet
+          connection is required for alfredtonote to work.
+        </Box>
+      ),
+      received: (
+        <Box>
+          <Badge variant="outline">{`${count}`}</Badge> received. continue
+          sending messages with alfred
+        </Box>
+      ),
+    },
     facebook: {
       notReady: (
         <Box>
@@ -80,25 +160,6 @@ export const channelMessages = (
         </Box>
       ),
     },
-    alfred: {
-      notReady: "",
-      ready: (
-        <Box>
-          download{" "}
-          <MyLink href="https://ptn.gumroad.com/l/ptn-alfred">
-            alfredtonote
-          </MyLink>{" "}
-          and edit the script to include your ptn key. please note an internet
-          connection is required for alfredtonote to work.
-        </Box>
-      ),
-      received: (
-        <Box>
-          <Badge variant="outline">{`${count}`}</Badge> received. continue
-          sending messages with alfred
-        </Box>
-      ),
-    },
     chrome: {
       notReady: "",
       ready: (
@@ -114,38 +175,6 @@ export const channelMessages = (
         <Box>
           <Badge variant="outline">{`${count}`}</Badge> received. continue using
           the chrometonote extension.
-        </Box>
-      ),
-    },
-    telegram: {
-      notReady: (
-        <Box>
-          send your ptn key to our{" "}
-          <MyLink href="https://telegram.me/phonetoroam_bot">
-            telegram bot
-          </MyLink>{" "}
-          to get started. send your ptn key with nothing else.
-        </Box>
-      ),
-      ready: (
-        <VStack align="stretch" spacing="4">
-          <Box>
-            telegram connected, send messages to our{" "}
-            <MyLink href="https://telegram.me/phonetoroam_bot">
-              telegram bot
-            </MyLink>{" "}
-            to get started.
-          </Box>
-        </VStack>
-      ),
-      received: (
-        <Box>
-          <Badge variant="outline">{`${count}`}</Badge> received. continue
-          sending messages to our{" "}
-          <MyLink href="https://telegram.me/phonetoroam_bot">
-            telegram bot
-          </MyLink>
-          .
         </Box>
       ),
     },
