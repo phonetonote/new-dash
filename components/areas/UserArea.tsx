@@ -1,5 +1,13 @@
-import { Box, Button, Flex, HStack, Text, VStack } from "@chakra-ui/react";
-import { FiCreditCard, FiSettings } from "react-icons/fi";
+import {
+  Box,
+  Button,
+  Flex,
+  Heading,
+  HStack,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
+import { FiCreditCard, FiHelpCircle, FiMail, FiSettings } from "react-icons/fi";
 import { DashboardSection } from "../DashboardSection";
 import { ClerkProfile } from "../widgets/ClerkProfile";
 import { SignOutButton, useUser } from "@clerk/nextjs";
@@ -80,10 +88,33 @@ export const UserArea = () => {
         <Text>check back soon for monthly backup preferences and more.</Text>
       </DashboardSection>
       <DashboardSection id="help" title="help" icon={<IoHelpBuoy />}>
-        <Text>
-          plase email <a href={`mailto:${supportEmail}`}>{supportEmail}</a> for
-          support
-        </Text>
+        <VStack spacing={10} align="stretch">
+          <Box mt="5">
+            <Heading size="md" pb="2">
+              <HStack>
+                <Text> FAQ </Text>
+                <FiHelpCircle></FiHelpCircle>
+              </HStack>
+            </Heading>
+            <Text>
+              please see{" "}
+              <a href="https://phonetonote.com/pages/faq/">this faq article</a>{" "}
+              for answers to common questions.
+            </Text>
+          </Box>
+          <Box>
+            <Heading size="md" pb="2">
+              <HStack>
+                <Text>contact support</Text>
+                <FiMail></FiMail>
+              </HStack>
+            </Heading>
+            <Text>
+              plase email <a href={`mailto:${supportEmail}`}>{supportEmail}</a>{" "}
+              for support
+            </Text>
+          </Box>
+        </VStack>
       </DashboardSection>
       <Box height={"85vh"}></Box>
     </VStack>
