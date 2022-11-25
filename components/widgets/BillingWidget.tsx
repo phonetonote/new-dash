@@ -56,7 +56,7 @@ export const BillingWdiget = (props: BillingWidgetProps) => {
 
       <CalmSkeleton isLoaded={!subscriptionLoading}>
         {has_subscription && (
-          <Alert status="info" rounded="md">
+          <Alert status="info" rounded="md" mb="20">
             <AlertIcon />
             <Text>
               please email{" "}
