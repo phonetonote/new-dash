@@ -15,7 +15,7 @@ export const channelMessages = (
   };
 } => {
   const copyPhoneNumber = <CopyText text="+1 (310) 919-1008" />;
-  const copyEmail = <CopyText text="hello@inbound.phonetonote.com" />;
+  const copyEmail = <CopyText text="receiver@inbound.phonetonote.com" />;
 
   const telegramDocsAnnouncement = (
     <Alert status="success" rounded="md">
@@ -124,8 +124,8 @@ export const channelMessages = (
           <MyLink href="http://m.me/phonetonote">
             ptn on facebook messenger
           </MyLink>{" "}
-          to get started. the bot will ask for your ptn key. if you don't get a
-          response, please contact support.
+          to get started. the bot will ask for your ptn key. if you don&apos;t
+          get a response, please contact support.
         </Box>
       ),
       ready: (

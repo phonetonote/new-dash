@@ -31,7 +31,7 @@ export const useFetchData = () => {
       variables: {
         clerkId: user?.id,
       },
-      pollInterval: 2000,
+      pollInterval: 10000,
     });
 
     return { data, loading };
