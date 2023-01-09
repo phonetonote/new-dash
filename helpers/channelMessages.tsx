@@ -117,32 +117,6 @@ export const channelMessages = (
         </Box>
       ),
     },
-    facebook: {
-      notReady: (
-        <Box>
-          send a message to{" "}
-          <MyLink href="http://m.me/phonetonote">
-            ptn on facebook messenger
-          </MyLink>{" "}
-          to get started. the bot will ask for your ptn key. if you don&apos;t
-          get a response, please contact support.
-        </Box>
-      ),
-      ready: (
-        <VStack align="stretch" spacing="6">
-          <Box>
-            facebook connected, send messages{" "}
-            <MyLink href="http://m.me/phonetonote">to our facebook bot</MyLink>.
-          </Box>
-        </VStack>
-      ),
-      received: (
-        <Box>
-          <Badge variant="outline">{`${count}`}</Badge> received. continiue{" "}
-          <MyLink href="http://m.me/phonetonote">sending us messages</MyLink>.
-        </Box>
-      ),
-    },
     chrome: {
       notReady: "",
       ready: (

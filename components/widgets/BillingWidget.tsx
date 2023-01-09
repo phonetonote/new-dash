@@ -117,7 +117,6 @@ export const BillingWdiget = (props: BillingWidgetProps) => {
                     "sms",
                     "email",
                     "telegram",
-                    "facebook",
                     "alfred",
                     "zapier",
                   ],
@@ -145,7 +144,6 @@ export const BillingWdiget = (props: BillingWidgetProps) => {
                     "sms",
                     "email",
                     "telegram",
-                    "facebook",
                     "alfred",
                   ],
                 }}

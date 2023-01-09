@@ -34,10 +34,6 @@ export const ChannelStatus = (props: ChannelStatusProps) => {
       user.phoneNumbers.length,
       data?.smsCount.aggregate.count ?? 0
     ),
-    facebook: determineStatusWithTwoCounts(
-      data?.facebookChannels.aggregate.count ?? 0,
-      data?.facebookCount.aggregate.count ?? 0
-    ),
     alfred: determineStatusWithOneCount(data?.alfredCount.aggregate.count ?? 0),
 
     zapier: determineStatusWithOneCount(data?.zapierCount.aggregate.count ?? 0),

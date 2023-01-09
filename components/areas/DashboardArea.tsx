@@ -24,6 +24,7 @@ import { AllData, useFetchData } from "../../hooks/useFetchData";
 import { MyLink } from "../MyLink";
 import { Plan, Subscription } from "../../types/SubscriptionTypes";
 import router from "next/router";
+import { InfoIcon } from "@chakra-ui/icons";
 
 export const inputMethods = [
   "sms",
@@ -31,7 +32,6 @@ export const inputMethods = [
   "alfred",
   "chrome",
   "zapier",
-  "facebook",
   "email",
 ] as const;
 
@@ -144,6 +144,21 @@ export const DashboardArea = () => {
     <VStack align="stretch" spacing="20">
       <DashboardSection title="channels" icon={<FiSend />}>
         <>
+          <Alert status="warning" rounded="md">
+            <AlertIcon />
+            <Text>
+              the facebook integration has been deprecated because of stability
+              issues.
+            </Text>
+          </Alert>
+          <Alert status="info" rounded="md">
+            <AlertIcon />
+            <Text>
+              a note for international users --- the telegram integration is
+              preferred for international users because it is more reliable and
+              less costly than sms.
+            </Text>
+          </Alert>
           {noPhone && (
             <Alert status="warning" rounded="md">
               <AlertIcon />
