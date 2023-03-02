@@ -1,8 +1,12 @@
+export type Plan =  "standard" | "pro" | "free" | "enterprise";
+type StripeStatus = "incomplete" | "incomplete_expired" | "trialing" |
+  "active" | "past_due" | "canceled" | "unpaid"
+
 export type Subscription = {
   stripe_data: {
     plan: {
       product: {
-        name: string;
+        name: Plan;
       };
       nickname: string;
     };
@@ -13,10 +17,6 @@ export type Subscription = {
         };
       };
     };
-    status: string;
+    status: StripeStatus;
   };
 };
-
-export type PTRDuration = "month" | "year";
-export type PaidPlan = "standard" | "pro";
-export type Plan = PaidPlan | "free" | "enterprise";

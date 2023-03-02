@@ -27,6 +27,8 @@ export const useFetchData = () => {
   const { user, isLoaded, isSignedIn } = useUser();
 
   if (isLoaded && isSignedIn) {
+    // TODO refactor this
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const { data, loading } = useQuery(dashboardQuery, {
       variables: {
         clerkId: user?.id,

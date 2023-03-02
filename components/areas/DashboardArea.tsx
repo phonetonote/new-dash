@@ -1,4 +1,3 @@
-import { useQuery } from "@apollo/client";
 import {
   Alert,
   AlertIcon,
@@ -12,7 +11,6 @@ import { useUser } from "@clerk/nextjs";
 import { useEffect, useState } from "react";
 import { FiKey, FiPackage, FiSend } from "react-icons/fi";
 import Analytics from "../../helpers/analytics";
-import { dashboardQuery } from "../../helpers/queries/dashboard-query";
 import { DashboardSection } from "../DashboardSection";
 import { ChannelStatus } from "../widgets/ChannelStatus";
 import { ClientInfo } from "../widgets/ClientInfo";
@@ -20,11 +18,10 @@ import { PtnKey } from "../widgets/PtnKey";
 
 import { loadStripe } from "@stripe/stripe-js";
 import useParams from "../../hooks/useParams";
-import { AllData, useFetchData } from "../../hooks/useFetchData";
+import { useFetchData } from "../../hooks/useFetchData";
 import { MyLink } from "../MyLink";
 import { Plan, Subscription } from "../../types/SubscriptionTypes";
 import router from "next/router";
-import { InfoIcon } from "@chakra-ui/icons";
 
 export const inputMethods = [
   "sms",
@@ -83,7 +80,7 @@ export const DashboardArea = () => {
   const liveSubscription: Subscription | undefined =
     liveData?.subscriptions?.[0];
   const currentPlan: Plan = liveSubscription
-    ? (liveSubscription.stripe_data.plan.product.name as Plan)
+    ? (liveSubscription.stripe_data.plan.product.name)
     : "free";
   const messagesAllowed: number = messagesAllowedMap[currentPlan];
 

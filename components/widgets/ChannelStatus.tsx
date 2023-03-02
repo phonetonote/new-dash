@@ -1,5 +1,4 @@
 import { Box, VStack, Flex, Heading, HStack, Skeleton } from "@chakra-ui/react";
-import colors from "../../styles/themes/colors";
 import { CircleStatus } from "../indicators/circle-status";
 import { UserResource } from "@clerk/types";
 import { AggregateCount } from "../areas/DashboardArea";
