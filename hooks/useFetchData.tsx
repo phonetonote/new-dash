@@ -19,10 +19,8 @@ export const useFetchData = () => {
       {}
     );
 
-  console.log("stripeData", stripeData);
-
   if (data) {
-    data["stripeData"] = stripeData;
+    data["extraStripeData"] = stripeData;
   }
 
   return { data, loading };

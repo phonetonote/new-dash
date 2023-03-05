@@ -78,9 +78,9 @@ export const DashboardArea = () => {
   const totalMonthlyCount = liveData?.totalMonthylMessages.aggregate.count ?? 0;
 
   const liveSubscription: Subscription | undefined =
-    liveData?.subscriptions?.[0];
+    liveData?.extraStripeData?.[0];
   const currentPlan: Plan = liveSubscription
-    ? (liveSubscription.stripe_data.plan.product.name)
+    ? liveSubscription.stripe_data.plan.product.name
     : "free";
   const messagesAllowed: number = messagesAllowedMap[currentPlan];
 

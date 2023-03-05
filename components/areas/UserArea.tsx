@@ -33,8 +33,7 @@ export const UserArea = () => {
     }
   }, []);
 
-  const liveSubscription: Subscription | undefined =
-    liveData?.subscriptions?.[0];
+  const liveSubscription: Subscription | undefined = liveData?.extraStripeData;
   const stripeData = liveSubscription?.stripe_data;
   const currentPlan: Plan = liveSubscription
     ? (liveSubscription.stripe_data.plan.product.name as Plan)
