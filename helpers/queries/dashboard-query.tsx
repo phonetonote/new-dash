@@ -2,32 +2,6 @@ import { gql } from "@apollo/client";
 
 export const dashboardQuery = gql`
   query DashboardData($clerkId: String = "") {
-    subscriptions(
-      where: { clerk_id: { _eq: $clerkId } }
-      limit: 1
-      order_by: { id: desc }
-    ) {
-      stripe_data {
-        plan {
-          product {
-            ... on StripeProduct {
-              name
-            }
-          }
-          nickname
-        }
-        customer {
-          ... on StripeCustomer {
-            discount {
-              coupon {
-                id
-              }
-            }
-          }
-        }
-      }
-    }
-
     totalMonthylMessages: filter_to_current_month_aggregate(
       where: { clerk_id: { _eq: $clerkId } }
     ) {

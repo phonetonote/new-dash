@@ -1,46 +1,29 @@
 import { useQuery } from "@apollo/client";
+import usePollingFetch from "./usePollingFetch";
 import { useUser } from "@clerk/nextjs";
-import * as React from "react";
-import { AggregateCount } from "../components/areas/DashboardArea";
 import { dashboardQuery } from "../helpers/queries/dashboard-query";
 import { Subscription } from "../types/SubscriptionTypes";
 
-export type AllData = {
-  subscriptions: Subscription[];
-  totalMonthylMessages: AggregateCount;
-  totalCount: AggregateCount;
-  smsCount: AggregateCount;
-  facebookCount: AggregateCount;
-  facebookChannels: AggregateCount;
-  alfredCount: AggregateCount;
-  telegramCount: AggregateCount;
-  zapierCount: AggregateCount;
-  chromeCount: AggregateCount;
-  emailCount: AggregateCount;
-  telegramChannels: AggregateCount;
-  roam_keys: {
-    key: string;
-  }[];
-};
-
 export const useFetchData = () => {
-  const { user, isLoaded, isSignedIn } = useUser();
+  const { user } = useUser();
+  const { data, loading } = useQuery(dashboardQuery, {
+    variables: {
+      clerkId: user?.id,
+    },
+    pollInterval: 10000,
+  });
 
-  if (isLoaded && isSignedIn) {
-    // TODO refactor this
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const { data, loading } = useQuery(dashboardQuery, {
-      variables: {
-        clerkId: user?.id,
-      },
-      pollInterval: 10000,
-    });
+  const { data: stripeData }: { data?: Subscription; error?: string } =
+    usePollingFetch(
+      "https://app.phonetonote.com/payments/user-subscription-data",
+      {}
+    );
 
-    return { data, loading };
+  console.log("stripeData", stripeData);
+
+  if (data) {
+    data["stripeData"] = stripeData;
   }
 
-  return {
-    data: undefined,
-    loading: false,
-  };
+  return { data, loading };
 };

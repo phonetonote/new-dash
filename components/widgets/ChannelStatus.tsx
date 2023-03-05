@@ -7,9 +7,9 @@ import {
   determineStatusWithTwoCounts,
 } from "../../helpers/determineChannelStatus";
 import { channelMessages, InputMethod } from "../../helpers/channelMessages";
-import { AllData } from "../../hooks/useFetchData";
 import { useMutedColor } from "../../hooks/useChannelColors";
 import { CalmSkeleton } from "../indicators/CalmSkeleton";
+import { AllData } from "../../types/AllData";
 
 type ChannelStatusProps = {
   inputMethod: string;
