@@ -20,7 +20,7 @@ const poll = async (
 };
 
 const usePollingFetch = (
-  url: RequestInfo | URL,
+  url: string,
   options: RequestInit | undefined,
   duration = 10000
 ) => {
