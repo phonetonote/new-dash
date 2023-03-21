@@ -9,14 +9,14 @@ export type Subscription = {
         name: Plan;
       };
       nickname: string;
-    };
+    } | null;
     customer: {
       discount: {
         coupon: {
           id: string;
         };
       };
-    };
-    status: StripeStatus;
+    } | null;
+    status: StripeStatus | null;
   };
 };

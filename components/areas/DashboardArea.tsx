@@ -79,9 +79,8 @@ export const DashboardArea = () => {
 
   const liveSubscription: Subscription | undefined =
     liveData?.extraStripeData?.[0];
-  const currentPlan: Plan = liveSubscription
-    ? liveSubscription.stripe_data.plan.product.name
-    : "free";
+  const currentPlan: Plan =
+    liveSubscription?.stripe_data?.plan?.product?.name ?? "free";
   const messagesAllowed: number = messagesAllowedMap[currentPlan];
 
   const shouldRenderOverage = totalMonthlyCount > messagesAllowed && !justPaid;
