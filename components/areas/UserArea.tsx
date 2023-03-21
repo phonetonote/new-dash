@@ -14,6 +14,7 @@ import { SignOutButton, useUser } from "@clerk/nextjs";
 import router from "next/router";
 import { BillingWdiget } from "../widgets/BillingWidget";
 import { useFetchData } from "../../hooks/useFetchData";
+import { useFetchSubscriptionData } from "../../hooks/useFetchSubscriptionData";
 import { IoHelpBuoy } from "react-icons/io5";
 import { Subscription, Plan } from "../../types/SubscriptionTypes";
 import { useEffect } from "react";
@@ -22,6 +23,7 @@ export const UserArea = () => {
   const { user } = useUser();
 
   const { data: liveData, loading } = useFetchData();
+  const { subscriptionData } = useFetchSubscriptionData();
 
   useEffect(() => {
     const titles = ["account", "security", "billing", "preferences", "help"];
@@ -33,7 +35,7 @@ export const UserArea = () => {
     }
   }, []);
 
-  const liveSubscription: Subscription | undefined = liveData?.extraStripeData;
+  const liveSubscription: Subscription | null = subscriptionData;
   const stripeData = liveSubscription?.stripe_data;
   const currentPlan: Plan =
     liveSubscription?.stripe_data?.plan?.product?.name ?? ("free" as Plan);

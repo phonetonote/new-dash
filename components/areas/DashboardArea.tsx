@@ -19,6 +19,7 @@ import { PtnKey } from "../widgets/PtnKey";
 import { loadStripe } from "@stripe/stripe-js";
 import useParams from "../../hooks/useParams";
 import { useFetchData } from "../../hooks/useFetchData";
+import { useFetchSubscriptionData } from "../../hooks/useFetchSubscriptionData";
 import { MyLink } from "../MyLink";
 import { Plan, Subscription } from "../../types/SubscriptionTypes";
 import router from "next/router";
@@ -73,12 +74,12 @@ export const DashboardArea = () => {
   );
 
   const { data: liveData, loading } = useFetchData();
+  const { subscriptionData } = useFetchSubscriptionData();
 
   const totalSentMessages = liveData?.totalCount.aggregate.count ?? 0;
   const totalMonthlyCount = liveData?.totalMonthylMessages.aggregate.count ?? 0;
 
-  const liveSubscription: Subscription | undefined =
-    liveData?.extraStripeData?.[0];
+  const liveSubscription: Subscription | null = subscriptionData;
   const currentPlan: Plan =
     liveSubscription?.stripe_data?.plan?.product?.name ?? "free";
   const messagesAllowed: number = messagesAllowedMap[currentPlan];
