@@ -9,7 +9,24 @@ import {
 import { channelMessages, InputMethod } from "../../helpers/channelMessages";
 import { useMutedColor } from "../../hooks/useChannelColors";
 import { CalmSkeleton } from "../indicators/CalmSkeleton";
-import { AllData } from "../../types/AllData";
+
+type AllData = {
+  // LATER remove subscriptions from this query
+  totalMonthylMessages: AggregateCount;
+  totalCount: AggregateCount;
+  smsCount: AggregateCount;
+  facebookCount: AggregateCount;
+  facebookChannels: AggregateCount;
+  alfredCount: AggregateCount;
+  telegramCount: AggregateCount;
+  zapierCount: AggregateCount;
+  chromeCount: AggregateCount;
+  emailCount: AggregateCount;
+  telegramChannels: AggregateCount;
+  roam_keys: {
+    key: string;
+  }[];
+};
 
 type ChannelStatusProps = {
   inputMethod: string;

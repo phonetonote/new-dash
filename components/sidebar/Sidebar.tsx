@@ -35,7 +35,6 @@ export const Sidebar = () => {
       hashes: [
         { name: "account", icon: <FiUser /> },
         { name: "security", icon: <FiShield /> },
-        { name: "billing", icon: <FiCreditCard /> },
         { name: "preferences", icon: <FiSettings /> },
         { name: "help", icon: <IoHelpBuoy /> },
       ],

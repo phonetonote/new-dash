@@ -7,43 +7,14 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import { FiCreditCard, FiHelpCircle, FiMail, FiSettings } from "react-icons/fi";
+import { FiHelpCircle, FiMail, FiSettings } from "react-icons/fi";
 import { DashboardSection } from "../DashboardSection";
 import { ClerkProfile } from "../widgets/ClerkProfile";
-import { SignOutButton, useUser } from "@clerk/nextjs";
+import { SignOutButton } from "@clerk/nextjs";
 import router from "next/router";
-import { BillingWdiget } from "../widgets/BillingWidget";
-import { useFetchData } from "../../hooks/useFetchData";
-import { useFetchSubscriptionData } from "../../hooks/useFetchSubscriptionData";
 import { IoHelpBuoy } from "react-icons/io5";
-import { Subscription, Plan } from "../../types/SubscriptionTypes";
-import { useEffect } from "react";
 
 export const UserArea = () => {
-  const { user } = useUser();
-
-  const { data: liveData, loading } = useFetchData();
-  const { subscriptionData } = useFetchSubscriptionData();
-
-  useEffect(() => {
-    const titles = ["account", "security", "billing", "preferences", "help"];
-    for (var i = 0; i < titles.length; i++) {
-      const title = titles[i];
-      if (router.asPath.includes(title)) {
-        document.getElementById(title)?.scrollIntoView();
-      }
-    }
-  }, []);
-
-  const liveSubscription: Subscription | null = subscriptionData;
-  const stripeData = liveSubscription?.stripe_data;
-  const currentPlan: Plan =
-    liveSubscription?.stripe_data?.plan?.product?.name ?? ("free" as Plan);
-  const supportEmail =
-    currentPlan === "pro"
-      ? "prosupport@phonetonote.com"
-      : "support@phonetonote.com";
-
   return (
     <VStack align="stretch" spacing="20" p="0">
       <Box id="account">
@@ -68,18 +39,6 @@ export const UserArea = () => {
       <Box id="security">
         <ClerkProfile only="security"></ClerkProfile>
       </Box>
-      <DashboardSection id="billing" title="billing" icon={<FiCreditCard />}>
-        <>
-          {user && (
-            <BillingWdiget
-              subscriptionLoading={loading}
-              user={user}
-              stripeData={stripeData as Subscription["stripe_data"]}
-              currentPlan={currentPlan}
-            />
-          )}
-        </>
-      </DashboardSection>
       <DashboardSection
         id="preferences"
         title="preferences"
@@ -96,6 +55,7 @@ export const UserArea = () => {
                 <FiHelpCircle></FiHelpCircle>
               </HStack>
             </Heading>
+            {/* TODO update this */}
             <Text>
               please see{" "}
               <a href="https://phonetonote.com/pages/faq/">this faq article</a>{" "}
@@ -109,10 +69,7 @@ export const UserArea = () => {
                 <FiMail></FiMail>
               </HStack>
             </Heading>
-            <Text>
-              plase email <a href={`mailto:${supportEmail}`}>{supportEmail}</a>{" "}
-              for support
-            </Text>
+            {/* TODO put link to premium support */}
           </Box>
         </VStack>
       </DashboardSection>

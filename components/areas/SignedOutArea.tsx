@@ -1,6 +1,5 @@
 import { Box, Button, HStack } from "@chakra-ui/react";
-import { SignIn, SignInButton } from "@clerk/nextjs";
-import useSearchParams from "../../hooks/useParams";
+import { SignInButton } from "@clerk/nextjs";
 
 export const SignedOutArea = () => {
   const searchParams = new URLSearchParams(`${window.location.search}`);

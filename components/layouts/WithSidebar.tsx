@@ -1,10 +1,8 @@
-import { Flex, Box, Heading } from "@chakra-ui/react";
+import { Flex, Box } from "@chakra-ui/react";
 import { useColorModeValue } from "@chakra-ui/react";
-import { ReactElement, ReactNode } from "react";
 import { useMobileMenuState } from "../../hooks/useMobileMenuState";
 import { MobileMenuButton } from "../sidebar/MobileMenuButton";
 import { Sidebar } from "../sidebar/Sidebar";
-import { Topbar } from "../topbar/Topbar";
 
 type LayoutProps = {
   children: React.ReactNode;
