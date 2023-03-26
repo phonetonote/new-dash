@@ -16,27 +16,27 @@ type KinopioClientProps = {};
 export const KinopioClient = (props: KinopioClientProps) => {
   const mutedColor = useMutedColor();
 
-  const { kiniopioStatus, kinopioForm, kinopioKey } = useKinopio();
+  const { kiniopioStatus, deleteForm, newForm, kinopioKey } = useKinopio();
 
   return (
     <VStack align="stretch" spacing={"2"}>
       <Heading color={mutedColor} size="md">
-        kinopio
+        kinopio (coming soon)
       </Heading>
       {!kinopioKey && ["idle", "submitting"].includes(kiniopioStatus) && (
         <>
           <Text>
             enter your kinopio API key to send messages to your kinopio inbox.{" "}
           </Text>
-          <form onSubmit={kinopioForm.handleSubmit}>
+          <form onSubmit={newForm.handleSubmit}>
             <FormControl>
               <Input
                 type="text"
                 placeholder="your api key"
                 name="kinopioApiKey"
                 id="kinopioApiKey"
-                value={kinopioForm.values.kinopioApiKey}
-                onChange={kinopioForm.handleChange}
+                value={newForm.values.kinopioApiKey}
+                onChange={newForm.handleChange}
               />
               <HStack justifyContent={"space-between"} mt="1">
                 <FormHelperText>
@@ -51,6 +51,28 @@ export const KinopioClient = (props: KinopioClientProps) => {
               </HStack>
             </FormControl>
           </form>
+        </>
+      )}
+
+      {kinopioKey && ["idle", "submitting"].includes(kiniopioStatus) && (
+        <>
+          <Text>
+            your kinopio API key is is encrypted and will be used to send
+            messages to your kinopio inbox.
+          </Text>
+
+          <HStack justifyContent={"space-between"} mt="1">
+            <Text>{kinopioKey}</Text>
+
+            <Button
+              onClick={() => {
+                deleteForm.handleSubmit();
+              }}
+              disabled={kiniopioStatus === "submitting"}
+            >
+              {kiniopioStatus === "submitting" ? "loading" : "remove"}
+            </Button>
+          </HStack>
         </>
       )}
     </VStack>
