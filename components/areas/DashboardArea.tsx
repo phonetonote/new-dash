@@ -77,14 +77,7 @@ export const DashboardArea = () => {
               issues.
             </Text>
           </Alert>
-          <Alert status="info" rounded="md">
-            <AlertIcon />
-            <Text>
-              a note for international users --- the telegram integration is
-              preferred for international users because it is more reliable and
-              less costly than sms.
-            </Text>
-          </Alert>
+
           {noPhone && (
             <Alert status="warning" rounded="md">
               <AlertIcon />

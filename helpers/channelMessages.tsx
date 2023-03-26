@@ -17,22 +17,6 @@ export const channelMessages = (
   const copyPhoneNumber = <CopyText text="+1 (310) 919-1008" />;
   const copyEmail = <CopyText text="receiver@inbound.phonetonote.com" />;
 
-  const telegramDocsAnnouncement = (
-    <Alert status="success" rounded="md">
-      <Text>
-        <VStack align="stretch">
-          <Text>now you can send files</Text>
-          <a
-            href="https://phonetonote.com/changelog/telegram-documents"
-            className={styles["telegram-announcement"]}
-          >
-            click here to learn more
-          </a>
-        </VStack>
-      </Text>
-    </Alert>
-  );
-
   return {
     sms: {
       notReady: (
@@ -70,7 +54,6 @@ export const channelMessages = (
             </MyLink>{" "}
             to get started. send your ptn key with nothing else.
           </Box>
-          {telegramDocsAnnouncement}
         </VStack>
       ),
       ready: (
@@ -82,7 +65,6 @@ export const channelMessages = (
             </MyLink>{" "}
             to get started.
           </Box>
-          {telegramDocsAnnouncement}
         </VStack>
       ),
       received: (
@@ -94,7 +76,6 @@ export const channelMessages = (
               telegram bot
             </MyLink>
           </Box>
-          {telegramDocsAnnouncement}
         </VStack>
       ),
     },

@@ -56,6 +56,7 @@ export const UserArea = () => {
               </HStack>
             </Heading>
             {/* TODO update this */}
+            {/* Mention telegram race condition */}
             <Text>
               please see{" "}
               <a href="https://phonetonote.com/pages/faq/">this faq article</a>{" "}

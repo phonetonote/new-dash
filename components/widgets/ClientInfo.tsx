@@ -1,26 +1,22 @@
 import {
   Box,
   VStack,
-  Flex,
   Heading,
   Skeleton,
   useColorModeValue,
   SimpleGrid,
   Text,
-  Link as ChakraLink,
-  Kbd,
-  OrderedList,
-  ListItem,
-  Code,
   useClipboard,
-  Button,
   Badge,
+  HStack,
 } from "@chakra-ui/react";
-import Link from "next/link";
+
 import { useMutedColor } from "../../hooks/useChannelColors";
-import typography from "../../styles/themes/foundations/typography";
+import { useKinopio } from "../../hooks/useKinopio";
 import { CircleStatus } from "../indicators/circle-status";
 import { MyLink } from "../MyLink";
+
+import { KinopioClient } from "./KinopioClient";
 
 type ClientInfoProps = {
   loading: boolean;
@@ -62,79 +58,82 @@ document.getElementsByTagName("head")[0].appendChild(s);
   const bgColor = useColorModeValue("ptnRed.200", "ptnRed.600");
   const textColor = useColorModeValue("blackAlpha.800", "whiteAlpha.900");
 
+  const statusComponnent = (
+    <HStack pb="6">
+      <Box>
+        {loading && <Skeleton height="18px" width="100px" />}
+        {messagesReceived && (
+          <>
+            <Badge variant="outline">{totalSentMessages}</Badge>
+            <span>{` message${
+              totalSentMessages > 1 ? "s" : ""
+            } published`}</span>
+          </>
+        )}
+
+        {noMessagesReceived && (
+          <>
+            <Badge variant="outline">0</Badge> messages published, please
+            install one of the clients
+          </>
+        )}
+
+        {errorReceived && (
+          <Text
+            bg={bgColor}
+            color={textColor}
+            as="div"
+            p="2"
+            my="2"
+            rounded="md"
+          >
+            error fetching your published messages
+          </Text>
+        )}
+      </Box>
+      {!loading && <CircleStatus type={circleColor}></CircleStatus>}
+    </HStack>
+  );
+
   return (
-    <SimpleGrid columns={{ base: 1, md: 2 }} spacing="6">
-      <Box border="thinborder" rounded="md" p="5">
-        <VStack align="stretch" spacing={"2"}>
-          <Flex justify="space-between" align="baseline">
+    <VStack align="left">
+      {statusComponnent}
+      <SimpleGrid columns={{ base: 1, md: 2 }} spacing="6">
+        <Box border="thinborder" rounded="md" p="5">
+          <KinopioClient />
+        </Box>
+        <Box border="thinborder" rounded="md" p="5">
+          <VStack align="stretch" spacing={"2"}>
             <Heading color={mutedColor} size="md">
-              status
+              logseq
             </Heading>
-            {!loading && <CircleStatus type={circleColor}></CircleStatus>}
-          </Flex>
-          <Box>
-            {loading && <Skeleton height="18px" width="100px" />}
-            {messagesReceived && (
-              <>
-                <Badge variant="outline">{totalSentMessages}</Badge>
-                <span>{` message${
-                  totalSentMessages > 1 ? "s" : ""
-                } published`}</span>
-              </>
-            )}
-
-            {noMessagesReceived && (
-              <>
-                <Badge variant="outline">0</Badge> messages published, please
-                install one of the clients
-              </>
-            )}
-
-            {errorReceived && (
-              <Text
-                bg={bgColor}
-                color={textColor}
-                as="div"
-                p="2"
-                my="2"
-                rounded="md"
-              >
-                error fetching your published messages
-              </Text>
-            )}
-          </Box>
-        </VStack>
-      </Box>
-      <Box border="thinborder" rounded="md" p="5">
-        <VStack align="stretch" spacing={"2"}>
-          <Heading color={mutedColor} size="md">
-            logseq
-          </Heading>
-          <Text>
-            our <strong>logseq-phonetonote</strong> plugin is available in the
-            logseq plugin marketplace. after installing, open the plugin
-            settings to set your ptn key and configure the plugin. issues and
-            feature requests are{" "}
-            <MyLink href="https://github.com/phonetonote/phonetonote-logseq/issues">
-              being tracked on github
-            </MyLink>
-            .
-          </Text>
-        </VStack>
-      </Box>
-      <Box border="thinborder" rounded="md" p="5">
-        <VStack align="stretch" spacing={"2"}>
-          <Heading color={mutedColor} size="md">
-            roam
-          </Heading>
-          <Text>
-            the <strong>phonetonote</strong> plugin is now available in{" "}
-            <strong>roam depot</strong>. new and existing customers can install
-            the plugin and delete the roam/js script. everything should just
-            work. please contact support with any questions or issues.
-          </Text>
-        </VStack>
-      </Box>
-    </SimpleGrid>
+            <Text>
+              our <strong>logseq-phonetonote</strong> plugin is available in the
+              logseq plugin marketplace. after installing, open the plugin
+              settings to set your ptn key and configure the plugin. issues and
+              feature requests are{" "}
+              <MyLink href="https://github.com/phonetonote/phonetonote-logseq/issues">
+                being tracked on github
+              </MyLink>
+              .
+            </Text>
+          </VStack>
+        </Box>
+        <Box border="thinborder" rounded="md" p="5">
+          <VStack align="stretch" spacing={"2"}>
+            <Heading color={mutedColor} size="md">
+              roam
+            </Heading>
+            <Text>
+              the <strong>phonetonote</strong> plugin is now available in{" "}
+              <strong>roam depot</strong>. new and existing customers can
+              install the plugin and delete the roam/js script. everything
+              should just work. please contact support with any questions or
+              issues.
+            </Text>
+          </VStack>
+        </Box>
+      </SimpleGrid>
+    </VStack>
   );
 };

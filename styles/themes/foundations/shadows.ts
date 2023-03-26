@@ -1,3 +1,5 @@
+
+
 const shadows = {
   sm: `1px 1px 2px hsl(var(--shadowColor) / 0.7)`,
   md: `1px 2px 2px hsl(var(--shadowColor) / 0.333),
@@ -17,7 +19,7 @@ const shadows = {
     4px 8px 8px hsl(var(--boldShadowColor) / 0.2),
     8px 16px 16px hsl(var(--boldShadowColor) / 0.2),
     16px 32px 32px hsl(var(--boldShadowColor) / 0.2)`,
-  outline: "0 0 0 3px var(--boldShadowColor)",
+  outline: "#3b7f2382 3px 3px",
 };
 
 export default shadows;
