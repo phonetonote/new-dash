@@ -18,7 +18,7 @@ export const useKinopio = () => {
 
   const deleteForm = useFormik({
     initialValues: {},
-    onSubmit: (values) => {
+    onSubmit: (_) => {
       const asyncSubmit = async () => {
         const userToken = await getToken();
 
@@ -30,13 +30,18 @@ export const useKinopio = () => {
           method: "DELETE",
           headers: generateHeaders(userToken),
         })
-          .then((r) => r.json())
-          .then((data) => {
-            if (data?.kinopio?.masked_api_key?.length ?? 0 > 0) {
-              setKey(data.kinopio.masked_api_key);
+          .then((r) => {
+            if (!r.ok) {
+              throw new Error(`Network response was not ok ${r.status}`);
+            } else if (!r.status.toString().startsWith("2")) {
+              throw new Error(`Numerical response was not ok, ${r.status}}`);
             } else {
               setKey(null);
+              return;
             }
+          })
+          .catch((e) => {
+            console.error(e);
           })
           .finally(() => {
             setStatus("idle");
@@ -71,11 +76,22 @@ export const useKinopio = () => {
             },
           }),
         })
-          .then((r) => r.json())
+          .then((r) => {
+            if (!r.ok) {
+              throw new Error(`Network response was not ok ${r.status}`);
+            } else if (!r.status.toString().startsWith("2")) {
+              throw new Error(`Numerical response was not ok, ${r.status}}`);
+            } else {
+              return r.json();
+            }
+          })
           .then((data) => {
             if (data?.kinopio?.masked_api_key?.length ?? 0 > 0) {
               setKey(data.kinopio.masked_api_key);
             }
+          })
+          .catch((e) => {
+            console.error(e);
           })
           .finally(() => {
             setStatus("idle");
@@ -98,11 +114,22 @@ export const useKinopio = () => {
         method: "GET",
         headers: generateHeaders(userToken),
       })
-        .then((r) => r.json())
+        .then((r) => {
+          if (!r.ok) {
+            throw new Error(`Network response was not ok ${r.status}`);
+          } else if (!r.status.toString().startsWith("2")) {
+            throw new Error(`Numerical response was not ok, ${r.status}}`);
+          } else {
+            return r.json();
+          }
+        })
         .then((data) => {
           if (data?.kinopio?.masked_api_key?.length ?? 0 > 0) {
             setKey(data.kinopio.masked_api_key);
           }
+        })
+        .catch((e) => {
+          console.error(e);
         })
         .finally(() => {
           setStatus("idle");
