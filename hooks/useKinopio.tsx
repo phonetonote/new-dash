@@ -15,30 +15,35 @@ export const useKinopio = () => {
   const [status, setStatus] = React.useState<KinopioStatus>("loading");
   const [key, setKey] = React.useState<string | null>(null);
   const { getToken } = useAuth();
-  const [userToken, setUserToken] = React.useState<string | null>(null);
 
   const deleteForm = useFormik({
     initialValues: {},
     onSubmit: (values) => {
-      if (!userToken) {
-        return;
-      }
+      const asyncSubmit = async () => {
+        const userToken = await getToken();
 
-      fetch(`${KINOPIO_URL}`, {
-        method: "DELETE",
-        headers: generateHeaders(userToken),
-      })
-        .then((r) => r.json())
-        .then((data) => {
-          if (data?.kinopio?.masked_api_key?.length ?? 0 > 0) {
-            setKey(data.kinopio.masked_api_key);
-          } else {
-            setKey(null);
-          }
+        if (!userToken) {
+          return;
+        }
+
+        fetch(`${KINOPIO_URL}`, {
+          method: "DELETE",
+          headers: generateHeaders(userToken),
         })
-        .finally(() => {
-          setStatus("idle");
-        });
+          .then((r) => r.json())
+          .then((data) => {
+            if (data?.kinopio?.masked_api_key?.length ?? 0 > 0) {
+              setKey(data.kinopio.masked_api_key);
+            } else {
+              setKey(null);
+            }
+          })
+          .finally(() => {
+            setStatus("idle");
+          });
+      };
+
+      asyncSubmit();
     },
   });
   const newForm = useFormik({
@@ -46,42 +51,45 @@ export const useKinopio = () => {
       kinopioApiKey: "",
     },
     onSubmit: (values) => {
-      if ((values?.kinopioApiKey?.length ?? 0) < 1 || !userToken) {
+      if ((values?.kinopioApiKey?.length ?? 0) < 1) {
         return;
       }
 
-      fetch(KINOPIO_URL, {
-        method: "POST",
-        headers: generateHeaders(userToken),
-        body: JSON.stringify({
-          kinopio: {
-            api_key: values.kinopioApiKey,
-          },
-        }),
-      })
-        .then((r) => r.json())
-        .then((data) => {
-          if (data?.kinopio?.masked_api_key?.length ?? 0 > 0) {
-            setKey(data.kinopio.masked_api_key);
-          }
+      const asyncSubmit = async () => {
+        const userToken = await getToken();
+
+        if (!userToken) {
+          return;
+        }
+
+        fetch(KINOPIO_URL, {
+          method: "POST",
+          headers: generateHeaders(userToken),
+          body: JSON.stringify({
+            kinopio: {
+              api_key: values.kinopioApiKey,
+            },
+          }),
         })
-        .finally(() => {
-          setStatus("idle");
-        });
+          .then((r) => r.json())
+          .then((data) => {
+            if (data?.kinopio?.masked_api_key?.length ?? 0 > 0) {
+              setKey(data.kinopio.masked_api_key);
+            }
+          })
+          .finally(() => {
+            setStatus("idle");
+          });
+      };
+
+      asyncSubmit();
     },
   });
 
   React.useEffect(() => {
-    const loadtokenAsync = async () => {
-      const token = await getToken();
-      setUserToken(token);
-    };
-
-    loadtokenAsync();
-  }, [getToken, setUserToken]);
-
-  React.useEffect(() => {
     const loadAsync = async () => {
+      const userToken = await getToken();
+
       if (!userToken) {
         return;
       }
@@ -102,7 +110,7 @@ export const useKinopio = () => {
     };
 
     loadAsync();
-  }, [userToken]);
+  }, [getToken]);
 
   return {
     kiniopioStatus: status,
