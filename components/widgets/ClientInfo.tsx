@@ -126,10 +126,11 @@ document.getElementsByTagName("head")[0].appendChild(s);
             </Heading>
             <Text>
               the <strong>phonetonote</strong> plugin is now available in{" "}
-              <strong>roam depot</strong>. new and existing customers can
-              install the plugin and delete the roam/js script. everything
-              should just work. please contact support with any questions or
-              issues.
+              <strong>roam depot</strong>. issues and feature requests are{" "}
+              <MyLink href="https://github.com/phonetonote/ptn-roam-depot/issues">
+                being tracked on github
+              </MyLink>
+              .
             </Text>
           </VStack>
         </Box>

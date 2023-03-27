@@ -21,7 +21,7 @@ export const KinopioClient = (props: KinopioClientProps) => {
   return (
     <VStack align="stretch" spacing={"2"}>
       <Heading color={mutedColor} size="md">
-        kinopio (coming soon)
+        kinopio
       </Heading>
       {!kinopioKey && ["idle", "submitting"].includes(kiniopioStatus) && (
         <>
@@ -58,7 +58,8 @@ export const KinopioClient = (props: KinopioClientProps) => {
         <>
           <Text>
             your kinopio API key is is encrypted and will be used to send
-            messages to your kinopio inbox.
+            messages to your kinopio inbox. with kinopio enabled,{" "}
+            <strong>messages will not sync to any other apps</strong>.
           </Text>
 
           <HStack justifyContent={"space-between"} mt="1">

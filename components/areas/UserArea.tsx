@@ -55,8 +55,6 @@ export const UserArea = () => {
                 <FiHelpCircle></FiHelpCircle>
               </HStack>
             </Heading>
-            {/* TODO update this */}
-            {/* Mention telegram race condition */}
             <Text>
               please see{" "}
               <a href="https://phonetonote.com/pages/faq/">this faq article</a>{" "}
@@ -66,11 +64,17 @@ export const UserArea = () => {
           <Box>
             <Heading size="md" pb="2">
               <HStack>
-                <Text>contact support</Text>
+                <Text>further support</Text>
                 <FiMail></FiMail>
               </HStack>
             </Heading>
-            {/* TODO put link to premium support */}
+            <Text>
+              premium support is available for $5/month at{" "}
+              <a href="https://pro.phonetonote.com/">
+                https://pro.phonetonote.com/
+              </a>
+              .
+            </Text>
           </Box>
         </VStack>
       </DashboardSection>
