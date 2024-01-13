@@ -19,33 +19,26 @@ export const UserArea = () => {
     <VStack align="stretch" spacing="20" p="0">
       <Box id="account">
         <VStack align="stretch">
-          <Box minH="600px">
-            <ClerkProfile only="account"></ClerkProfile>
+          <Box>
+            <Flex>
+              <HStack spacing="4" align="stretch" mt="4">
+                <Box ml="3">
+                  <SignOutButton
+                    signOutCallback={() =>
+                      router.push(`${process.env.NEXT_PUBLIC_OLD_MARKETING_SITE}`)
+                    }
+                  >
+                    <Button>sign out</Button>
+                  </SignOutButton>
+                </Box>
+              </HStack>
+            </Flex>
           </Box>
-
-          <Flex maxWidth="840px" mt="4" justifyContent="right">
-            <HStack spacing="4" align="stretch">
-              <SignOutButton
-                signOutCallback={() =>
-                  router.push(`${process.env.NEXT_PUBLIC_OLD_MARKETING_SITE}`)
-                }
-              >
-                <Button>sign out</Button>
-              </SignOutButton>
-            </HStack>
-          </Flex>
+          <Box minH="600px">
+            <ClerkProfile></ClerkProfile>
+          </Box>
         </VStack>
       </Box>
-      <Box id="security">
-        <ClerkProfile only="security"></ClerkProfile>
-      </Box>
-      <DashboardSection
-        id="preferences"
-        title="preferences"
-        icon={<FiSettings />}
-      >
-        <Text>check back soon for monthly backup preferences and more.</Text>
-      </DashboardSection>
       <DashboardSection id="help" title="help" icon={<IoHelpBuoy />}>
         <VStack spacing={10} align="stretch">
           <Box mt="5">

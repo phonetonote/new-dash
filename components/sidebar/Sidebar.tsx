@@ -34,8 +34,6 @@ export const Sidebar = () => {
       title: "user",
       hashes: [
         { name: "account", icon: <FiUser /> },
-        { name: "security", icon: <FiShield /> },
-        { name: "preferences", icon: <FiSettings /> },
         { name: "help", icon: <IoHelpBuoy /> },
       ],
     },
@@ -62,14 +60,14 @@ export const Sidebar = () => {
             justifyContent={"space-between"}
           >
             <Box>
-              <Link href="/#channels" passHref={true}>
+              <Link href="/#channels" passHref={true} legacyBehavior>
                 <a>
                   <Box mx="3" p="3" ml="0" mt="-3" mb="6">
                     <Image
                       src="/images/logo.svg"
                       alt="logo"
-                      width="60px"
-                      height="60px"
+                      width="60"
+                      height="60"
                     />
                   </Box>
                 </a>

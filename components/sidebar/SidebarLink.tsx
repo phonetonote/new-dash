@@ -46,7 +46,7 @@ export const SidebarLink = (props: SidebarLinkProps) => {
   const applicableStyles = isActiveTitle ? activeLink : inactiveLink;
 
   return (
-    <Link href={href} passHref scroll={false}>
+    <Link href={href} passHref scroll={false} legacyBehavior>
       <Box
         as="a"
         marginEnd="2"
