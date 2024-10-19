@@ -1,5 +1,5 @@
 import { useDisclosure } from "@chakra-ui/react";
-import { getOwnerDocument, isFocusable, isRightClick } from "@chakra-ui/utils";
+import { getOwnerDocument, isFocusable } from "@chakra-ui/utils";
 import * as React from "react";
 
 const getTarget = (event: React.FocusEvent) =>
@@ -39,7 +39,6 @@ export function useNavMenu() {
     };
 
     triggerProps.onClick = (event: React.MouseEvent) => {
-      if (isRightClick(event)) return;
       onToggle();
       if (!isOpen) {
         focusMenu();
