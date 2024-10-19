@@ -25,7 +25,9 @@ export const UserArea = () => {
                 <Box ml="3">
                   <SignOutButton
                     signOutCallback={() =>
-                      router.push(`${process.env.NEXT_PUBLIC_OLD_MARKETING_SITE}`)
+                      router.push(
+                        `${process.env.NEXT_PUBLIC_OLD_MARKETING_SITE}`
+                      )
                     }
                   >
                     <Button>sign out</Button>
@@ -52,21 +54,6 @@ export const UserArea = () => {
               please see{" "}
               <a href="https://phonetonote.com/pages/faq/">this faq article</a>{" "}
               for answers to common questions.
-            </Text>
-          </Box>
-          <Box>
-            <Heading size="md" pb="2">
-              <HStack>
-                <Text>further support</Text>
-                <FiMail></FiMail>
-              </HStack>
-            </Heading>
-            <Text>
-              premium support is available for $5/month at{" "}
-              <a href="https://pro.phonetonote.com/">
-                https://pro.phonetonote.com/
-              </a>
-              .
             </Text>
           </Box>
         </VStack>

@@ -3,7 +3,6 @@ import { SignedIn, SignedOut } from "@clerk/nextjs";
 import type { NextPage } from "next";
 import { DashboardArea } from "../components/areas/DashboardArea";
 import WithSidebar from "../components/layouts/WithSidebar";
-import { ApolloProviderWrapper } from "../helpers/apollo-client";
 import { PageWithLayout } from "../types/PageWithLayout";
 import { AreaStack } from "../components/areas/AreaStack";
 import { SignedOutArea } from "../components/areas/SignedOutArea";
@@ -12,9 +11,7 @@ const Home: NextPage = (props) => {
   return (
     <Box>
       <SignedIn>
-        <ApolloProviderWrapper>
-          <DashboardArea></DashboardArea>
-        </ApolloProviderWrapper>
+        <DashboardArea></DashboardArea>
       </SignedIn>
       <SignedOut>
         <SignedOutArea />

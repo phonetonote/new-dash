@@ -11,8 +11,8 @@ export const MyLink = (props: MyLinkProps) => {
   const { children, href } = props;
 
   return (
-    <NextLink href={href} passHref={true}>
-      <Link>{children}</Link>
-    </NextLink>
+    <Link as={NextLink} href={href} passHref={true}>
+      {children}
+    </Link>
   );
 };

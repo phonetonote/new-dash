@@ -10,7 +10,7 @@ import { channelMessages, InputMethod } from "../../helpers/channelMessages";
 import { useMutedColor } from "../../hooks/useChannelColors";
 import { CalmSkeleton } from "../indicators/CalmSkeleton";
 
-type AllData = {
+export type AllData = {
   // LATER remove subscriptions from this query
   totalMonthylMessages: AggregateCount;
   totalCount: AggregateCount;
