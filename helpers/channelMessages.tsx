@@ -2,8 +2,7 @@ import { inputMethods } from "../components/areas/DashboardArea";
 import { ChannelStatusTypes } from "../components/widgets/ChannelStatus";
 import { MyLink } from "../components/MyLink";
 import { CopyText } from "../components/widgets/CopyText";
-import { Alert, Badge, Box, Text, VStack } from "@chakra-ui/react";
-import styles from "../styles/Channels.module.css";
+import { Badge, Box, VStack } from "@chakra-ui/react";
 
 export type InputMethod = typeof inputMethods[number];
 
@@ -15,7 +14,6 @@ export const channelMessages = (
   };
 } => {
   const copyPhoneNumber = <CopyText text="+1 (310) 919-1008" />;
-  const copyEmail = <CopyText text="receiver@inbound.phonetonote.com" />;
 
   return {
     sms: {
@@ -138,32 +136,6 @@ export const channelMessages = (
           piping messages through zapier.
         </Box>
       ),
-    },
-    email: {
-      notReady: (
-        <Box>
-          please{" "}
-          <MyLink href="/user?title=account#/profile/email-addresses">
-            add and verify an email address
-          </MyLink>{" "}
-          to get started
-        </Box>
-      ),
-      ready: (
-        <VStack align="stretch" spacing="6">
-          <Box>send emails to the address below</Box>
-          {copyEmail}
-        </VStack>
-      ),
-      received: (
-        <VStack align="stretch" spacing="8">
-          <Box>
-            <Badge variant="outline">{`${count}`}</Badge> received. send more to
-            the address below
-          </Box>
-          {copyEmail}
-        </VStack>
-      ),
-    },
+    }
   };
 };

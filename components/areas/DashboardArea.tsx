@@ -24,8 +24,7 @@ export const inputMethods = [
   "telegram",
   "alfred",
   "chrome",
-  "zapier",
-  "email",
+  "zapier"
 ] as const;
 
 export type AggregateCount = {
